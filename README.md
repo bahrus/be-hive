@@ -4,7 +4,7 @@
 
 be-hive is the Queen Bee of the may-it-be (?) HTML frimework.
 
-Specify that ShadowDOM should inherit behiviors from parent Shadow DOM.
+Specify that ShadowDOM should inherit be-hiviors from parent Shadow DOM.
 
 Allow judicious overriding of if-wants-to-be's.
 
@@ -14,18 +14,33 @@ Allow judicious overriding of if-wants-to-be's.
 <be-hive></be-hive>
 ```
 
-Causes copies of parent behiviors to be imported into the ShadowDOM containing the templite.
+Causes copies of parent be-hiviors to be imported into the ShadowDOM containing the templite.
 
 How to find said behiviors?
 
-behiviors registered via:
+be-hiviors registered via:
 
+```JavaScript
+const beHive = myDecoratorInstance.getRootNode().querySelector('be-hive');
+if(beHive !== null){
+    await customElements.whenDefined('be-hive');
+    beHive.register(myInstance);
+}
 ```
-myInstance.getRootNode()[Symbol.for('be-hive')][name of custom element] = [if wants to be value]
-```
 
-To override if-wants-to-be value, or register a new behivior, specify an override inside the overrides attribe:
+be-hive then determines which be-hiviors to inherit via:
 
-```html
-<be-hive overrides='{"be-reformable": "married-to-a-skullery-maid"}'></be-hive>
+```JavaScript
+const rn = beHiveInstance.getRootNode();
+const parentShadowRealm = rn.host ? rn.host.getRootNode() : rn;
+const parentBeHiveInstance = parentShadowRealm.querySelector('be-hive');
+if(parentBeHiveInstance !== null){
+    parentBeHiveInstance.registeredBehaviors.forEach(behavior => {
+        beHiveInstance.register(behavior);
+    });
+    parentBeHiveInstance.addEventEventListener('latest-behavior-changed', e => {
+        beHiveInstance.register(e.detail.value);
+    });
+}
+
 ```
