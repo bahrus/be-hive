@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "xtal-element": "0.0.448"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-hive.git"

@@ -11,8 +11,7 @@ export class BeHiveCore extends HTMLElement {
         if (parentBeHiveInstance !== null) {
             const { registeredBehaviors } = parentBeHiveInstance;
             for (const key in registeredBehaviors) {
-                const instance = registeredBehaviors[key];
-                this.register(instance);
+                this.register(registeredBehaviors[key]);
             }
             parentBeHiveInstance.addEventListener('latest-behavior-changed', (e) => {
                 this.register(e.detail.value);
@@ -20,16 +19,8 @@ export class BeHiveCore extends HTMLElement {
         }
     }
     onOverrides({ overrides }) {
-        const rn = this.getRootNode();
-        const host = rn.host;
-        if (!rn.host)
-            return;
-        const parentRn = rn.host.getRootNode();
-        const hive = { ...parentRn[Symbol.for('be-hive')], ...overrides };
-        for (const key in hive) {
-            const el = document.createElement(key);
-            el.setAttribute('if-wants-to-be', hive[key]);
-            rn.appendChild(el);
+        for (const key in overrides) {
+            this.register(overrides[key]);
         }
     }
     register(instance) {
