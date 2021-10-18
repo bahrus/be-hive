@@ -1,6 +1,5 @@
 import {XE} from 'xtal-element/src/XE.js';
 import {BeHiveProps, BeHiveActions, BehaviorKeys} from './types';
-import {BeDecoratedProps} from 'be-decorated/types';
 
 export class BeHiveCore extends HTMLElement implements BeHiveActions{
     registeredBehaviors: {[key: string]: BehaviorKeys} = {};
