@@ -44,3 +44,5 @@ if(parentBeHiveInstance !== null){
 }
 
 ```
+
+However, be-hive supports a "overrides" attribute/property that allows overriding the parent inheritance
