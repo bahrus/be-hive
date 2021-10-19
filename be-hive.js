@@ -29,6 +29,8 @@ export class BeHiveCore extends HTMLElement {
             return;
         this.registeredBehaviors[localName] = instance;
         const newBehaviorEl = document.createElement(localName);
+        newBehaviorEl.setAttribute('if-wants-to-be', instance.ifWantsToBe);
+        newBehaviorEl.setAttribute('upgrade', instance.upgrade);
         this.appendChild(newBehaviorEl);
         this.latestBehavior = instance;
     }

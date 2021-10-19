@@ -28,21 +28,7 @@ if(beHive !== null){
 }
 ```
 
-be-hive then determines which be-hiviors to inherit via:
+be-hive then determines which be-hiviors to inherit.
 
-```JavaScript
-const rn = beHiveInstance.getRootNode();
-const parentShadowRealm = rn.host ? rn.host.getRootNode() : rn;
-const parentBeHiveInstance = parentShadowRealm.querySelector('be-hive');
-if(parentBeHiveInstance !== null){
-    parentBeHiveInstance.registeredBehaviors.forEach(behavior => {
-        beHiveInstance.register(behavior);
-    });
-    parentBeHiveInstance.addEventEventListener('latest-behavior-changed', e => {
-        beHiveInstance.register(e.detail.value);
-    });
-}
 
-```
-
-However, be-hive supports a "overrides" attribute/property that allows overriding the parent inheritance
+However, be-hive supports a "overrides" attribute/property that allows overriding the parent inheritance.
