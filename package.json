@@ -1,19 +1,44 @@
 {
   "name": "be-hive",
   "version": "0.0.3",
-  "description": "",
-  "main": "index.js",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements"
+  ],
+  "description": "Specify that ShadowDOM should inherit be-haviors from parent Shadow DOM",
+  "main": "be-hive.js",
+  "module": "be-hive.js",
+  "exports": {
+    ".": "./be-hive.js",
+    "./be-hive.js": "./be-hive.js"
+  },
+  "files": [
+    "b*.*",
+    "types.d.ts",
+    "custom-elements.json"
+  ],
+  "types": "types.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "node node_modules/xtal-test/serve.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package-check": "package-check",
+    "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "xtal-element": "0.0.448"
+    "xtal-element": "0.0.450"
+  },
+  "devDependencies": {
+    "@skypack/package-check": "0.2.2",
+    "xtal-test": "0.0.51",
+    "@custom-elements-manifest/analyzer": "0.5.5"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-hive.git"
   },
-  "author": "",
+  "author": "anderson.bruce.b@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/be-hive/issues"
