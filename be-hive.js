@@ -65,3 +65,18 @@ const xe = new XE({
     superclass: BeHiveCore
 });
 export const BeHive = xe.classDef;
+export function register(ifWantsToBe, upgrade, extTagName) {
+    const beHive = document.querySelector(tagName);
+    if (beHive !== null) {
+        customElements.whenDefined(tagName).then(() => {
+            beHive.register({
+                ifWantsToBe,
+                upgrade,
+                localName: extTagName,
+            });
+        });
+    }
+    else {
+        document.head.appendChild(document.createElement(extTagName));
+    }
+}
