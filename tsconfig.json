@@ -9,7 +9,8 @@
 		"watch": true
 	},
 	"files": [
-		"be-hive.ts"
+		"be-hive.ts",
+		"register.ts"
 	],
 	"exclude":[
 		"build",

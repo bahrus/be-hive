@@ -1,8 +1,8 @@
-# be-hive [TODO]
+# be-hive
 
 ## Let it snow in August
 
-be-hive is the Queen Bee of the may-it-be (?) HTML frimework.
+be-hive is the Queen Bee of the [may-it-be](https://github.com/bahrus/may-it-be) HTML frimework.
 
 Specify that ShadowDOM should inherit be-hiviors from parent Shadow DOM.
 
@@ -32,3 +32,5 @@ be-hive then determines which be-hiviors to inherit.
 
 
 However, be-hive supports a "overrides" attribute/property that allows overriding the parent inheritance.
+
+[TODO]  Expline this coherently.

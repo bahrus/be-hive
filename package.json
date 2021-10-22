@@ -12,12 +12,11 @@
   "module": "be-hive.js",
   "exports": {
     ".": "./be-hive.js",
-    "./be-hive.js": "./be-hive.js"
+    "./be-hive.js": "./be-hive.js",
+    "./register.js": "./register.js"
   },
   "files": [
-    "b*.*",
-    "types.d.ts",
-    "custom-elements.json"
+    "*.*"
   ],
   "types": "types.d.ts",
   "scripts": {
