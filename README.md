@@ -10,27 +10,29 @@ Allow judicious overriding of if-wants-to-be's.
 
 ## Syntax
 
-```html
-<be-hive></be-hive>
+
+be-hiviors are registered via function:
+
+```Typescript
+register(ifWantsToBe: string, upgrade: string, extTagName: string);
 ```
 
-Causes copies of parent be-hiviors to be imported into the ShadowDOM containing the templite.
+in be-hive/register.js
 
-How to find said behiviors?
-
-be-hiviors registered via:
-
-```JavaScript
-const beHive = myDecoratorInstance.getRootNode().querySelector('be-hive');
-if(beHive !== null){
-    await customElements.whenDefined('be-hive');
-    beHive.register(myInstance);
-}
-```
 
 be-hive then determines which be-hiviors to inherit.
 
 
-However, be-hive supports a "overrides" attribute/property that allows overriding the parent inheritance.
+However, be-hive supports an optional "overrides" attribute/property that allows overriding the parent inheritance.
+
+To uses be-hiviors in this way, we need to include one instance of be-hive in our ShadowDOM-based web component.
+
+```html
+<be-hive overrides='{
+    "be-sharing":{
+        "ifWantsToBe": "familial"
+    }
+}'></be-hive>
+```
 
 [TODO]  Expline this coherently.
