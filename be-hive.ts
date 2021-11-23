@@ -30,6 +30,7 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
     register(instance: BehaviorKeys){
         const localName =  instance.localName;
         if(this.overrides[instance.localName] !== undefined) return;
+        if(this.querySelector(localName) !== null) return;
         this.registeredBehaviors[localName] = instance;
         const newBehaviorEl = document.createElement(localName);
         newBehaviorEl.setAttribute('if-wants-to-be', instance.ifWantsToBe);
