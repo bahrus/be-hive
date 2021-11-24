@@ -1,3 +1,4 @@
+import('./be-hive.js');
 export function register(ifWantsToBe, upgrade, extTagName) {
     const beHive = document.querySelector('be-hive');
     if (beHive !== null) {
