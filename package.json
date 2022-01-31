@@ -26,11 +26,11 @@
     "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "xtal-element": "0.0.462"
+    "xtal-element": "0.0.463"
   },
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
-    "xtal-test": "0.0.54",
+    "xtal-test": "0.0.55",
     "@custom-elements-manifest/analyzer": "0.5.7"
   },
   "repository": {
