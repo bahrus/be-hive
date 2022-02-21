@@ -26,7 +26,7 @@
     "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "xtal-element": "0.0.479"
+    "xtal-element": "0.0.480"
   },
   "devDependencies": {
     "@skypack/package-check": "0.2.2",
