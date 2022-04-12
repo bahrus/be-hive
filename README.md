@@ -1,5 +1,7 @@
 # be-hive
 
+[![Actions Status](https://github.com/bahrus/be-hive/workflows/CI/badge.svg)](https://github.com/bahrus/be-hive/actions?query=workflow%3ACI)
+
 ## Let it snow in August
 
 be-hive is the Queen Bee of the [may-it-be](https://github.com/bahrus/may-it-be) HTML frimework.
