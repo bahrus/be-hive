@@ -1,6 +1,6 @@
 # be-hive
 
-[![Actions Status](https://github.com/bahrus/be-hive/workflows/CI/badge.svg)](https://github.com/bahrus/be-hive/actions?query=workflow%3ACI)
+[![Playwright Tests](https://github.com/bahrus/be-hive/actions/workflows/CI.yml/badge.svg)](https://github.com/bahrus/be-hive/actions/workflows/CI.yml)
 
 ## Let it snow in August
 
