@@ -10,7 +10,7 @@ export function register(ifWantsToBe: string, upgrade: string, extTagName: strin
             ifWantsToBe,
             upgrade,
             localName: extTagName,
-        })
+        });
     });
     
 }
