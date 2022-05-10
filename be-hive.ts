@@ -37,7 +37,7 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
         newBehaviorEl.setAttribute('upgrade', instance.upgrade);
         this.appendChild(newBehaviorEl);
         this.latestBehavior = instance;
-
+        return newBehaviorEl;
     }
 }
 

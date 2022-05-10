@@ -35,6 +35,7 @@ export class BeHiveCore extends HTMLElement {
         newBehaviorEl.setAttribute('upgrade', instance.upgrade);
         this.appendChild(newBehaviorEl);
         this.latestBehavior = instance;
+        return newBehaviorEl;
     }
 }
 const tagName = 'be-hive';
