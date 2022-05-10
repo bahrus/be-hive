@@ -17,5 +17,5 @@ export interface BeHiveProps{
 export interface BeHiveActions{
     intro(self: this): void;
     onOverrides(self: this): void;
-    register(instance: BehaviorKeys): void;
+    register(instance: BehaviorKeys): Element | undefined;
 }
