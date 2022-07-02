@@ -13,7 +13,8 @@
   "exports": {
     ".": "./be-hive.js",
     "./be-hive.js": "./be-hive.js",
-    "./register.js": "./register.js"
+    "./register.js": "./register.js",
+    "./beatify.js": "./beatify.js"
   },
   "files": [
     "*.*"

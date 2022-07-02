@@ -10,7 +10,8 @@
 	},
 	"files": [
 		"be-hive.ts",
-		"register.ts"
+		"register.ts",
+		"beatify.ts"
 	],
 	"exclude":[
 		"build",
