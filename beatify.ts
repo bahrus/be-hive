@@ -1,11 +1,14 @@
 export function beatify(content: DocumentFragment | Element, beHive: Element){
     const decoratorElements = Array.from(beHive.children) as any;
+    
     for(const decorEl of decoratorElements){
         const ifWantsToBe = (decorEl as any as Element).getAttribute('if-wants-to-be');
         if(ifWantsToBe === undefined) continue;
         const isAttr = 'is-' + ifWantsToBe;
         const beAttr = 'be-' + ifWantsToBe;
-        const converted = Array.from(content.querySelectorAll(`[${isAttr}]`));
+        const qry = `[${isAttr}]`;
+        const converted = Array.from(content.querySelectorAll(qry));
+        if((content as Element).matches !== undefined && (content as Element).matches(qry)) converted.push(content);
         for(const el of converted){
             const attr = el.getAttribute(isAttr)!;
             el.removeAttribute(isAttr);

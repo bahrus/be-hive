@@ -6,7 +6,10 @@ export function beatify(content, beHive) {
             continue;
         const isAttr = 'is-' + ifWantsToBe;
         const beAttr = 'be-' + ifWantsToBe;
-        const converted = Array.from(content.querySelectorAll(`[${isAttr}]`));
+        const qry = `[${isAttr}]`;
+        const converted = Array.from(content.querySelectorAll(qry));
+        if (content.matches !== undefined && content.matches(qry))
+            converted.push(content);
         for (const el of converted) {
             const attr = el.getAttribute(isAttr);
             el.removeAttribute(isAttr);
