@@ -8,7 +8,7 @@ export function beatify(content: DocumentFragment | Element, beHive: Element){
         const beAttr = 'be-' + ifWantsToBe;
         const qry = `[${isAttr}]`;
         const converted = Array.from(content.querySelectorAll(qry));
-        if((content as Element).matches !== undefined && (content as Element).matches(qry)) converted.push(content);
+        if((content as Element).matches !== undefined && (content as Element).matches(qry)) converted.push(content as Element);
         for(const el of converted){
             const attr = el.getAttribute(isAttr)!;
             el.removeAttribute(isAttr);
