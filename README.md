@@ -6,7 +6,13 @@
 
 be-hive is the Queen Bee of the [may-it-be](https://github.com/bahrus/may-it-be) HTML frimework.
 
-Specify that ShadowDOM should inherit be-hiviors from parent Shadow DOM.
+Specify that ShadowDOM should inherit [be-decorated-based](https://github.com/bahrus/be-decorated) be-hiviors from the parent Shadow DOM (or outside any Shadow DOM).
+
+To activate all the be-decorated beviviors, plop an instance of be-hive inside the Shadow DOM:
+
+```html
+<be-hive></be-hive>
+```
 
 Allow judicious overriding of if-wants-to-be's.
 
