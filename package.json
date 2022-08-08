@@ -27,7 +27,7 @@
     "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "xtal-element": "0.0.496"
+    "xtal-element": "0.0.499"
   },
   "devDependencies": {
     "@playwright/test": "1.24.2",
