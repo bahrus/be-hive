@@ -52,17 +52,8 @@ But the child Shadow DOM realm can develop a personality of its own by:
 </be-hive>
 ```
 
- 
 
-Specify that ShadowDOM should inherit [be-decorated-based]() be-hiviors from the parent Shadow DOM (or outside any Shadow DOM).
-
-To activate all the be-decorated beviviors, plop an instance of be-hive inside the Shadow DOM:
-
-
-
-Allow judicious overriding of if-wants-to-be's.
-
-## Syntax
+## API
 
 
 be-hiviors are registered via function:
@@ -77,10 +68,3 @@ in be-hive/register.js
 be-hive then determines which be-hiviors to inherit.
 
 
-However, be-hive supports an optional "overrides" attribute/property that allows overriding the parent inheritance.
-
-To uses be-hiviors in this way, we need to include one instance of be-hive in our ShadowDOM-based web component.
-
-
-
-[TODO]  Expline this coherently.
