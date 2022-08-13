@@ -24,9 +24,10 @@ This signals that the Shadow DOM realm is opting in to allowing element behivior
 
 But the child Shadow DOM realm can develop a personality of its own by:
 
-1.  Adding additional behaviors by adding specific be-decorated elements inside the be-hive instance tag.
-2.  Avoiding naming conflicts by overriding the attribute associated with inherited behivior.
-3.  Preventing inheriting unwanted behaviors from affecting the Shadow DOM realm [TODO].
+1.  Adding additional behiviors by adding specific be-decorated elements inside the be-hive instance tag.
+2.  Avoiding naming conflicts by overriding the attribute associated with the inherited behivior.
+3.  Preventing inheriting unwanted behaviors from affecting the child Shadow DOM realm [TODO].
+4.  Start over.  [TODO].  Only decorator elements manually added inside the Shadow DOM (preferably inside the be-hive tag, for inheritance to work within)
 
 ## Syntax for customizations of inherited behiviors:
 
@@ -42,6 +43,13 @@ But the child Shadow DOM realm can develop a personality of its own by:
         "notAllowed": "true" //TODO
     }
 }'></be-hive>
+```
+
+## Starting over
+
+```html
+<be-hive be-sirius-black>
+</be-hive>
 ```
 
  
