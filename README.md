@@ -2,6 +2,8 @@
 
 [![Playwright Tests](https://github.com/bahrus/be-hive/actions/workflows/CI.yml/badge.svg)](https://github.com/bahrus/be-hive/actions/workflows/CI.yml)
 
+<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-hive?compression=gzip">
+
 ## Let it snow in August
 
 be-hive is the Queen Bee of the [may-it-be](https://github.com/bahrus/may-it-be) HTML frimework.
