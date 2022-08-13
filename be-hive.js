@@ -18,11 +18,6 @@ export class BeHiveCore extends HTMLElement {
             });
         }
     }
-    // onOverrides({overrides}: this){
-    //     for(const key in overrides){
-    //         this.register(overrides[key]);
-    //     }
-    // }
     register(parentInstance) {
         const parentInstanceLocalName = parentInstance.localName;
         if (this.querySelector(parentInstanceLocalName) !== null)

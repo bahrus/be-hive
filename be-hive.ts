@@ -21,11 +21,7 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
             });
         }
     }
-    // onOverrides({overrides}: this){
-    //     for(const key in overrides){
-    //         this.register(overrides[key]);
-    //     }
-    // }
+
 
     register(parentInstance: BehaviorKeys){
         const parentInstanceLocalName =  parentInstance.localName;
