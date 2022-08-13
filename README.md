@@ -2,6 +2,8 @@
 
 [![Playwright Tests](https://github.com/bahrus/be-hive/actions/workflows/CI.yml/badge.svg)](https://github.com/bahrus/be-hive/actions/workflows/CI.yml)
 
+[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-hive?style=for-the-badge)](https://bundlephobia.com/result?p=be-hive)
+
 <img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-hive?compression=gzip">
 
 ## Let it snow in August
