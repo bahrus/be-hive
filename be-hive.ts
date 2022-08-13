@@ -27,18 +27,19 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
         }
     }
 
-    register(instance: BehaviorKeys){
-        const localName =  instance.localName;
-        if(this.overrides[instance.localName] !== undefined) return;
-        if(this.querySelector(localName) !== null) return;
-        this.registeredBehaviors[localName] = instance;
-        const newBehaviorEl = document.createElement(localName);
-        newBehaviorEl.setAttribute('if-wants-to-be', instance.ifWantsToBe);
-        newBehaviorEl.setAttribute('upgrade', instance.upgrade);
+    register(parentInstance: BehaviorKeys){
+        const parentInstanceLocalName =  parentInstance.localName;
+        //if(this.overrides[parentInstanceLocalName] !== undefined) return;
+        if(this.querySelector(parentInstanceLocalName) !== null) return;
+        this.registeredBehaviors[parentInstanceLocalName] = parentInstance;
+        const newBehaviorEl = document.createElement(parentInstanceLocalName);
+        newBehaviorEl.setAttribute('if-wants-to-be', parentInstance.ifWantsToBe);
+        newBehaviorEl.setAttribute('upgrade', parentInstance.upgrade);
         this.appendChild(newBehaviorEl);
-        this.latestBehavior = instance;
+        this.latestBehavior = parentInstance;
         return newBehaviorEl;
     }
+
 
     onLatestBehavior({latestBehavior}: this): void {
         this.dispatchEvent(new CustomEvent('latest-behavior-changed', {

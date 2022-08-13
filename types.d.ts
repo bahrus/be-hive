@@ -4,6 +4,7 @@ export interface BehaviorKeys {
     ifWantsToBe: string,
     upgrade: string,
     localName: string,
+    blocked?: boolean,
 }
 
 

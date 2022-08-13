@@ -40,7 +40,7 @@ But the child Shadow DOM realm can develop a personality of its own by:
         "ifWantsToBe": "respectful"
     },
     "be-disobedient-without-facing-the-consequences": {
-        "notAllowed": "true" //TODO
+        "blocked": "true" //TODO
     }
 }'></be-hive>
 ```

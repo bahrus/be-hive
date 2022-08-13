@@ -35,7 +35,9 @@
     "may-it-serve": "0.0.2",
     "@custom-elements-manifest/analyzer": "0.6.4",
     "xtal-editor": "0.0.176",
-    "xtal-shell": "0.0.27"
+    "xtal-shell": "0.0.27",
+    "be-exportable": "0.0.23",
+    "be-functional": "0.0.8"
   },
   "repository": {
     "type": "git",
