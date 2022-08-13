@@ -21,22 +21,39 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
             });
         }
     }
-    onOverrides({overrides}: this){
-        for(const key in overrides){
-            this.register(overrides[key]);
-        }
-    }
+    // onOverrides({overrides}: this){
+    //     for(const key in overrides){
+    //         this.register(overrides[key]);
+    //     }
+    // }
 
     register(parentInstance: BehaviorKeys){
         const parentInstanceLocalName =  parentInstance.localName;
-        //if(this.overrides[parentInstanceLocalName] !== undefined) return;
         if(this.querySelector(parentInstanceLocalName) !== null) return;
-        this.registeredBehaviors[parentInstanceLocalName] = parentInstance;
+        const override =  this.overrides[parentInstanceLocalName];
+        let isRenamed = false;
+        let newInstanceTagName = parentInstanceLocalName;
+        let newIfWantsToBe = parentInstance.ifWantsToBe;
+        if(override !== undefined){
+            const {ifWantsToBe} = override;
+            if(ifWantsToBe !== null){
+                newIfWantsToBe = ifWantsToBe;
+                newInstanceTagName = 'be-' + ifWantsToBe;
+            }
+        }
+        
         const newBehaviorEl = document.createElement(parentInstanceLocalName);
-        newBehaviorEl.setAttribute('if-wants-to-be', parentInstance.ifWantsToBe);
+        newBehaviorEl.setAttribute('if-wants-to-be', newIfWantsToBe);
         newBehaviorEl.setAttribute('upgrade', parentInstance.upgrade);
         this.appendChild(newBehaviorEl);
-        this.latestBehavior = parentInstance;
+        const newRegisteredBehavior: BehaviorKeys = {
+            ...parentInstance,
+            ifWantsToBe: newIfWantsToBe,
+            
+        };
+            
+        this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
+        this.latestBehavior = newRegisteredBehavior;
         return newBehaviorEl;
     }
 
@@ -65,9 +82,9 @@ const ce = new CE<BeHiveProps, BeHiveActions>({
             intro:{
                 ifAllOf:['isC'],
             },
-            onOverrides:{
-                ifAllOf:['overrides']
-            },
+            // onOverrides:{
+            //     ifAllOf:['overrides']
+            // },
             onLatestBehavior: 'latestBehavior'
         },
         style:{
