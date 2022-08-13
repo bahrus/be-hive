@@ -1,4 +1,4 @@
-import { XE } from 'xtal-element/src/XE.js';
+import { CE } from 'trans-render/lib/CE.js';
 export class BeHiveCore extends HTMLElement {
     registeredBehaviors = {};
     intro({}) {
@@ -37,21 +37,21 @@ export class BeHiveCore extends HTMLElement {
         this.latestBehavior = instance;
         return newBehaviorEl;
     }
+    onLatestBehavior({ latestBehavior }) {
+        this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
+            detail: {
+                value: latestBehavior,
+            }
+        }));
+    }
 }
 const tagName = 'be-hive';
-const xe = new XE({
+const ce = new CE({
     config: {
         tagName,
         propDefaults: {
             overrides: {},
             isC: true,
-        },
-        propInfo: {
-            latestBehavior: {
-                notify: {
-                    dispatch: true,
-                }
-            }
         },
         actions: {
             intro: {
@@ -59,7 +59,8 @@ const xe = new XE({
             },
             onOverrides: {
                 ifAllOf: ['overrides']
-            }
+            },
+            onLatestBehavior: 'latestBehavior'
         },
         style: {
             display: 'none',
@@ -67,4 +68,4 @@ const xe = new XE({
     },
     superclass: BeHiveCore
 });
-export const BeHive = xe.classDef;
+export const BeHive = ce.classDef;
