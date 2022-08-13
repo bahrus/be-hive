@@ -20,7 +20,7 @@ With the help of the be-hive component, the developer only has to plop a single 
 <be-hive></be-hive>
 ```
 
-This signals that the Shadow DOM realm is opting in to allowing element behiviors, and will inherit all the behiviors from the parent Shadow DOM realm, by default.
+This signals that the Shadow DOM realm is opting-in, and allowing element behiviors, and will inherit all the behiviors from the parent Shadow DOM realm, by default.
 
 But the child Shadow DOM realm can develop a personality of its own by:
 
