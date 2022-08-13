@@ -4,7 +4,8 @@ import {BeHiveProps, BeHiveActions, BehaviorKeys} from './types';
 export class BeHiveCore extends HTMLElement implements BeHiveActions{
     registeredBehaviors: {[key: string]: BehaviorKeys} = {};
 
-    intro({}: this){
+    intro({beSevered}: this){
+        if(beSevered) return;
         const rn = this.getRootNode();
         const host = (<any>rn).host;
         if(!host) return;
@@ -27,7 +28,6 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
         const parentInstanceLocalName =  parentInstance.localName;
         if(this.querySelector(parentInstanceLocalName) !== null) return;
         const override =  this.overrides[parentInstanceLocalName];
-        //let isRenamed = false;
         let newInstanceTagName = parentInstanceLocalName;
         let newIfWantsToBe = parentInstance.ifWantsToBe;
         if(override !== undefined){
@@ -74,14 +74,12 @@ const ce = new CE<BeHiveProps, BeHiveActions>({
         propDefaults:{
             overrides: {},
             isC: true,
+            beSevered: false,
         },
         actions:{
             intro:{
                 ifAllOf:['isC'],
             },
-            // onOverrides:{
-            //     ifAllOf:['overrides']
-            // },
             onLatestBehavior: 'latestBehavior'
         },
         style:{

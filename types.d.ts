@@ -13,6 +13,7 @@ export interface BeHiveProps{
     isC: boolean;
     registeredBehaviors: {[key: string]: BehaviorKeys};
     latestBehavior: BehaviorKeys;
+    beSevered: boolean
 }
 
 export interface BeHiveActions{

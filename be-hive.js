@@ -1,7 +1,9 @@
 import { CE } from 'trans-render/lib/CE.js';
 export class BeHiveCore extends HTMLElement {
     registeredBehaviors = {};
-    intro({}) {
+    intro({ beSevered }) {
+        if (beSevered)
+            return;
         const rn = this.getRootNode();
         const host = rn.host;
         if (!host)
@@ -23,7 +25,6 @@ export class BeHiveCore extends HTMLElement {
         if (this.querySelector(parentInstanceLocalName) !== null)
             return;
         const override = this.overrides[parentInstanceLocalName];
-        //let isRenamed = false;
         let newInstanceTagName = parentInstanceLocalName;
         let newIfWantsToBe = parentInstance.ifWantsToBe;
         if (override !== undefined) {
@@ -62,14 +63,12 @@ const ce = new CE({
         propDefaults: {
             overrides: {},
             isC: true,
+            beSevered: false,
         },
         actions: {
             intro: {
                 ifAllOf: ['isC'],
             },
-            // onOverrides:{
-            //     ifAllOf:['overrides']
-            // },
             onLatestBehavior: 'latestBehavior'
         },
         style: {
