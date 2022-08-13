@@ -23,8 +23,8 @@ This signals that the Shadow DOM realm is opting in to allowing element behivior
 But the child Shadow DOM realm can develop a personality of its own by:
 
 1.  Adding additional behaviors by adding specific be-decorated elements inside the be-hive instance tag.
-2.  Avoid naming conflicts by overriding the attribute associated with the behivior.
-3.  Preventing selected behaviors from affecting the Shadow DOM realm [TODO].
+2.  Avoiding naming conflicts by overriding the attribute associated with inherited behivior.
+3.  Preventing inheriting unwanted behaviors from affecting the Shadow DOM realm [TODO].
 
 ## Syntax for customizations of inherited behiviors:
 
@@ -37,7 +37,7 @@ But the child Shadow DOM realm can develop a personality of its own by:
         "ifWantsToBe": "respectful"
     },
     "be-disobedient-without-facing-the-consequences": {
-        "notAllowed": "true"
+        "notAllowed": "true" //TODO
     }
 }'></be-hive>
 ```
