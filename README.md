@@ -40,15 +40,17 @@ But the child Shadow DOM realm can develop a personality of its own by:
         "ifWantsToBe": "respectful"
     },
     "be-disobedient-without-facing-the-consequences": {
-        "blocked": "true" //TODO
+        "block": "true" //TODO
     }
 }'></be-hive>
 ```
 
-## Starting over [TODO]
+## Be like Sirius Black [TODO]
+
+If the inherited behavior are all just too odious to inherit, there's an option to start again:
 
 ```html
-<be-hive be-sirius-black>
+<be-hive be-severed>
 </be-hive>
 ```
 

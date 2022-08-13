@@ -23,11 +23,13 @@ export class BeHiveCore extends HTMLElement {
         if (this.querySelector(parentInstanceLocalName) !== null)
             return;
         const override = this.overrides[parentInstanceLocalName];
-        let isRenamed = false;
+        //let isRenamed = false;
         let newInstanceTagName = parentInstanceLocalName;
         let newIfWantsToBe = parentInstance.ifWantsToBe;
         if (override !== undefined) {
-            const { ifWantsToBe } = override;
+            const { ifWantsToBe, block } = override;
+            if (block)
+                return;
             if (ifWantsToBe !== null) {
                 newIfWantsToBe = ifWantsToBe;
                 newInstanceTagName = 'be-' + ifWantsToBe;
