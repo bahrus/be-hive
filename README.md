@@ -6,6 +6,8 @@
 
 <img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-hive?compression=gzip">
 
+<a href="https://nodei.co/npm/be-hive/"><img src="https://nodei.co/npm/be-hive.png"></a>
+
 ## Inheriting behiviors
 
 [be-hive](https://www.youtube.com/watch?v=SQoOwosJWns) let's it [snow in August](https://www.youtube.com/watch?v=m3dmnOtqrV0).
