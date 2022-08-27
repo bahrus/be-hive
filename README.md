@@ -73,4 +73,5 @@ in be-hive/register.js
 
 be-hive then determines which be-hiviors to inherit.
 
+[TODO]  Provide a "registry" for be-hiviors to read common meta information.
 
