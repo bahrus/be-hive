@@ -27,7 +27,7 @@
     "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "trans-render": "0.0.581"
+    "trans-render": "0.0.583"
   },
   "devDependencies": {
     "@playwright/test": "1.25.1",
