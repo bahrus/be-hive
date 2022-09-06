@@ -50,17 +50,20 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
         };
             
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
-        this.latestBehavior = newRegisteredBehavior;
+        this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
         return newBehaviorEl;
     }
 
 
-    onLatestBehavior({latestBehavior}: this): void {
-        this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
-            detail:{
-                value: latestBehavior,
-            }
-        }))
+    onLatestBehavior({}: this): void {
+        for(const behavior of this.latestBehaviors){
+            this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
+                detail:{
+                    value: behavior,
+                }
+            }))
+        }
+        this.latestBehaviors = [];
     }
 }
 
@@ -75,12 +78,13 @@ const ce = new CE<BeHiveProps, BeHiveActions>({
             overrides: {},
             isC: true,
             beSevered: false,
+            latestBehaviors: []
         },
         actions:{
             intro:{
                 ifAllOf:['isC'],
             },
-            onLatestBehavior: 'latestBehavior'
+            onLatestBehaviors: 'latestBehaviors'
         },
         style:{
             display: 'none',

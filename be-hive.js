@@ -45,15 +45,18 @@ export class BeHiveCore extends HTMLElement {
             ifWantsToBe: newIfWantsToBe,
         };
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
-        this.latestBehavior = newRegisteredBehavior;
+        this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
         return newBehaviorEl;
     }
-    onLatestBehavior({ latestBehavior }) {
-        this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
-            detail: {
-                value: latestBehavior,
-            }
-        }));
+    onLatestBehavior({}) {
+        for (const behavior of this.latestBehaviors) {
+            this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
+                detail: {
+                    value: behavior,
+                }
+            }));
+        }
+        this.latestBehaviors = [];
     }
 }
 const tagName = 'be-hive';
@@ -64,12 +67,13 @@ const ce = new CE({
             overrides: {},
             isC: true,
             beSevered: false,
+            latestBehaviors: []
         },
         actions: {
             intro: {
                 ifAllOf: ['isC'],
             },
-            onLatestBehavior: 'latestBehavior'
+            onLatestBehaviors: 'latestBehaviors'
         },
         style: {
             display: 'none',

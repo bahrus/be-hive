@@ -12,13 +12,13 @@ export interface BeHiveProps{
     overrides: {[key: string]: BehaviorKeys};
     isC: boolean;
     registeredBehaviors: {[key: string]: BehaviorKeys};
-    latestBehavior: BehaviorKeys;
+    latestBehaviors: BehaviorKeys[];
     beSevered: boolean
 }
 
 export interface BeHiveActions{
     intro(self: this): void;
     //onOverrides(self: this): void;
-    onLatestBehavior(self: this): void;
+    onLatestBehaviors(self: this): void;
     register(instance: BehaviorKeys): Element | undefined;
 }
