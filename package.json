@@ -36,7 +36,7 @@
     "@custom-elements-manifest/analyzer": "0.6.4",
     "xtal-editor": "0.0.193",
     "xtal-shell": "0.0.27",
-    "be-exportable": "0.0.29",
+    "be-exportable": "0.0.30",
     "be-functional": "0.0.12"
   },
   "repository": {
