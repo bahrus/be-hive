@@ -49,6 +49,8 @@ export class BeHiveCore extends HTMLElement {
         return newBehaviorEl;
     }
     onLatestBehaviors({}) {
+        if (this.latestBehaviors.length === 0)
+            return;
         for (const behavior of this.latestBehaviors) {
             this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
                 detail: {
