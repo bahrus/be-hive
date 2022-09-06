@@ -55,7 +55,7 @@ export class BeHiveCore extends HTMLElement implements BeHiveActions{
     }
 
 
-    onLatestBehavior({}: this): void {
+    onLatestBehaviors({}: this): void {
         for(const behavior of this.latestBehaviors){
             this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
                 detail:{
