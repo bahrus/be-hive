@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "trans-render": "0.0.602",
-    "be-decorated": "0.0.155"
+    "be-decorated": "0.0.156"
   },
   "devDependencies": {
     "@playwright/test": "1.25.2",
