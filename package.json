@@ -27,8 +27,8 @@
     "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "trans-render": "0.0.606",
-    "be-decorated": "0.0.161"
+    "trans-render": "0.0.609",
+    "be-decorated": "0.0.162"
   },
   "devDependencies": {
     "@playwright/test": "1.25.2",
