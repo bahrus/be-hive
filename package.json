@@ -27,11 +27,11 @@
     "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "trans-render": "0.0.610",
-    "be-decorated": "0.0.163"
+    "trans-render": "0.0.616",
+    "be-decorated": "0.0.164"
   },
   "devDependencies": {
-    "@playwright/test": "1.25.2",
+    "@playwright/test": "1.26.0",
     "@skypack/package-check": "0.2.2",
     "may-it-serve": "0.0.2",
     "@custom-elements-manifest/analyzer": "0.6.4",
