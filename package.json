@@ -27,7 +27,7 @@
     "doc": "custom-elements-manifest analyze"
   },
   "dependencies": {
-    "trans-render": "0.0.617",
+    "trans-render": "0.0.619",
     "be-decorated": "0.0.165"
   },
   "devDependencies": {
