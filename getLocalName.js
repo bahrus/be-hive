@@ -14,8 +14,9 @@ export function getLocalName(peerCitizen, decoratorName) {
         const controller = new AbortController();
         bh.addEventListener('latest-behavior-changed', e => {
             const detail = e.detail;
-            if (detail.localName === decoratorName) {
-                resolve(detail.ifWantsToBe);
+            const { localName, ifWantsToBe } = detail.value;
+            if (localName === decoratorName) {
+                resolve(ifWantsToBe);
                 controller.abort();
             }
         });

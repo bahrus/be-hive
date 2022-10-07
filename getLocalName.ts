@@ -1,3 +1,5 @@
+import {LatestBehaviorEvent} from './types';
+
 export function getLocalName(peerCitizen: Element, decoratorName: string): Promise<string>{
     return new Promise((resolve, reject) => {
         const rn = peerCitizen.getRootNode() as Element;
@@ -14,9 +16,10 @@ export function getLocalName(peerCitizen: Element, decoratorName: string): Promi
         }
         const controller = new AbortController();
         bh.addEventListener('latest-behavior-changed', e => {
-            const detail = (e as CustomEvent).detail;
-            if(detail.localName === decoratorName){
-                resolve(detail.ifWantsToBe);
+            const detail = (e as CustomEvent).detail as LatestBehaviorEvent;
+            const {localName, ifWantsToBe} = detail.value;
+            if(localName === decoratorName){
+                resolve(ifWantsToBe);
                 controller.abort();
             }
         });

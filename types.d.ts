@@ -22,3 +22,7 @@ export interface BeHiveActions{
     onLatestBehaviors(self: this): void;
     register(instance: BehaviorKeys): Element | undefined;
 }
+
+export interface LatestBehaviorEvent{
+    value: BehaviorKeys;
+}
