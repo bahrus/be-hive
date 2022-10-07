@@ -15,7 +15,7 @@
     "./be-hive.js": "./be-hive.js",
     "./register.js": "./register.js",
     "./beatify.js": "./beatify.js",
-    "./getLocalName.js": "./getLocalName.js",
+    "./getLocalName.js": "./getLocalName.js"
   },
   "files": [
     "*.*"
