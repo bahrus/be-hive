@@ -1,24 +1,11 @@
+import {CE} from 'trans-render/lib/CE.js';
 import {BeHiveProps, BeHiveActions, BehaviorKeys} from './types';
-export class BeHive extends HTMLElement{
-    constructor(){
-        super();
-        this.registeredBehaviors = {};
-    }
-    connectedCallback(){
-        this.style.display = 'none';
-        const overridesAttr = this.getAttribute('overrides');
-        if(overridesAttr !== null){
-            this.overrides = JSON.parse(overridesAttr);
-        }else{
-            this.overrides = {};
-        }
-        
-        this.#getInheritedBehaviors();
-    }
 
-    #getInheritedBehaviors(){
-        const beSevered = this.getAttribute('be-severed');
-        if(beSevered !== null) return;
+export class BeHiveCore extends HTMLElement implements BeHiveActions{
+    registeredBehaviors: {[key: string]: BehaviorKeys} = {};
+
+    intro({beSevered}: this){
+        if(beSevered) return;
         const rn = this.getRootNode();
         const host = (<any>rn).host;
         if(!host) return;
@@ -35,6 +22,7 @@ export class BeHive extends HTMLElement{
             });
         }
     }
+
 
     register(parentInstance: BehaviorKeys){
         const parentInstanceLocalName =  parentInstance.localName;
@@ -62,20 +50,50 @@ export class BeHive extends HTMLElement{
         };
             
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
-        this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
-            detail:{
-                value: newRegisteredBehavior,
-            }
-        }));
-        //this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
+        this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
         return newBehaviorEl;
     }
 
 
+    onLatestBehaviors({}: this): void {
+        if(this.latestBehaviors.length === 0) return;
+        for(const behavior of this.latestBehaviors){
+            this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
+                detail:{
+                    value: behavior,
+                }
+            }))
+        }
+        this.latestBehaviors = [];
+    }
 }
 
-if(!customElements.get('be-hive')){
-    customElements.define('be-hive', BeHive);
-}
+export interface BeHiveCore extends BeHiveProps{}
 
-export interface BeHive extends BeHiveProps{}
+const tagName = 'be-hive';
+
+const ce = new CE<BeHiveProps, BeHiveActions>({
+    config:{
+        tagName,
+        propDefaults:{
+            overrides: {},
+            isC: true,
+            beSevered: false,
+            latestBehaviors: []
+        },
+        actions:{
+            intro:{
+                ifAllOf:['isC'],
+            },
+            onLatestBehaviors: 'latestBehaviors'
+        },
+        style:{
+            display: 'none',
+        }
+    },
+    superclass: BeHiveCore
+});
+
+export const BeHive = ce.classDef!;
+
+

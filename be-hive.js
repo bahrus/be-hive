@@ -1,8 +1,22 @@
-import { CE } from 'trans-render/lib/CE.js';
-export class BeHiveCore extends HTMLElement {
-    registeredBehaviors = {};
-    intro({ beSevered }) {
-        if (beSevered)
+export class BeHive extends HTMLElement {
+    constructor() {
+        super();
+        this.registeredBehaviors = {};
+    }
+    connectedCallback() {
+        this.style.display = 'none';
+        const overridesAttr = this.getAttribute('overrides');
+        if (overridesAttr !== null) {
+            this.overrides = JSON.parse(overridesAttr);
+        }
+        else {
+            this.overrides = {};
+        }
+        this.#getInheritedBehaviors();
+    }
+    #getInheritedBehaviors() {
+        const beSevered = this.getAttribute('be-severed');
+        if (beSevered !== null)
             return;
         const rn = this.getRootNode();
         const host = rn.host;
@@ -45,42 +59,15 @@ export class BeHiveCore extends HTMLElement {
             ifWantsToBe: newIfWantsToBe,
         };
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
-        this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
+        this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
+            detail: {
+                value: newRegisteredBehavior,
+            }
+        }));
+        //this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
         return newBehaviorEl;
     }
-    onLatestBehaviors({}) {
-        if (this.latestBehaviors.length === 0)
-            return;
-        for (const behavior of this.latestBehaviors) {
-            this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
-                detail: {
-                    value: behavior,
-                }
-            }));
-        }
-        this.latestBehaviors = [];
-    }
 }
-const tagName = 'be-hive';
-const ce = new CE({
-    config: {
-        tagName,
-        propDefaults: {
-            overrides: {},
-            isC: true,
-            beSevered: false,
-            latestBehaviors: []
-        },
-        actions: {
-            intro: {
-                ifAllOf: ['isC'],
-            },
-            onLatestBehaviors: 'latestBehaviors'
-        },
-        style: {
-            display: 'none',
-        }
-    },
-    superclass: BeHiveCore
-});
-export const BeHive = ce.classDef;
+if (!customElements.get('be-hive')) {
+    customElements.define('be-hive', BeHive);
+}

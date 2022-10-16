@@ -18,6 +18,7 @@
             ...
             <script nomodule id=my-script be-exportable>
             export const yawnAndStretch = e => {
+                console.log({e}, e.target);
                 e.target.textContent = 'Try to come to life';
             }
             </script>
