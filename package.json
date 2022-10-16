@@ -34,7 +34,7 @@
     "@custom-elements-manifest/analyzer": "0.6.4",
     "xtal-shell": "0.0.27",
     "be-functional": "0.0.15",
-    "be-exportable": "0.0.41"
+    "be-exportable": "0.0.42"
   },
   "repository": {
     "type": "git",
