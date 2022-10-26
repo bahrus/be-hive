@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <template shadowroot='open'>
+            <button be-functional='{
+                "click": {
+                    "scriptRef": "my-script",
+                    "fn": "yawnAndStretch"
+                }
+            }'>Tumble out of bed</button>
+            ...
+            <script nomodule id=my-script be-exportable>
+            export const yawnAndStretch = e => {
+                console.log({e}, e.target);
+                e.target.textContent = 'Try to come to life';
+                target.setAttribute('mark', 'good');
+            }
+            </script>
+            <be-hive></be-hive>
+        </template>
+
+    </div>
+    <div id=target></div>
+    <script type=importmap>{
+        "imports":{
+            "trans-render/": "../node_modules/trans-render/",
+            "xtal-element/": "../node_modules/xtal-element/",
+            "be-decorated/": "../node_modules/be-decorated/",
+            "be-hive/": "../",
+            "be-functional/": "../node_modules/be-functional/",
+            "be-exportable/": "../node_modules/be-exportable/"
+        }
+    }</script>
+    <script type=module>
+        import 'be-functional/be-functional.js';
+        import 'be-exportable/be-exportable.js';
+    </script>
+    <script>
+        function runScript(){
+            document.querySelector('div').shadowRoot.querySelector('button').click();
+        }
+        setTimeout(() => {
+            runScript();
+        }, 2000);
+    </script>
+</body>
+</html>
