@@ -58,6 +58,17 @@ If the inherited behiviors are all just too odious to inherit, there's an option
 </be-hive>
 ```
 
+## Adding back a personality trait [TODO]
+
+If one Shadow DOM blocks an inherited behavior, child Shadow DOMs can bring it back within their (and descendent) shadow DOM realms thusly:
+
+```html
+<be-hive overrides='{
+    "be-disobedient-without-facing-the-consequences": {
+        "unblock": "true"
+    }
+}'></be-hive>
+```
 
 ## API
 
