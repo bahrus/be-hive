@@ -23,6 +23,7 @@ export class BeHive extends HTMLElement {
         if (!host)
             return;
         const parentShadowRealm = host.getRootNode();
+        debugger;
         const parentBeHiveInstance = parentShadowRealm.querySelector('be-hive');
         if (parentBeHiveInstance !== null) {
             const { registeredBehaviors } = parentBeHiveInstance;
