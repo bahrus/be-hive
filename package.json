@@ -27,6 +27,9 @@
     "package-check": "package-check",
     "doc": "custom-elements-manifest analyze"
   },
+  "dependencies": {
+    "be-decorated": "0.0.190"
+  },
   "devDependencies": {
     "@playwright/test": "1.27.1",
     "@skypack/package-check": "0.2.2",

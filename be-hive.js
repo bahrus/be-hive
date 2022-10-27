@@ -15,9 +15,6 @@ export class BeHive extends HTMLElement {
         this.#getInheritedBehaviors();
     }
     #getInheritedBehaviors() {
-        const beSevered = this.getAttribute('be-severed');
-        if (beSevered !== null)
-            return;
         const rn = this.getRootNode();
         const host = rn.host;
         if (!host)
@@ -41,22 +38,33 @@ export class BeHive extends HTMLElement {
         const override = this.overrides[parentInstanceLocalName];
         let newInstanceTagName = parentInstanceLocalName;
         let newIfWantsToBe = parentInstance.ifWantsToBe;
+        let newDisabled = parentInstance.disabled;
         if (override !== undefined) {
-            const { ifWantsToBe, block } = override;
-            if (block)
-                return;
-            if (ifWantsToBe !== null) {
+            const { ifWantsToBe, block, unblock } = override;
+            if (block) {
+                newDisabled = true;
+            }
+            else if (unblock) {
+                newDisabled = false;
+            }
+            if (ifWantsToBe) {
                 newIfWantsToBe = ifWantsToBe;
                 newInstanceTagName = 'be-' + ifWantsToBe;
             }
         }
+        const beSevered = this.hasAttribute('be-severed');
+        if (beSevered)
+            newDisabled = true;
         const newBehaviorEl = document.createElement(parentInstanceLocalName);
         newBehaviorEl.setAttribute('if-wants-to-be', newIfWantsToBe);
         newBehaviorEl.setAttribute('upgrade', parentInstance.upgrade);
+        if (newDisabled)
+            newBehaviorEl.setAttribute('disabled', '');
         this.appendChild(newBehaviorEl);
         const newRegisteredBehavior = {
             ...parentInstance,
             ifWantsToBe: newIfWantsToBe,
+            disabled: newDisabled,
         };
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
         this.dispatchEvent(new CustomEvent('latest-behavior-changed', {

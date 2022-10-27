@@ -5,6 +5,8 @@ export interface BehaviorKeys {
     upgrade: string,
     localName: string,
     block?: boolean,
+    unblock?: boolean,
+    disabled?: boolean,
 }
 
 
