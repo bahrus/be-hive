@@ -58,7 +58,7 @@ If the inherited behiviors are all just too odious to inherit, there's an option
 </be-hive>
 ```
 
-## Adding back a personality trait [TODO]
+## Adding back a personality trait [Untested]
 
 If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it back within their (and descendent) shadow DOM realms thusly:
 
