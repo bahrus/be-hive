@@ -3,9 +3,9 @@ export class BeHive extends HTMLElement{
     constructor(){
         super();
         this.registeredBehaviors = {};
+        this.hidden = true;
     }
     connectedCallback(){
-        this.style.display = 'none';
         const overridesAttr = this.getAttribute('overrides');
         if(overridesAttr !== null){
             this.overrides = JSON.parse(overridesAttr);
