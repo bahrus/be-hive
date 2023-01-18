@@ -1,13 +1,14 @@
-import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID} from './types';
+import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable} from './types';
 export class BeHive extends HTMLElement{
 
+    #monitor?: IDisposable;
     constructor(){
         super();
         this.registeredBehaviors = {};
         this.refs = {};
-        
+
     }
-    connectedCallback(){
+    async connectedCallback(){
         this.hidden = true;
         const overridesAttr = this.getAttribute('overrides');
         if(overridesAttr !== null){
@@ -15,8 +16,15 @@ export class BeHive extends HTMLElement{
         }else{
             this.overrides = {};
         }
-        
         this.#getInheritedBehaviors();
+        const {IDMonitor} = await import('./IDMonitor.js');
+        this.#monitor = new IDMonitor(this);
+    }
+
+    disconnectedCallback(){
+        if(this.#monitor !== undefined){
+            this.#monitor.dispose();
+        }
     }
 
     #getInheritedBehaviors(){
@@ -36,11 +44,11 @@ export class BeHive extends HTMLElement{
             });
 
             for(const id in refs){
-                this.define(refs[id]);
+                this.define(refs[id], true);
             }
 
             parentBeHiveInstance.addEventListener('new-ref', (e: Event) => {
-                this.register((<any>e).detail.value);
+                this.define((<any>e).detail.value, true);
             });
             
         }
@@ -90,7 +98,10 @@ export class BeHive extends HTMLElement{
         return newBehaviorEl;
     }
 
-    define(ref: IHasID){
+    define(ref: IHasID, noReplace: boolean){
+        if(noReplace){
+            if(this.refs[ref.id] !== undefined) return;
+        }
         this.refs[ref.id] = ref;
         this.dispatchEvent(new CustomEvent('new-ref', {
             detail:{

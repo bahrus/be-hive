@@ -16,7 +16,8 @@ export interface BeHiveProps{
     registeredBehaviors: {[key: string]: BehaviorKeys};
     latestBehaviors: BehaviorKeys[];
     refs: {[key: string]: IHasID};
-    beSevered: boolean
+    beSevered: boolean;
+    
 }
 
 export interface BeHiveActions{
@@ -33,3 +34,9 @@ export interface LatestBehaviorEvent{
 export interface IHasID{
     id: string;
 }
+
+export interface IDisposable{
+    dispose(): void;
+}
+
+export type Disposable = {new(): IDisposable};
