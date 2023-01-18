@@ -2,6 +2,7 @@ export class BeHive extends HTMLElement {
     constructor() {
         super();
         this.registeredBehaviors = {};
+        this.refs = {};
     }
     connectedCallback() {
         this.hidden = true;
@@ -22,11 +23,17 @@ export class BeHive extends HTMLElement {
         const parentShadowRealm = host.getRootNode();
         const parentBeHiveInstance = parentShadowRealm.querySelector('be-hive');
         if (parentBeHiveInstance !== null) {
-            const { registeredBehaviors } = parentBeHiveInstance;
+            const { registeredBehaviors, refs } = parentBeHiveInstance;
             for (const key in registeredBehaviors) {
                 this.register(registeredBehaviors[key]);
             }
             parentBeHiveInstance.addEventListener('latest-behavior-changed', (e) => {
+                this.register(e.detail.value);
+            });
+            for (const id in refs) {
+                this.define(refs[id]);
+            }
+            parentBeHiveInstance.addEventListener('new-ref', (e) => {
                 this.register(e.detail.value);
             });
         }
@@ -74,6 +81,31 @@ export class BeHive extends HTMLElement {
         }));
         //this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
         return newBehaviorEl;
+    }
+    define(ref) {
+        this.refs[ref.id] = ref;
+        this.dispatchEvent(new CustomEvent('new-ref', {
+            detail: {
+                value: ref,
+            }
+        }));
+    }
+    get(id) {
+        return this.refs[id];
+    }
+    whenDefined(id) {
+        return new Promise(resolve => {
+            const ref = this.get(id);
+            if (ref !== undefined) {
+                resolve(ref);
+                return;
+            }
+            this.addEventListener('new-ref', e => {
+                const ref = e.detail.value;
+                if (ref.id === id)
+                    resolve(ref);
+            }, { once: true });
+        });
     }
 }
 if (!customElements.get('be-hive')) {

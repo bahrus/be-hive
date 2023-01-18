@@ -28,13 +28,13 @@
     "doc": "custom-elements-manifest analyze"
   },
   "devDependencies": {
-    "@playwright/test": "1.29.1",
+    "@playwright/test": "1.29.2",
     "@skypack/package-check": "0.2.2",
     "may-it-serve": "0.0.4",
     "@custom-elements-manifest/analyzer": "0.6.4",
     "xtal-shell": "0.0.27",
-    "be-functional": "0.0.17",
-    "be-exportable": "0.0.54"
+    "be-functional": "0.0.18",
+    "be-exportable": "0.0.62"
   },
   "repository": {
     "type": "git",

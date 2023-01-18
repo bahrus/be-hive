@@ -70,6 +70,37 @@ If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it b
 }'></be-hive>
 ```
 
+## Scoped templates [TODO]
+
+be-hive can also manage "scoped templates" -- templates contained inside be-hive elements in higher up ShadowDOM can "cascade down".
+
+```html
+<my-element>
+    #shadow
+        <be-hive>
+            <template id=open-menu>
+            ...
+            </template>
+        </be-hive>
+        <my-child-element>
+            <be-hive>
+            </be-hive>
+        </my-child-element>
+</my-element>
+```
+
+from within my-child-element:
+
+```JavaScript
+const openMenuTempl = await this.querySelector('be-hive').whenDefined('open-menu');
+```
+
+Can also programmatically register template:
+
+```JavaScript
+this.querySelector('be-hive').define(templ);
+```
+
 ## API
 
 

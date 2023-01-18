@@ -15,6 +15,7 @@ export interface BeHiveProps{
     isC: boolean;
     registeredBehaviors: {[key: string]: BehaviorKeys};
     latestBehaviors: BehaviorKeys[];
+    refs: {[key: string]: IHasID};
     beSevered: boolean
 }
 
@@ -27,4 +28,8 @@ export interface BeHiveActions{
 
 export interface LatestBehaviorEvent{
     value: BehaviorKeys;
+}
+
+export interface IHasID{
+    id: string;
 }
