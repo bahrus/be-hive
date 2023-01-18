@@ -70,9 +70,12 @@ If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it b
 }'></be-hive>
 ```
 
-## Scoped templates [TODO]
+## Scoped refs [WIP]
 
-be-hive can also manage "scoped templates" -- templates contained inside be-hive elements in higher up ShadowDOM can "cascade down".
+be-hive can also manage "scoped refs" -- 
+
+1.  Placing a DOM element, such as a template, with an id inside the be-vive element "registers" it.
+2.  Elements contained inside be-hive elements in higher up ShadowDOM realms can "cascade down".
 
 ```html
 <my-element>
@@ -114,6 +117,5 @@ in be-hive/register.js
 
 
 be-hive then determines which be-hiviors to inherit.
-
-[TODO]  Provide a "registry" for be-hiviors to read common meta information.  Create a property that is an ES6 proxy, transmits event on all prop changes?  
+  
 
