@@ -15,7 +15,7 @@ export interface BeHiveProps{
     isC: boolean;
     registeredBehaviors: {[key: string]: BehaviorKeys};
     latestBehaviors: BehaviorKeys[];
-    refs: {[key: string]: IHasID};
+    refs: {[key: string]: Ref};
     beSevered: boolean;
     
 }
@@ -33,6 +33,11 @@ export interface LatestBehaviorEvent{
 
 export interface IHasID{
     id: string;
+}
+
+export interface Ref<TElement = IHasID, Meta = any>{
+    element: TElement,
+    meta: Meta
 }
 
 export interface IDisposable{

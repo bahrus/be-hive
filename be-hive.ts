@@ -1,4 +1,4 @@
-import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable} from './types';
+import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable, Ref} from './types';
 export class BeHive extends HTMLElement{
 
     #monitor?: IDisposable;
@@ -98,11 +98,11 @@ export class BeHive extends HTMLElement{
         return newBehaviorEl;
     }
 
-    define(ref: IHasID, noReplace: boolean){
+    define(ref: Ref, noReplace: boolean){
         if(noReplace){
-            if(this.refs[ref.id] !== undefined) return;
+            if(this.refs[ref.element.id] !== undefined) return;
         }
-        this.refs[ref.id] = ref;
+        this.refs[ref.element.id] = ref;
         this.dispatchEvent(new CustomEvent('new-ref', {
             detail:{
                 value: ref,
@@ -114,7 +114,7 @@ export class BeHive extends HTMLElement{
         return this.refs[id];
     }
 
-    whenDefined(id: string): Promise<IHasID>{
+    whenDefined(id: string): Promise<Ref>{
         return new Promise(resolve => {
             const ref = this.get(id);
             if(ref !== undefined){
@@ -122,8 +122,8 @@ export class BeHive extends HTMLElement{
                 return;
             }
             this.addEventListener('new-ref', e => {
-                const ref = (<any>e).detail.value as IHasID;
-                if(ref.id === id) resolve(ref);
+                const ref = (<any>e).detail.value as Ref;
+                if(ref.element.id === id) resolve(ref);
             }, {once: true});
         });
     }
