@@ -4,10 +4,10 @@ export class IDMonitor{
     #mut: MutationObserver;
     constructor(public instance: BeHive){
         const config: MutationObserverInit = { childList: true};
-        instance.querySelectorAll('*').forEach(item => {
-            const {id} = item;
+        instance.querySelectorAll('*').forEach(element => {
+            const {id} = element;
             if(id){
-                instance.define(item, false);
+                instance.define({element, meta: {}}, false);
             }
         })
         this.#mut = new MutationObserver((mutationList: MutationRecord[]) => {
@@ -15,9 +15,10 @@ export class IDMonitor{
                 const {addedNodes} = mutation;
                 if(addedNodes !== undefined){
                     for(const addedNode of addedNodes){
-                        const {id} = addedNode as any as IHasID;
+                        const element = addedNode as any as IHasID;
+                        const {id} = element
                         if(id){
-                            instance.define(addedNode as any as IHasID, false);
+                            instance.define({element, meta: {}}, false);
                         }
                     }
                 }
