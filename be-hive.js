@@ -92,14 +92,14 @@ export class BeHive extends HTMLElement {
     }
     define(ref, noReplace) {
         if (noReplace) {
-            if (this.refs[ref.id] !== undefined)
+            if (this.refs[ref.element.id] !== undefined)
                 return;
         }
-        this.refs[ref.id] = ref;
+        this.refs[ref.element.id] = ref;
         this.dispatchEvent(new CustomEvent('new-ref', {
             detail: {
                 value: ref,
-            }
+            },
         }));
     }
     get(id) {
@@ -114,7 +114,7 @@ export class BeHive extends HTMLElement {
             }
             this.addEventListener('new-ref', e => {
                 const ref = e.detail.value;
-                if (ref.id === id)
+                if (ref.element.id === id)
                     resolve(ref);
             }, { once: true });
         });

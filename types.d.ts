@@ -45,3 +45,7 @@ export interface IDisposable{
 }
 
 export type Disposable = {new(): IDisposable};
+
+export interface INewDefEvent{
+    value: Ref
+}

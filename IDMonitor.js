@@ -4,10 +4,10 @@ export class IDMonitor {
     constructor(instance) {
         this.instance = instance;
         const config = { childList: true };
-        instance.querySelectorAll('*').forEach(item => {
-            const { id } = item;
+        instance.querySelectorAll('*').forEach(element => {
+            const { id } = element;
             if (id) {
-                instance.define(item, false);
+                instance.define({ element, meta: {} }, false);
             }
         });
         this.#mut = new MutationObserver((mutationList) => {
@@ -15,9 +15,10 @@ export class IDMonitor {
                 const { addedNodes } = mutation;
                 if (addedNodes !== undefined) {
                     for (const addedNode of addedNodes) {
-                        const { id } = addedNode;
+                        const element = addedNode;
+                        const { id } = element;
                         if (id) {
-                            instance.define(addedNode, false);
+                            instance.define({ element, meta: {} }, false);
                         }
                     }
                 }

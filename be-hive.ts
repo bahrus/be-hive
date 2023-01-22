@@ -1,4 +1,4 @@
-import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable, Ref} from './types';
+import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable, Ref, INewDefEvent} from './types';
 export class BeHive extends HTMLElement{
 
     #monitor?: IDisposable;
@@ -106,7 +106,7 @@ export class BeHive extends HTMLElement{
         this.dispatchEvent(new CustomEvent('new-ref', {
             detail:{
                 value: ref,
-            }
+            } as INewDefEvent,
         }));
     }
 
