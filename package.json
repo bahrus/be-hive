@@ -25,7 +25,8 @@
     "serve": "node node_modules/may-it-serve/serve.js",
     "test": "playwright test",
     "package-check": "package-check",
-    "doc": "custom-elements-manifest analyze"
+    "doc": "custom-elements-manifest analyze",
+    "safari": "npx playwright wk http://localhost:3030"
   },
   "devDependencies": {
     "@playwright/test": "1.30.0",
