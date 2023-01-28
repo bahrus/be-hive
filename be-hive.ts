@@ -4,7 +4,7 @@ export class BeHive extends HTMLElement{
     //#monitor?: IDisposable;
     constructor(){
         super();
-        // this.registeredBehaviors = {};
+        this.registeredBehaviors = {};
         // this.refs = {};
 
     }
@@ -21,11 +21,11 @@ export class BeHive extends HTMLElement{
         // this.#monitor = new IDMonitor(this);
     }
 
-    disconnectedCallback(){
-        // if(this.#monitor !== undefined){
-        //     this.#monitor.dispose();
-        // }
-    }
+    // disconnectedCallback(){
+    //     // if(this.#monitor !== undefined){
+    //     //     this.#monitor.dispose();
+    //     // }
+    // }
 
     #getInheritedBehaviors(){
         const rn = this.getRootNode();

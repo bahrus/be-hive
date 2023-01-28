@@ -2,7 +2,7 @@ export class BeHive extends HTMLElement {
     //#monitor?: IDisposable;
     constructor() {
         super();
-        // this.registeredBehaviors = {};
+        this.registeredBehaviors = {};
         // this.refs = {};
     }
     async connectedCallback() {
@@ -18,11 +18,11 @@ export class BeHive extends HTMLElement {
         // const {IDMonitor} = await import('./IDMonitor.js');
         // this.#monitor = new IDMonitor(this);
     }
-    disconnectedCallback() {
-        // if(this.#monitor !== undefined){
-        //     this.#monitor.dispose();
-        // }
-    }
+    // disconnectedCallback(){
+    //     // if(this.#monitor !== undefined){
+    //     //     this.#monitor.dispose();
+    //     // }
+    // }
     #getInheritedBehaviors() {
         const rn = this.getRootNode();
         const host = rn.host;
