@@ -1,11 +1,11 @@
-import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable, Ref, INewDefEvent} from './types';
+import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable} from './types';
 export class BeHive extends HTMLElement{
 
-    #monitor?: IDisposable;
+    //#monitor?: IDisposable;
     constructor(){
         super();
-        this.registeredBehaviors = {};
-        this.refs = {};
+        // this.registeredBehaviors = {};
+        // this.refs = {};
 
     }
     async connectedCallback(){
@@ -17,14 +17,14 @@ export class BeHive extends HTMLElement{
             this.overrides = {};
         }
         this.#getInheritedBehaviors();
-        const {IDMonitor} = await import('./IDMonitor.js');
-        this.#monitor = new IDMonitor(this);
+        // const {IDMonitor} = await import('./IDMonitor.js');
+        // this.#monitor = new IDMonitor(this);
     }
 
     disconnectedCallback(){
-        if(this.#monitor !== undefined){
-            this.#monitor.dispose();
-        }
+        // if(this.#monitor !== undefined){
+        //     this.#monitor.dispose();
+        // }
     }
 
     #getInheritedBehaviors(){
@@ -34,7 +34,7 @@ export class BeHive extends HTMLElement{
         const parentShadowRealm = host.getRootNode();
         const parentBeHiveInstance = parentShadowRealm.querySelector('be-hive') as BeHiveProps & Element;
         if(parentBeHiveInstance !== null){
-            const {registeredBehaviors, refs} = parentBeHiveInstance;
+            const {registeredBehaviors} = parentBeHiveInstance;
             for(const key in registeredBehaviors){
                 this.register(registeredBehaviors[key]);
             }
@@ -43,13 +43,13 @@ export class BeHive extends HTMLElement{
                 this.register((<any>e).detail.value);
             });
 
-            for(const id in refs){
-                this.define(refs[id], true);
-            }
+            // for(const id in refs){
+            //     this.define(refs[id], true);
+            // }
 
-            parentBeHiveInstance.addEventListener('new-ref', (e: Event) => {
-                this.define((<any>e).detail.value, true);
-            });
+            // parentBeHiveInstance.addEventListener('new-ref', (e: Event) => {
+            //     this.define((<any>e).detail.value, true);
+            // });
             
         }
     }
@@ -98,35 +98,35 @@ export class BeHive extends HTMLElement{
         return newBehaviorEl;
     }
 
-    define(ref: Ref, noReplace: boolean){
-        if(noReplace){
-            if(this.refs[ref.element.id] !== undefined) return;
-        }
-        this.refs[ref.element.id] = ref;
-        this.dispatchEvent(new CustomEvent('new-ref', {
-            detail:{
-                value: ref,
-            } as INewDefEvent,
-        }));
-    }
+    // define(ref: Ref, noReplace: boolean){
+    //     if(noReplace){
+    //         if(this.refs[ref.element.id] !== undefined) return;
+    //     }
+    //     this.refs[ref.element.id] = ref;
+    //     this.dispatchEvent(new CustomEvent('new-ref', {
+    //         detail:{
+    //             value: ref,
+    //         } as INewDefEvent,
+    //     }));
+    // }
 
-    get(id: string){
-        return this.refs[id];
-    }
+    // get(id: string){
+    //     return this.refs[id];
+    // }
 
-    whenDefined(id: string): Promise<Ref>{
-        return new Promise(resolve => {
-            const ref = this.get(id);
-            if(ref !== undefined){
-                resolve(ref);
-                return;
-            }
-            this.addEventListener('new-ref', e => {
-                const ref = (<any>e).detail.value as Ref;
-                if(ref.element.id === id) resolve(ref);
-            }, {once: true});
-        });
-    }
+    // whenDefined(id: string): Promise<Ref>{
+    //     return new Promise(resolve => {
+    //         const ref = this.get(id);
+    //         if(ref !== undefined){
+    //             resolve(ref);
+    //             return;
+    //         }
+    //         this.addEventListener('new-ref', e => {
+    //             const ref = (<any>e).detail.value as Ref;
+    //             if(ref.element.id === id) resolve(ref);
+    //         }, {once: true});
+    //     });
+    // }
 }
 
 if(!customElements.get('be-hive')){
