@@ -28,7 +28,7 @@
     "doc": "custom-elements-manifest analyze"
   },
   "devDependencies": {
-    "@playwright/test": "1.29.2",
+    "@playwright/test": "1.30.0",
     "@skypack/package-check": "0.2.2",
     "may-it-serve": "0.0.4",
     "@custom-elements-manifest/analyzer": "0.6.4",
