@@ -1,9 +1,8 @@
+import '../be-enhanced/beEnhanced.js';
 export class BeHive extends HTMLElement {
-    //#monitor?: IDisposable;
     constructor() {
         super();
         this.registeredBehaviors = {};
-        // this.refs = {};
     }
     async connectedCallback() {
         this.hidden = true;
@@ -15,14 +14,8 @@ export class BeHive extends HTMLElement {
             this.overrides = {};
         }
         this.#getInheritedBehaviors();
-        // const {IDMonitor} = await import('./IDMonitor.js');
-        // this.#monitor = new IDMonitor(this);
+        this.#doSweepingScan();
     }
-    // disconnectedCallback(){
-    //     // if(this.#monitor !== undefined){
-    //     //     this.#monitor.dispose();
-    //     // }
-    // }
     #getInheritedBehaviors() {
         const rn = this.getRootNode();
         const host = rn.host;
@@ -38,13 +31,28 @@ export class BeHive extends HTMLElement {
             parentBeHiveInstance.addEventListener('latest-behavior-changed', (e) => {
                 this.register(e.detail.value);
             });
-            // for(const id in refs){
-            //     this.define(refs[id], true);
-            // }
-            // parentBeHiveInstance.addEventListener('new-ref', (e: Event) => {
-            //     this.define((<any>e).detail.value, true);
-            // });
         }
+    }
+    #addMutationObserver() {
+    }
+    #doSweepingScan() {
+        const rn = this.getRootNode();
+        const { registeredBehaviors } = this;
+        console.log({ registeredBehaviors });
+        const attrNames = Object.keys(registeredBehaviors).map(s => '[' + s + ']').join();
+        console.log({ attrNames });
+        if (attrNames.length === 0)
+            return;
+        rn.querySelectorAll(attrNames).forEach(el => {
+            for (const key in registeredBehaviors) {
+                const attr = '[' + key + ']';
+                if (el.matches(attr)) {
+                    console.log({ el });
+                    const { beEnhanced } = el;
+                    beEnhanced.attachAttr(key);
+                }
+            }
+        });
     }
     register(parentInstance) {
         const parentInstanceLocalName = parentInstance.localName;
@@ -88,6 +96,7 @@ export class BeHive extends HTMLElement {
             }
         }));
         //this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
+        this.#doSweepingScan();
         return newBehaviorEl;
     }
 }

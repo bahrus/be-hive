@@ -1,11 +1,11 @@
 import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable} from './types';
+import {BeEnhanced} from '../be-enhanced/beEnhanced.js';
+import '../be-enhanced/beEnhanced.js';
 export class BeHive extends HTMLElement{
 
-    //#monitor?: IDisposable;
     constructor(){
         super();
         this.registeredBehaviors = {};
-        // this.refs = {};
 
     }
     async connectedCallback(){
@@ -17,15 +17,10 @@ export class BeHive extends HTMLElement{
             this.overrides = {};
         }
         this.#getInheritedBehaviors();
-        // const {IDMonitor} = await import('./IDMonitor.js');
-        // this.#monitor = new IDMonitor(this);
+        this.#doSweepingScan();
     }
 
-    // disconnectedCallback(){
-    //     // if(this.#monitor !== undefined){
-    //     //     this.#monitor.dispose();
-    //     // }
-    // }
+
 
     #getInheritedBehaviors(){
         const rn = this.getRootNode();
@@ -43,15 +38,32 @@ export class BeHive extends HTMLElement{
                 this.register((<any>e).detail.value);
             });
 
-            // for(const id in refs){
-            //     this.define(refs[id], true);
-            // }
-
-            // parentBeHiveInstance.addEventListener('new-ref', (e: Event) => {
-            //     this.define((<any>e).detail.value, true);
-            // });
             
         }
+    }
+
+    #addMutationObserver(){
+
+    }
+
+    #doSweepingScan(){
+        const rn = this.getRootNode() as DocumentFragment;
+        const {registeredBehaviors} = this;
+        console.log({registeredBehaviors});
+        const attrNames = Object.keys(registeredBehaviors).map(s => '[' + s + ']').join();
+        console.log({attrNames});
+        if(attrNames.length === 0) return;
+        rn.querySelectorAll(attrNames).forEach(el => {
+            for(const key in registeredBehaviors){
+                const attr = '[' + key + ']';
+                if(el.matches(attr)){
+                    console.log({el});
+                    const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);
+                    beEnhanced.attachAttr(key);
+                }
+            }
+        });
+
     }
 
     register(parentInstance: BehaviorKeys){
@@ -95,38 +107,11 @@ export class BeHive extends HTMLElement{
             }
         }));
         //this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
+        this.#doSweepingScan();
         return newBehaviorEl;
     }
 
-    // define(ref: Ref, noReplace: boolean){
-    //     if(noReplace){
-    //         if(this.refs[ref.element.id] !== undefined) return;
-    //     }
-    //     this.refs[ref.element.id] = ref;
-    //     this.dispatchEvent(new CustomEvent('new-ref', {
-    //         detail:{
-    //             value: ref,
-    //         } as INewDefEvent,
-    //     }));
-    // }
 
-    // get(id: string){
-    //     return this.refs[id];
-    // }
-
-    // whenDefined(id: string): Promise<Ref>{
-    //     return new Promise(resolve => {
-    //         const ref = this.get(id);
-    //         if(ref !== undefined){
-    //             resolve(ref);
-    //             return;
-    //         }
-    //         this.addEventListener('new-ref', e => {
-    //             const ref = (<any>e).detail.value as Ref;
-    //             if(ref.element.id === id) resolve(ref);
-    //         }, {once: true});
-    //     });
-    // }
 }
 
 if(!customElements.get('be-hive')){
