@@ -14,6 +14,7 @@ export class BeHive extends HTMLElement {
             this.overrides = {};
         }
         this.#getInheritedBehaviors();
+        this.#addMutationObserver();
     }
     disconnectedCallback() {
         if (this.#mutationObserver !== undefined) {
@@ -43,18 +44,33 @@ export class BeHive extends HTMLElement {
         const config = { attributes: true, childList: true, subtree: true };
         const callback = (mutationList, observer) => {
             for (const mutation of mutationList) {
-                throw 'NI';
                 if (mutation.type === "childList") {
-                    console.log("A child node has been added or removed.");
+                    //console.log("A child node has been added or removed.");
+                    for (const node of mutation.addedNodes) {
+                        this.#inspectNewNode(node);
+                    }
                 }
                 else if (mutation.type === "attributes") {
-                    console.log(`The ${mutation.attributeName} attribute was modified.`);
+                    //console.log(`The ${mutation.attributeName} attribute was modified.`);
                 }
             }
         };
         // Create an observer instance linked to the callback function
         const observer = new MutationObserver(callback);
+        observer.observe(rn, config);
         this.#mutationObserver = observer;
+    }
+    #inspectNewNode(node) {
+        if (!(node instanceof Element))
+            return;
+        const { registeredBehaviors } = this;
+        for (const key in registeredBehaviors) {
+            const attr = '[' + key + ']';
+            if (node.matches(attr)) {
+                const { beEnhanced } = node;
+                beEnhanced.attachAttr(key);
+            }
+        }
     }
     // #doSweepingScan(){
     //     const rn = this.getRootNode() as DocumentFragment;
