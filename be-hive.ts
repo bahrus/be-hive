@@ -17,9 +17,13 @@ export class BeHive extends HTMLElement{
             this.overrides = {};
         }
         this.#getInheritedBehaviors();
-        //this.#doSweepingScan();
     }
 
+    disconnectedCallback(){
+        if(this.#mutationObserver !== undefined){
+            this.#mutationObserver.disconnect();
+        }
+    }
 
 
     #getInheritedBehaviors(){
@@ -42,8 +46,27 @@ export class BeHive extends HTMLElement{
         }
     }
 
-    #addMutationObserver(){
+    #mutationObserver: MutationObserver | undefined;
 
+    
+    #addMutationObserver(){
+        const rn = this.getRootNode() as DocumentFragment;
+        const config = { attributes: true, childList: true, subtree: true } as MutationObserverInit;
+        const callback = (mutationList: MutationRecord[], observer: MutationObserver) => {
+
+            for (const mutation of mutationList) {
+                throw 'NI';
+                if (mutation.type === "childList") {
+                console.log("A child node has been added or removed.");
+                } else if (mutation.type === "attributes") {
+                console.log(`The ${mutation.attributeName} attribute was modified.`);
+                }
+            }
+        };
+        
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback);
+        this.#mutationObserver = observer;
     }
 
     // #doSweepingScan(){
@@ -72,6 +95,7 @@ export class BeHive extends HTMLElement{
         const rn = this.getRootNode() as DocumentFragment;
         rn.querySelectorAll(attr).forEach(el => {
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);
+            console.log({el});
             beEnhanced.attachAttr(localName);
         })
     }
@@ -112,7 +136,7 @@ export class BeHive extends HTMLElement{
             
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
         this.#scanForSingleRegisteredBehavior(parentInstanceLocalName, newRegisteredBehavior);
-        console.log({newRegisteredBehavior});
+        //console.log({newRegisteredBehavior});
         this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
             detail:{
                 value: newRegisteredBehavior,
