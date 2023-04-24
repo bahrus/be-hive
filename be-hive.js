@@ -80,7 +80,6 @@ export class BeHive extends HTMLElement {
         const rn = this.getRootNode();
         rn.querySelectorAll(attr).forEach(el => {
             const { beEnhanced } = el;
-            console.log({ el });
             beEnhanced.attachAttr(localName);
         });
     }

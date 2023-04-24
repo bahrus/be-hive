@@ -95,7 +95,6 @@ export class BeHive extends HTMLElement{
         const rn = this.getRootNode() as DocumentFragment;
         rn.querySelectorAll(attr).forEach(el => {
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);
-            console.log({el});
             beEnhanced.attachAttr(localName);
         })
     }
