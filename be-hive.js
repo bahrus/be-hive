@@ -14,7 +14,7 @@ export class BeHive extends HTMLElement {
             this.overrides = {};
         }
         this.#getInheritedBehaviors();
-        this.#doSweepingScan();
+        //this.#doSweepingScan();
     }
     #getInheritedBehaviors() {
         const rn = this.getRootNode();
@@ -35,23 +35,31 @@ export class BeHive extends HTMLElement {
     }
     #addMutationObserver() {
     }
-    #doSweepingScan() {
+    // #doSweepingScan(){
+    //     const rn = this.getRootNode() as DocumentFragment;
+    //     const {registeredBehaviors} = this;
+    //     console.log({registeredBehaviors});
+    //     const attrNames = Object.keys(registeredBehaviors).map(s => '[' + s + ']').join();
+    //     console.log({attrNames});
+    //     if(attrNames.length === 0) return;
+    //     rn.querySelectorAll(attrNames).forEach(el => {
+    //         for(const key in registeredBehaviors){
+    //             const attr = '[' + key + ']';
+    //             if(el.matches(attr)){
+    //                 console.log({el});
+    //                 const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);
+    //                 beEnhanced.attachAttr(key);
+    //             }
+    //         }
+    //     });
+    // }
+    #scanForSingleRegisteredBehavior(localName, behaviorKeys) {
+        const { ifWantsToBe } = behaviorKeys;
+        const attr = '[' + localName + ']';
         const rn = this.getRootNode();
-        const { registeredBehaviors } = this;
-        console.log({ registeredBehaviors });
-        const attrNames = Object.keys(registeredBehaviors).map(s => '[' + s + ']').join();
-        console.log({ attrNames });
-        if (attrNames.length === 0)
-            return;
-        rn.querySelectorAll(attrNames).forEach(el => {
-            for (const key in registeredBehaviors) {
-                const attr = '[' + key + ']';
-                if (el.matches(attr)) {
-                    console.log({ el });
-                    const { beEnhanced } = el;
-                    beEnhanced.attachAttr(key);
-                }
-            }
+        rn.querySelectorAll(attr).forEach(el => {
+            const { beEnhanced } = el;
+            beEnhanced.attachAttr(localName);
         });
     }
     register(parentInstance) {
@@ -90,13 +98,15 @@ export class BeHive extends HTMLElement {
             disabled: newDisabled,
         };
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
+        this.#scanForSingleRegisteredBehavior(parentInstanceLocalName, newRegisteredBehavior);
+        console.log({ newRegisteredBehavior });
         this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
             detail: {
                 value: newRegisteredBehavior,
             }
         }));
         //this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
-        this.#doSweepingScan();
+        //this.#doSweepingScan();
         return newBehaviorEl;
     }
 }
