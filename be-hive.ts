@@ -1,6 +1,6 @@
 import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable} from './types';
-import {BeEnhanced} from '../be-enhanced/beEnhanced.js';
-import '../be-enhanced/beEnhanced.js';
+import {BeEnhanced} from 'be-enhanced/beEnhanced.js';
+import 'be-enhanced/beEnhanced.js';
 export class BeHive extends HTMLElement{
 
     constructor(){

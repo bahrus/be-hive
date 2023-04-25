@@ -1,4 +1,4 @@
-import '../be-enhanced/beEnhanced.js';
+import 'be-enhanced/beEnhanced.js';
 export class BeHive extends HTMLElement {
     constructor() {
         super();

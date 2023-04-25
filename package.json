@@ -28,14 +28,12 @@
     "doc": "custom-elements-manifest analyze",
     "safari": "npx playwright wk http://localhost:3030"
   },
+  "dependencies": {
+    "be-enhanced": "0.0.3"
+  },
   "devDependencies": {
-    "@playwright/test": "1.30.0",
-    "@skypack/package-check": "0.2.2",
-    "may-it-serve": "0.0.4",
-    "@custom-elements-manifest/analyzer": "0.6.4",
-    "xtal-shell": "0.0.27",
-    "be-functional": "0.0.18",
-    "be-exportable": "0.0.62"
+    "@playwright/test": "1.32.3",
+    "may-it-serve": "0.0.5"
   },
   "repository": {
     "type": "git",
