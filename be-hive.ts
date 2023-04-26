@@ -88,25 +88,6 @@ export class BeHive extends HTMLElement{
         }
     }
 
-    // #doSweepingScan(){
-    //     const rn = this.getRootNode() as DocumentFragment;
-    //     const {registeredBehaviors} = this;
-    //     console.log({registeredBehaviors});
-    //     const attrNames = Object.keys(registeredBehaviors).map(s => '[' + s + ']').join();
-    //     console.log({attrNames});
-    //     if(attrNames.length === 0) return;
-    //     rn.querySelectorAll(attrNames).forEach(el => {
-    //         for(const key in registeredBehaviors){
-    //             const attr = '[' + key + ']';
-    //             if(el.matches(attr)){
-    //                 console.log({el});
-    //                 const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);
-    //                 beEnhanced.attachAttr(key);
-    //             }
-    //         }
-    //     });
-
-    // }
 
     #scanForSingleRegisteredBehavior(localName: string, behaviorKeys: BehaviorKeys){
         const {ifWantsToBe, upgrade} = behaviorKeys;
