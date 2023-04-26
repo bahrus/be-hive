@@ -70,6 +70,7 @@ export class BeHive extends HTMLElement {
             const attr = '[' + key + ']';
             if (node.matches(upgrade) && node.matches(attr)) {
                 const { beEnhanced } = node;
+                //console.log("behive: attachAttr");
                 beEnhanced.attachAttr(key);
             }
         }
@@ -80,6 +81,7 @@ export class BeHive extends HTMLElement {
         const rn = this.getRootNode();
         rn.querySelectorAll(attr).forEach(el => {
             const { beEnhanced } = el;
+            //console.log("behive: attachAttr");
             beEnhanced.attachAttr(localName);
         });
     }
@@ -107,9 +109,15 @@ export class BeHive extends HTMLElement {
         const beSevered = this.hasAttribute('be-severed');
         if (beSevered)
             newDisabled = true;
-        const newBehaviorEl = document.createElement(parentInstanceLocalName);
-        newBehaviorEl.setAttribute('if-wants-to-be', newIfWantsToBe);
-        newBehaviorEl.setAttribute('upgrade', parentInstance.upgrade);
+        const newBehaviorEl = document.createElement('template');
+        Object.assign(newBehaviorEl.dataset, {
+            localName: parentInstanceLocalName,
+            ifWantsToBe: newIfWantsToBe,
+            upgrade: parentInstance.upgrade,
+        });
+        //parentInstanceLocalName
+        // newBehaviorEl.setAttribute('if-wants-to-be', newIfWantsToBe);
+        // newBehaviorEl.setAttribute('upgrade', parentInstance.upgrade);
         if (newDisabled)
             newBehaviorEl.setAttribute('disabled', '');
         this.appendChild(newBehaviorEl);
