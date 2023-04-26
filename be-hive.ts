@@ -78,8 +78,10 @@ export class BeHive extends HTMLElement{
         if(!(node instanceof Element)) return;
         const {registeredBehaviors} = this;
         for(const key in registeredBehaviors){
+            const registeredBehavior = registeredBehaviors[key];
+            const {upgrade} = registeredBehavior;
             const attr = '[' + key + ']';
-            if(node.matches(attr)){
+            if(node.matches(upgrade) && node.matches(attr)){
                 const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>node);
                 beEnhanced.attachAttr(key);
             }
@@ -107,8 +109,8 @@ export class BeHive extends HTMLElement{
     // }
 
     #scanForSingleRegisteredBehavior(localName: string, behaviorKeys: BehaviorKeys){
-        const {ifWantsToBe} = behaviorKeys;
-        const attr = '[' + localName + ']';
+        const {ifWantsToBe, upgrade} = behaviorKeys;
+        const attr = `${upgrade}[${localName}]`;
         const rn = this.getRootNode() as DocumentFragment;
         rn.querySelectorAll(attr).forEach(el => {
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);

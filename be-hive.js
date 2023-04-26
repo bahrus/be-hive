@@ -65,8 +65,10 @@ export class BeHive extends HTMLElement {
             return;
         const { registeredBehaviors } = this;
         for (const key in registeredBehaviors) {
+            const registeredBehavior = registeredBehaviors[key];
+            const { upgrade } = registeredBehavior;
             const attr = '[' + key + ']';
-            if (node.matches(attr)) {
+            if (node.matches(upgrade) && node.matches(attr)) {
                 const { beEnhanced } = node;
                 beEnhanced.attachAttr(key);
             }
@@ -91,8 +93,8 @@ export class BeHive extends HTMLElement {
     //     });
     // }
     #scanForSingleRegisteredBehavior(localName, behaviorKeys) {
-        const { ifWantsToBe } = behaviorKeys;
-        const attr = '[' + localName + ']';
+        const { ifWantsToBe, upgrade } = behaviorKeys;
+        const attr = `${upgrade}[${localName}]`;
         const rn = this.getRootNode();
         rn.querySelectorAll(attr).forEach(el => {
             const { beEnhanced } = el;
