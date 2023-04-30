@@ -29,7 +29,7 @@
     "safari": "npx playwright wk http://localhost:3030"
   },
   "dependencies": {
-    "be-enhanced": "0.0.13"
+    "be-enhanced": "0.0.14"
   },
   "devDependencies": {
     "@playwright/test": "1.33.0",
