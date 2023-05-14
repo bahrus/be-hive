@@ -49,6 +49,18 @@ export class BeHive extends HTMLElement {
                     for (const node of mutation.addedNodes) {
                         this.#inspectNewNode(node);
                     }
+                    for (const node of mutation.removedNodes) {
+                        const beEnhanced = node.beEnhanced;
+                        if (beEnhanced === undefined)
+                            continue;
+                        for (const key in beEnhanced) {
+                            const enhancement = beEnhanced[key];
+                            const detach = enhancement['detach'];
+                            if (typeof (detach) === 'function') {
+                                detach(node);
+                            }
+                        }
+                    }
                 }
                 else if (mutation.type === "attributes") {
                     //console.log(`The ${mutation.attributeName} attribute was modified.`);
