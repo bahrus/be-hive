@@ -75,28 +75,39 @@ export class BeHive extends HTMLElement {
     #inspectNewNode(node) {
         if (!(node instanceof Element))
             return;
+        const { beEnhanced } = node;
         const { registeredBehaviors } = this;
         for (const key in registeredBehaviors) {
             const registeredBehavior = registeredBehaviors[key];
             const { upgrade } = registeredBehavior;
-            const attr = node.localName.includes('-') ? `[enh-by-${key},data-enh-by-${key}]` : `[${key},enh-by-${key},data-enh-by-${key}]`;
-            if (node.matches(upgrade) && node.matches(attr)) {
-                const { beEnhanced } = node;
-                //console.log("behive: attachAttr");
-                beEnhanced.attachAttr(key);
-            }
+            if (!node.matches(upgrade))
+                continue;
+            const namespacedName = beEnhanced.getFQName(key);
+            if (namespacedName === undefined)
+                continue;
+            beEnhanced.attachAttr(namespacedName, key);
         }
     }
+    // #getPreciseMatch(key: string, node: Element, allowNonNamespaced = true){
+    //     if(allowNonNamespaced && node.matches(`[${key}]`)) return key;
+    //     let testKey = `enh-by-${key}`;
+    //     let test = `[${testKey}]`;
+    //     if(node.matches(test)) return testKey;
+    //     testKey = `data-enh-by-${key}`;
+    //     test = `[${testKey}]`;
+    //     if(node.matches(test)) return testKey;
+    //     return undefined;
+    // }
     #scanForSingleRegisteredBehavior(localName, behaviorKeys) {
         const { ifWantsToBe, upgrade } = behaviorKeys;
         const attr = `${upgrade}[${localName}],${upgrade}[enh-by-${localName}],${upgrade}[data-enh-by-${localName}]`;
         const rn = this.getRootNode();
         rn.querySelectorAll(attr).forEach(el => {
-            if (el.localName.includes('-') && !el.matches(`[enh-by-${localName}],${upgrade}[data-enh-by-${localName}]`))
-                return;
             const { beEnhanced } = el;
-            //console.log("behive: attachAttr");
-            beEnhanced.attachAttr(localName);
+            const namespacedName = beEnhanced.getFQName(localName);
+            if (namespacedName === undefined)
+                return;
+            beEnhanced.attachAttr(namespacedName, localName);
         });
     }
     register(parentInstance) {
