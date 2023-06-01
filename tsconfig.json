@@ -11,7 +11,6 @@
 	"files": [
 		"be-hive.ts",
 		"register.ts",
-		"beatify.ts",
 		"getLocalName.ts"
 	],
 	"exclude":[

@@ -91,7 +91,7 @@ export class BeHive extends HTMLElement{
         for(const key in registeredBehaviors){
             const registeredBehavior = registeredBehaviors[key];
             const {upgrade} = registeredBehavior;
-            const attr = '[' + key + ']';
+            const attr = `[${key},enh-by-${key},data-enh-by-${key}]`;
             if(node.matches(upgrade) && node.matches(attr)){
                 const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>node);
                 //console.log("behive: attachAttr");
@@ -103,7 +103,7 @@ export class BeHive extends HTMLElement{
 
     #scanForSingleRegisteredBehavior(localName: string, behaviorKeys: BehaviorKeys){
         const {ifWantsToBe, upgrade} = behaviorKeys;
-        const attr = `${upgrade}[${localName}]`;
+        const attr = `${upgrade}[${localName}],${upgrade}[enh-by-${localName}],${upgrade}[data-enh-by-${localName}]`;
         const rn = this.getRootNode() as DocumentFragment;
         rn.querySelectorAll(attr).forEach(el => {
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);

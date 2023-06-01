@@ -13,7 +13,7 @@
 
 [be-hive](https://www.youtube.com/watch?v=SQoOwosJWns) lets it [snow in August](https://www.youtube.com/watch?v=m3dmnOtqrV0).
 
-be-hive allows us to manage and coordinate the [family, or HTML frimework](https://github.com/bahrus/may-it-be) of [be-decorated](https://github.com/bahrus/be-decorated) element behiviors / decorators.  
+be-hive allows us to manage and coordinate the [family, or HTML frimework](https://github.com/bahrus/may-it-be) of [be-enhanced](https://github.com/bahrus/be-enhanced) custom enhancements.  
 
 Without be-hive, the developer is burdened with plopping an instance of each decorator inside each shadow DOM realm.
 
