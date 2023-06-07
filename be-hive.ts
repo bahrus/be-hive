@@ -68,7 +68,8 @@ export class BeHive extends HTMLElement{
                             const enhancement = beEnhanced[key];
                             const detach = enhancement['detach'];
                             if(typeof(detach) === 'function'){
-                                detach(node);
+                                const boundDetach = detach.bind(enhancement);
+                                boundDetach(node);
                             }
                         }
                     }
