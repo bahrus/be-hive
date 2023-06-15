@@ -1,40 +1,35 @@
-import {BeHive} from './be-hive.js';
-import {BeatifyOptions} from './types.js';
-type key = string;
-export function beatify(content: DocumentFragment | Element, beHive: BeHive, options?: BeatifyOptions){
-    const clone = content.cloneNode(true) as DocumentFragment;
+export function beatify(content, beHive, options) {
+    const clone = content.cloneNode(true);
     options = options || {
         cleanMicrodata: true //TODO
     };
-    const {registeredBehaviors} = beHive;
-    const map = new Map<Element, Map<key, string>>()
-    for(const key in registeredBehaviors){
+    const { registeredBehaviors } = beHive;
+    const map = new Map();
+    for (const key in registeredBehaviors) {
         const registeredBehavior = registeredBehaviors[key];
-        const {ifWantsToBe} = registeredBehavior;
+        const { ifWantsToBe } = registeredBehavior;
         const qry = `[be-${ifWantsToBe}]`; //TODO:  include enh-by- and data-enh-by
         const enhancedElements = Array.from(clone.querySelectorAll(qry));
-        for(const el of enhancedElements){
-            if(!map.has(el)){
-                map.set(el, new Map<key, string>());
+        for (const el of enhancedElements) {
+            if (!map.has(el)) {
+                map.set(el, new Map());
             }
-            const attr = `be-${ifWantsToBe}`
-            const attrVal = el.getAttribute(attr)!;
-            const elMap = map.get(el)!
+            const attr = `be-${ifWantsToBe}`;
+            const attrVal = el.getAttribute(attr);
+            const elMap = map.get(el);
             elMap.set(ifWantsToBe, attrVal);
             el.removeAttribute(attr);
         }
     }
-    for(const [el, m] of map){
+    for (const [el, m] of map) {
         let be = '{';
-        for(const [key, val] of m){
+        for (const [key, val] of m) {
             be += `"${key}": ${val}`;
         }
         be += '}';
         el.setAttribute('be', be);
     }
-
     // const decoratorElements = Array.from(beHive.children) as any;
-    
     // for(const decorEl of decoratorElements){
     //     const ifWantsToBe = (decorEl as any as Element).getAttribute('if-wants-to-be');
     //     if(ifWantsToBe === undefined) continue;
@@ -50,8 +45,7 @@ export function beatify(content: DocumentFragment | Element, beHive: BeHive, opt
     //     }
     // }
 }
-
-export function beBeatified(element: Element){
-    const beHive = (element.getRootNode() as ShadowRoot).querySelector('be-hive') as BeHive;
-    beatify(element, beHive);    
+export function beBeatified(element) {
+    const beHive = element.getRootNode().querySelector('be-hive');
+    beatify(element, beHive);
 }

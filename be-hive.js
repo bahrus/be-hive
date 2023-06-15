@@ -111,6 +111,9 @@ export class BeHive extends HTMLElement {
             beEnhanced.attachAttr(namespacedName, localName);
         });
     }
+    async beatify(content) {
+        const { beatify } = await import('./beatify.js');
+    }
     register(parentInstance) {
         const parentInstanceLocalName = parentInstance.localName;
         if (this.querySelector(parentInstanceLocalName) !== null)
