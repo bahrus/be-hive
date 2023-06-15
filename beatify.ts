@@ -1,4 +1,7 @@
-export function beatify(content: DocumentFragment | Element, beHive: Element){
+import {BeHive} from './be-hive.js';
+import {BeatifyOptions} from './types.js';
+export function beatify(content: DocumentFragment | Element, beHive: BeHive, options?: BeatifyOptions){
+    options = options 
     const decoratorElements = Array.from(beHive.children) as any;
     
     for(const decorEl of decoratorElements){
@@ -18,6 +21,6 @@ export function beatify(content: DocumentFragment | Element, beHive: Element){
 }
 
 export function beBeatified(element: Element){
-    const beHive = (element.getRootNode() as ShadowRoot).querySelector('be-hive') as Element;
+    const beHive = (element.getRootNode() as ShadowRoot).querySelector('be-hive') as BeHive;
     beatify(element, beHive);    
 }

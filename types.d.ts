@@ -20,6 +20,10 @@ export interface BeHiveProps{
     
 }
 
+export interface BeatifyOptions{
+    cleanMicrodata?: boolean,
+}
+
 export interface BeHiveActions{
     intro(self: this): void;
     //onOverrides(self: this): void;

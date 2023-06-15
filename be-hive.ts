@@ -125,6 +125,11 @@ export class BeHive extends HTMLElement{
         })
     }
 
+    async beatify(content: DocumentFragment | Element){
+        const {beatify} = await import('./beatify.js');
+        
+    }
+
     register(parentInstance: BehaviorKeys){
         const parentInstanceLocalName =  parentInstance.localName;
         if(this.querySelector(parentInstanceLocalName) !== null) return;
