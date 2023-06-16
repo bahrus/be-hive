@@ -113,6 +113,7 @@ export class BeHive extends HTMLElement {
     }
     async beatify(content) {
         const { beatify } = await import('./beatify.js');
+        return await beatify(content, this);
     }
     register(parentInstance) {
         const parentInstanceLocalName = parentInstance.localName;

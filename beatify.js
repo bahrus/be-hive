@@ -24,11 +24,17 @@ export function beatify(content, beHive, options) {
     for (const [el, m] of map) {
         let be = '{';
         for (const [key, val] of m) {
-            be += `"${key}": ${val}`;
+            if (val.startsWith('{')) {
+                be += `"${key}": ${val}`;
+            }
+            else {
+                be += `"${key}": "${val}"`;
+            }
         }
         be += '}';
         el.setAttribute('be', be);
     }
+    return clone;
     // const decoratorElements = Array.from(beHive.children) as any;
     // for(const decorEl of decoratorElements){
     //     const ifWantsToBe = (decorEl as any as Element).getAttribute('if-wants-to-be');

@@ -27,11 +27,17 @@ export function beatify(content: DocumentFragment | Element, beHive: BeHive, opt
     for(const [el, m] of map){
         let be = '{';
         for(const [key, val] of m){
-            be += `"${key}": ${val}`;
+            if(val.startsWith('{')){
+                be += `"${key}": ${val}`;
+            }else{
+                be += `"${key}": "${val}"`;
+            }
+            
         }
         be += '}';
         el.setAttribute('be', be);
     }
+    return clone;
 
     // const decoratorElements = Array.from(beHive.children) as any;
     

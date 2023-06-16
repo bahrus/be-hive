@@ -127,7 +127,7 @@ export class BeHive extends HTMLElement{
 
     async beatify(content: DocumentFragment | Element){
         const {beatify} = await import('./beatify.js');
-        
+        return await beatify(content, this);
     }
 
     register(parentInstance: BehaviorKeys){
