@@ -26,7 +26,7 @@
     "serve": "node node_modules/may-it-serve/serve.js"
   },
   "dependencies": {
-    "be-enhanced": "0.0.29"
+    "be-enhanced": "0.0.30"
   },
   "devDependencies": {
     "may-it-serve": "0.0.5"
