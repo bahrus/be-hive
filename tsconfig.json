@@ -6,7 +6,6 @@
 		"experimentalDecorators": false,
 		"newLine": "LF",
 		"strict": true,
-		"watch": true
 	},
 	"files": [
 		"be-hive.ts",
@@ -14,8 +13,6 @@
 		"getLocalName.ts"
 	],
 	"exclude":[
-		"build",
-		"bower_components",
 		"node_modules"
 	]
 
