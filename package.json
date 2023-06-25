@@ -1,6 +1,6 @@
 {
   "name": "be-hive",
-  "version": "0.0.108",
+  "version": "0.0.109",
   "keywords": [
     "web-components",
     "web-component",
@@ -26,7 +26,7 @@
     "serve": "node node_modules/may-it-serve/serve.js"
   },
   "dependencies": {
-    "be-enhanced": "0.0.32"
+    "be-enhanced": "0.0.33"
   },
   "devDependencies": {
     "may-it-serve": "0.0.5"
