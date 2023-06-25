@@ -74,7 +74,8 @@ export class BeHive extends HTMLElement{
                         }
                     }
                 } else if (mutation.type === "attributes") {
-
+                    const {target} = mutation;
+                    this.#inspectNewNode(target);
                     //console.log(`The ${mutation.attributeName} attribute was modified.`);
                 }
             }
