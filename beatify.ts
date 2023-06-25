@@ -18,7 +18,7 @@ export function beatify(content: DocumentFragment | Element, beHive: BeHive, opt
                 map.set(el, new Map<key, string>());
             }
             const attr = `be-${ifWantsToBe}`
-            const attrVal = el.getAttribute(attr)!.replaceAll('\n', '');
+            const attrVal = btoa(el.getAttribute(attr)!.trim());
             const elMap = map.get(el)!
             elMap.set(ifWantsToBe, attrVal);
             el.removeAttribute(attr);

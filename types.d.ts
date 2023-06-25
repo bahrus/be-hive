@@ -1,5 +1,3 @@
-import {BeDecoratedProps} from 'be-decorated/types';
-
 export interface BehaviorKeys {
     ifWantsToBe: string,
     upgrade: string,
