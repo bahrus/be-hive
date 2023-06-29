@@ -1,4 +1,5 @@
 import {BeHive} from './be-hive.js';
+import {utoa} from 'trans-render/lib/tau.js';
 import {BeatifyOptions} from './types.js';
 type key = string;
 export function beatify(content: DocumentFragment | Element, beHive: BeHive, options?: BeatifyOptions){
@@ -18,7 +19,7 @@ export function beatify(content: DocumentFragment | Element, beHive: BeHive, opt
                 map.set(el, new Map<key, string>());
             }
             const attr = `be-${ifWantsToBe}`
-            const attrVal = btoa(el.getAttribute(attr)!.trim());
+            const attrVal = utoa(el.getAttribute(attr)!.trim());
             const elMap = map.get(el)!
             elMap.set(ifWantsToBe, attrVal);
             el.removeAttribute(attr);

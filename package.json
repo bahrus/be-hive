@@ -26,7 +26,8 @@
     "serve": "node node_modules/may-it-serve/serve.js"
   },
   "dependencies": {
-    "be-enhanced": "0.0.33"
+    "be-enhanced": "0.0.33",
+    "trans-render": "0.0.694"
   },
   "devDependencies": {
     "may-it-serve": "0.0.5"

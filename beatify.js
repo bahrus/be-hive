@@ -1,3 +1,4 @@
+import { utoa } from 'trans-render/lib/tau.js';
 export function beatify(content, beHive, options) {
     const clone = content.cloneNode(true);
     options = options || {
@@ -15,7 +16,7 @@ export function beatify(content, beHive, options) {
                 map.set(el, new Map());
             }
             const attr = `be-${ifWantsToBe}`;
-            const attrVal = btoa(el.getAttribute(attr).trim());
+            const attrVal = utoa(el.getAttribute(attr).trim());
             const elMap = map.get(el);
             elMap.set(ifWantsToBe, attrVal);
             el.removeAttribute(attr);
