@@ -23,10 +23,11 @@
   ],
   "types": "types.d.ts",
   "scripts": {
-    "serve": "node node_modules/may-it-serve/serve.js"
+    "serve": "node node_modules/may-it-serve/serve.js",
+    "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.33",
+    "be-enhanced": "0.0.34",
     "trans-render": "0.0.694"
   },
   "devDependencies": {
