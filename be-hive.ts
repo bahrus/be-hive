@@ -57,7 +57,6 @@ export class BeHive extends HTMLElement{
 
             for (const mutation of mutationList) {
                 if (mutation.type === "childList") {
-                    //console.log("A child node has been added or removed.");
                     for(const node of mutation.addedNodes){
                         this.#inspectNewNode(node);
                     }
@@ -97,6 +96,9 @@ export class BeHive extends HTMLElement{
             const namespacedName = beEnhanced.getFQName(key);
             if(namespacedName === undefined) continue;
             beEnhanced.attachAttr(namespacedName, key);
+        }
+        for(const child of node.children){
+            this.#inspectNewNode(child);
         }
     }
 
