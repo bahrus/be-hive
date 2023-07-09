@@ -10,7 +10,8 @@
 	"files": [
 		"be-hive.ts",
 		"register.ts",
-		"getLocalName.ts"
+		"getLocalName.ts",
+		"toTempl.ts"
 	],
 	"exclude":[
 		"node_modules"
