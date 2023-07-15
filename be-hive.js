@@ -46,6 +46,10 @@ export class BeHive extends HTMLElement {
             for (const mutation of mutationList) {
                 if (mutation.type === "childList") {
                     for (const node of mutation.addedNodes) {
+                        if (node instanceof Element && node.hasAttribute('data--ignore')) {
+                            //console.log('ignore');
+                            continue;
+                        }
                         this.#inspectNewNode(node);
                     }
                     for (const node of mutation.removedNodes) {
@@ -64,6 +68,10 @@ export class BeHive extends HTMLElement {
                 }
                 else if (mutation.type === "attributes") {
                     const { target } = mutation;
+                    if (target instanceof Element && target.hasAttribute('data--ignore')) {
+                        //console.log('ignore');
+                        continue;
+                    }
                     this.#inspectNewNode(target);
                 }
             }

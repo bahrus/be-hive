@@ -38,6 +38,9 @@ export function beatify(content: DocumentFragment | Element, beHive: BeHive, opt
         be += '}';
         el.setAttribute('be', be);
     }
+    for(const child of clone.children){
+        child.setAttribute('data--ignore', '');
+    }
     return clone;
 
     // const decoratorElements = Array.from(beHive.children) as any;
