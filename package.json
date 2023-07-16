@@ -28,8 +28,8 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.35",
-    "trans-render": "0.0.695"
+    "be-enhanced": "0.0.36",
+    "trans-render": "0.0.699"
   },
   "devDependencies": {
     "may-it-serve": "0.0.5"
