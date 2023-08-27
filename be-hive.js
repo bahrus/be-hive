@@ -94,7 +94,8 @@ export class BeHive extends HTMLElement {
             const namespacedName = beEnhanced.getFQName(key);
             if (namespacedName === undefined)
                 continue;
-            beEnhanced.attachAttr(namespacedName, key);
+            beEnhanced.whenAttached(key);
+            //beEnhanced.attachAttr(namespacedName, key);
         }
         for (const child of node.children) {
             this.#inspectNewNode(child);
@@ -119,7 +120,7 @@ export class BeHive extends HTMLElement {
             const namespacedName = beEnhanced.getFQName(localName);
             if (namespacedName === undefined)
                 return;
-            beEnhanced.attachAttr(namespacedName, localName);
+            beEnhanced.whenAttached(localName);
         });
     }
     async beatify(content) {
