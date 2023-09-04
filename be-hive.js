@@ -120,7 +120,8 @@ export class BeHive extends HTMLElement {
             const namespacedName = beEnhanced.getFQName(localName);
             if (namespacedName === undefined)
                 return;
-            beEnhanced.whenAttached(localName);
+            //console.log({namespacedName});
+            beEnhanced.whenAttached(namespacedName);
         });
     }
     async beatify(content) {

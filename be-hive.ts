@@ -132,7 +132,8 @@ export class BeHive extends HTMLElement{
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);
             const namespacedName = beEnhanced.getFQName(localName);
             if(namespacedName === undefined) return;
-            beEnhanced.whenAttached(localName);
+            //console.log({namespacedName});
+            beEnhanced.whenAttached(namespacedName);
         })
     }
 
