@@ -134,7 +134,7 @@ export class BeHive extends HTMLElement{
             if(namespacedName === undefined) return;
             //console.log({namespacedName});
             beEnhanced.whenAttached(namespacedName);
-        })
+        });
     }
 
     async beatify(content: DocumentFragment | Element){
