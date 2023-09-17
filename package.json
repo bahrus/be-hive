@@ -28,11 +28,11 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.50",
+    "be-enhanced": "0.0.51",
     "trans-render": "0.0.705"
   },
   "devDependencies": {
-    "may-it-serve": "0.0.5"
+    "may-it-serve": "0.0.6"
   },
   "repository": {
     "type": "git",

@@ -15,7 +15,7 @@
 
 be-hive allows us to manage and coordinate the [family, or HTML frimework](https://github.com/bahrus/may-it-be) of [be-enhanced](https://github.com/bahrus/be-enhanced) custom enhancements.  
 
-Without be-hive, the developer is burdened with plopping an instance of each decorator inside each shadow DOM realm.
+Without be-hive, the developer is burdened with plopping an instance of each enhancement inside each shadow DOM realm.
 
 With the help of the be-hive component, the developer only has to plop a single instance of be-hive inside the Shadow DOM realm, like so:
 
