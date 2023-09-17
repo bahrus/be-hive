@@ -1,6 +1,6 @@
 import {BeHiveActions} from './types';
 import('./be-hive.js');
-export async function register(ifWantsToBe: string, upgrade: string, extTagName: string){
+export async function register(ifWantsToBe: string, upgrade: string, extTagName: string, aspects?: string[]){
     let beHive = document.querySelector('be-hive') as Element & BeHiveActions;
     if(beHive===null){
         beHive = document.body.appendChild(document.createElement('be-hive'))  as any as Element & BeHiveActions;
@@ -10,6 +10,7 @@ export async function register(ifWantsToBe: string, upgrade: string, extTagName:
         ifWantsToBe,
         upgrade,
         localName: extTagName,
+        aspects,
     });
     
 }

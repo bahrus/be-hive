@@ -5,6 +5,7 @@ export interface BehaviorKeys {
     block?: boolean,
     unblock?: boolean,
     disabled?: boolean,
+    aspects?: string[],
 }
 
 
