@@ -102,10 +102,18 @@ we can write:
 </time>
 ```
 
+This is especially useful in environments where the consumer of the behivior prefers to use attributes, rather than properties, for updating a property of the behivior.
+
 For this, we can add a fourth parameter to our register function:
 
 ```Typescript
-register(ifWantsToBe: string, upgrade: string, extTagName: string, );
+register(ifWantsToBe: string, upgrade: string, extTagName: string, aspects: string[]);
+```
+
+So for the example above, this would look like:
+
+```Typescript
+register('intl', 'time', 'be-intl', ['weekday', 'year', 'month', 'day']);
 ```
 
   
