@@ -83,5 +83,30 @@ in be-hive/register.js
 
 
 be-hive then determines which be-hiviors to inherit.
+
+## Secondary attributes [TODO]
+
+There may be some cases, especially for complex enhancements [here's an example](https://github.com/bahrus/be-intl) where a developer prefers to break up the settings into separate attributes.  So instead of:
+
+```html
+<time lang="ar-EG" datetime=2011-11-18T14:54:39.929Z be-intl='{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }'></time>
+```
+
+we can write:
+
+```html
+<time lang="ar-EG" 
+    datetime=2011-11-18T14:54:39.929Z 
+    be-intl-weekday=long be-intl-year=numeric be-intl-month=long
+    be-intl-day=numeric>
+</time>
+```
+
+For this, we can add a fourth parameter to our register function:
+
+```Typescript
+register(ifWantsToBe: string, upgrade: string, extTagName: string, );
+```
+
   
 
