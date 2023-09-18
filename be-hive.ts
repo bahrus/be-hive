@@ -129,7 +129,7 @@ export class BeHive extends HTMLElement{
         const allAspects = aspects !== undefined ? ['', ...aspects.map(x => '-' + x)] : [''];
         for(const aspect of allAspects){
             const match = localName + aspect;
-            const attr = `${upgrade}[${localName}],${upgrade}[enh-by-${localName}],${upgrade}[data-enh-by-${localName}]`;
+            const attr = `${upgrade}[${match}],${upgrade}[enh-by-${match}],${upgrade}[data-enh-by-${match}]`;
             const rn = this.getRootNode() as DocumentFragment;
             rn.querySelectorAll(attr).forEach(el => {
                 const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>el);

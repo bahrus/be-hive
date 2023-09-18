@@ -112,17 +112,21 @@ export class BeHive extends HTMLElement {
     //     return undefined;
     // }
     #scanForSingleRegisteredBehavior(localName, behaviorKeys) {
-        const { ifWantsToBe, upgrade } = behaviorKeys;
-        const attr = `${upgrade}[${localName}],${upgrade}[enh-by-${localName}],${upgrade}[data-enh-by-${localName}]`;
-        const rn = this.getRootNode();
-        rn.querySelectorAll(attr).forEach(el => {
-            const { beEnhanced } = el;
-            const namespacedName = beEnhanced.getFQName(localName);
-            if (namespacedName === undefined)
-                return;
-            //console.log({namespacedName});
-            beEnhanced.whenAttached(namespacedName);
-        });
+        const { ifWantsToBe, upgrade, aspects } = behaviorKeys;
+        const allAspects = aspects !== undefined ? ['', ...aspects.map(x => '-' + x)] : [''];
+        for (const aspect of allAspects) {
+            const match = localName + aspect;
+            const attr = `${upgrade}[${match}],${upgrade}[enh-by-${match}],${upgrade}[data-enh-by-${match}]`;
+            const rn = this.getRootNode();
+            rn.querySelectorAll(attr).forEach(el => {
+                const { beEnhanced } = el;
+                const namespacedName = beEnhanced.getFQName(localName);
+                if (namespacedName === undefined)
+                    return;
+                //console.log({namespacedName});
+                beEnhanced.whenAttached(namespacedName);
+            });
+        }
     }
     async beatify(content) {
         const { beatify } = await import('./beatify.js');

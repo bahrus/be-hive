@@ -1,5 +1,5 @@
 import('./be-hive.js');
-export async function register(ifWantsToBe, upgrade, extTagName) {
+export async function register(ifWantsToBe, upgrade, extTagName, aspects) {
     let beHive = document.querySelector('be-hive');
     if (beHive === null) {
         beHive = document.body.appendChild(document.createElement('be-hive'));
@@ -9,5 +9,6 @@ export async function register(ifWantsToBe, upgrade, extTagName) {
         ifWantsToBe,
         upgrade,
         localName: extTagName,
+        aspects,
     });
 }
