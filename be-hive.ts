@@ -111,18 +111,6 @@ export class BeHive extends HTMLElement{
         }
     }
 
-    // #getPreciseMatch(key: string, node: Element, allowNonNamespaced = true){
-    //     if(allowNonNamespaced && node.matches(`[${key}]`)) return key;
-    //     let testKey = `enh-by-${key}`;
-    //     let test = `[${testKey}]`;
-    //     if(node.matches(test)) return testKey;
-    //     testKey = `data-enh-by-${key}`;
-    //     test = `[${testKey}]`;
-    //     if(node.matches(test)) return testKey;
-    //     return undefined;
-    // }
-
-
 
     #scanForSingleRegisteredBehavior(localName: string, behaviorKeys: BehaviorKeys){
         const {ifWantsToBe, upgrade, aspects} = behaviorKeys;
