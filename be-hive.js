@@ -1,10 +1,11 @@
 import 'be-enhanced/beEnhanced.js';
+import { MountObserver } from 'mount-observer/MountObserver';
 export class BeHive extends HTMLElement {
     constructor() {
         super();
         this.registeredBehaviors = {};
     }
-    async connectedCallback() {
+    connectedCallback() {
         this.hidden = true;
         const overridesAttr = this.getAttribute('overrides');
         if (overridesAttr !== null) {
@@ -14,12 +15,6 @@ export class BeHive extends HTMLElement {
             this.overrides = {};
         }
         this.#getInheritedBehaviors();
-        this.#addMutationObserver();
-    }
-    disconnectedCallback() {
-        if (this.#mutationObserver !== undefined) {
-            this.#mutationObserver.disconnect();
-        }
     }
     #getInheritedBehaviors() {
         const rn = this.getRootNode();
@@ -35,96 +30,6 @@ export class BeHive extends HTMLElement {
             }
             parentBeHiveInstance.addEventListener('latest-behavior-changed', (e) => {
                 this.register(e.detail.value);
-            });
-        }
-    }
-    #mutationObserver;
-    #addMutationObserver() {
-        const rn = this.getRootNode();
-        const config = { attributes: true, childList: true, subtree: true };
-        const callback = (mutationList, observer) => {
-            for (const mutation of mutationList) {
-                if (mutation.type === "childList") {
-                    for (const node of mutation.addedNodes) {
-                        if (node instanceof Element && node.hasAttribute('data--ignore')) {
-                            //console.log('ignore');
-                            continue;
-                        }
-                        this.#inspectNewNode(node);
-                    }
-                    for (const node of mutation.removedNodes) {
-                        const beEnhanced = node.beEnhanced;
-                        if (beEnhanced === undefined)
-                            continue;
-                        for (const key in beEnhanced) {
-                            const enhancement = beEnhanced[key];
-                            const detach = enhancement['detach'];
-                            if (typeof (detach) === 'function') {
-                                const boundDetach = detach.bind(enhancement);
-                                boundDetach(node);
-                            }
-                        }
-                    }
-                }
-                else if (mutation.type === "attributes") {
-                    const { target } = mutation;
-                    if (target instanceof Element && target.hasAttribute('data--ignore')) {
-                        //console.log('ignore');
-                        continue;
-                    }
-                    this.#inspectNewNode(target);
-                }
-            }
-        };
-        // Create an observer instance linked to the callback function
-        const observer = new MutationObserver(callback);
-        observer.observe(rn, config);
-        this.#mutationObserver = observer;
-    }
-    #inspectNewNode(node) {
-        if (!(node instanceof Element))
-            return;
-        const { beEnhanced } = node;
-        const { registeredBehaviors } = this;
-        for (const key in registeredBehaviors) {
-            const registeredBehavior = registeredBehaviors[key];
-            const { upgrade } = registeredBehavior;
-            if (!node.matches(upgrade))
-                continue;
-            const namespacedName = beEnhanced.getFQName(key);
-            if (namespacedName === undefined)
-                continue;
-            beEnhanced.whenAttached(key);
-            //beEnhanced.attachAttr(namespacedName, key);
-        }
-        for (const child of node.children) {
-            this.#inspectNewNode(child);
-        }
-    }
-    // #getPreciseMatch(key: string, node: Element, allowNonNamespaced = true){
-    //     if(allowNonNamespaced && node.matches(`[${key}]`)) return key;
-    //     let testKey = `enh-by-${key}`;
-    //     let test = `[${testKey}]`;
-    //     if(node.matches(test)) return testKey;
-    //     testKey = `data-enh-by-${key}`;
-    //     test = `[${testKey}]`;
-    //     if(node.matches(test)) return testKey;
-    //     return undefined;
-    // }
-    #scanForSingleRegisteredBehavior(localName, behaviorKeys) {
-        const { ifWantsToBe, upgrade, aspects } = behaviorKeys;
-        const allAspects = aspects !== undefined ? ['', ...aspects.map(x => '-' + x)] : [''];
-        for (const aspect of allAspects) {
-            const match = localName + aspect;
-            const attr = `${upgrade}[${match}],${upgrade}[enh-by-${match}],${upgrade}[data-enh-by-${match}]`;
-            const rn = this.getRootNode();
-            rn.querySelectorAll(attr).forEach(el => {
-                const { beEnhanced } = el;
-                const namespacedName = beEnhanced.getFQName(localName);
-                if (namespacedName === undefined)
-                    return;
-                //console.log({namespacedName});
-                beEnhanced.whenAttached(namespacedName);
             });
         }
     }
@@ -184,6 +89,26 @@ export class BeHive extends HTMLElement {
         //this.latestBehaviors = [...this.latestBehaviors, newRegisteredBehavior];
         //this.#doSweepingScan();
         return newBehaviorEl;
+    }
+    #scanForSingleRegisteredBehavior(localName, behaviorKeys) {
+        const { ifWantsToBe, upgrade, aspects } = behaviorKeys;
+        const allAspects = aspects !== undefined ? ['', ...aspects.map(x => '-' + x)] : [''];
+        const mo = new MountObserver({
+            match: `${upgrade}:not([data--ignore])`,
+            attribMatches: allAspects.map(x => ({
+                names: [localName + x, `enh-by-${localName}` + x, `data-enh-by-${localName}` + x]
+            }))
+        });
+        mo.addEventListener('mount', e => {
+            const { beEnhanced } = e.mountedElement;
+            const namespacedName = beEnhanced.getFQName(localName);
+            if (namespacedName === undefined)
+                return;
+            //console.log({namespacedName});
+            beEnhanced.whenAttached(namespacedName);
+        });
+        const rn = this.getRootNode();
+        mo.observe(rn);
     }
 }
 if (!customElements.get('be-hive')) {
