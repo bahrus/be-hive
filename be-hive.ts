@@ -1,7 +1,7 @@
 import {BeHiveProps, BeHiveActions, BehaviorKeys, IHasID, IDisposable} from './types';
 import {BeEnhanced} from 'be-enhanced/beEnhanced.js';
 import 'be-enhanced/beEnhanced.js';
-import { MountObserver } from 'mount-observer/MountObserver';
+import { MountObserver } from 'mount-observer/MountObserver.js';
 import {AddMountEventListener, AttribMatch } from 'mount-observer/types';
 export class BeHive extends HTMLElement{
 

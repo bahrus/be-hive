@@ -1,5 +1,5 @@
 import 'be-enhanced/beEnhanced.js';
-import { MountObserver } from 'mount-observer/MountObserver';
+import { MountObserver } from 'mount-observer/MountObserver.js';
 export class BeHive extends HTMLElement {
     constructor() {
         super();
