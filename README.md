@@ -1,13 +1,9 @@
 # be-hive
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/bahrus/be-hive)
-
-
 [![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-hive?style=for-the-badge)](https://bundlephobia.com/result?p=be-hive)
-
 <img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-hive?compression=gzip">
-
-<a href="https://nodei.co/npm/be-hive/"><img src="https://nodei.co/npm/be-hive.png"></a>
+[![NPM version](https://badge.fury.io/js/be-hive.png)](http://badge.fury.io/js/be-hive)
 
 ## Inheriting behiviors
 
