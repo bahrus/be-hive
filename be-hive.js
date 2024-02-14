@@ -92,12 +92,20 @@ export class BeHive extends HTMLElement {
     }
     #scanForSingleRegisteredBehavior(localName, behaviorKeys) {
         const { ifWantsToBe, upgrade, aspects } = behaviorKeys;
-        const allAspects = aspects !== undefined ? ['', ...aspects.map(x => '-' + x)] : [''];
+        //const allAspects = aspects !== undefined ? ['', ...aspects.map(x => '-' + x)] : [''];
         const mo = new MountObserver({
-            match: `${upgrade}:not([data--ignore])`,
-            attribMatches: allAspects.map(x => ({
-                names: [localName + x, `enh-by-${localName}` + x, `data-enh-by-${localName}` + x]
-            }))
+            on: `${upgrade}:not([data--ignore])`,
+            whereAttr: {
+                hasRootIn: ['enh', 'data-enh', {
+                        path: '',
+                        context: 'BuiltIn'
+                    }],
+                hasBase: localName,
+                hasBranchesIn: aspects
+            }
+            // attribMatches: allAspects.map(x => ({
+            //     names: [localName + x, `enh-by-${localName}` + x, `data-enh-by-${localName}` + x]
+            // }) as AttribMatch)
         });
         mo.addEventListener('mount', e => {
             const { beEnhanced } = e.mountedElement;
