@@ -100,7 +100,7 @@ export class BeHive extends HTMLElement {
                         path: '',
                         context: 'BuiltIn'
                     }],
-                hasBase: localName,
+                hasBase: `be-${ifWantsToBe}`,
                 hasBranchIn: aspects
             }
             // attribMatches: allAspects.map(x => ({
@@ -109,11 +109,11 @@ export class BeHive extends HTMLElement {
         });
         mo.addEventListener('mount', e => {
             const { beEnhanced } = e.mountedElement;
-            const namespacedName = beEnhanced.getFQName(localName);
+            const namespacedName = beEnhanced.getFQName(localName, ifWantsToBe);
             if (namespacedName === undefined)
                 return;
             //console.log({namespacedName});
-            beEnhanced.whenAttached(namespacedName);
+            beEnhanced.whenAttached(localName);
         });
         const rn = this.getRootNode();
         mo.observe(rn);

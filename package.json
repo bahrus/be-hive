@@ -28,9 +28,9 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.69",
-    "mount-observer": "0.0.14",
-    "trans-render": "0.0.741"
+    "be-enhanced": "0.0.71",
+    "mount-observer": "0.0.15",
+    "trans-render": "0.0.746"
   },
   "devDependencies": {
     "may-it-serve": "0.0.6"
