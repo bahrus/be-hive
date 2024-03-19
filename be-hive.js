@@ -109,11 +109,11 @@ export class BeHive extends HTMLElement {
         });
         mo.addEventListener('mount', e => {
             const { beEnhanced } = e.mountedElement;
-            const namespacedName = beEnhanced.getFQName(localName, ifWantsToBe);
-            if (namespacedName === undefined)
+            const fqn = beEnhanced.getFQName(localName, ifWantsToBe);
+            if (fqn === undefined)
                 return;
-            //console.log({namespacedName});
-            beEnhanced.whenAttached(localName);
+            //beEnhanced.whenAttached(`be-${ifWantsToBe}`);
+            beEnhanced.whenAttached(localName, ifWantsToBe, fqn);
         });
         const rn = this.getRootNode();
         mo.observe(rn);
