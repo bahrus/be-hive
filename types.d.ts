@@ -52,3 +52,41 @@ export type Disposable = {new(): IDisposable};
 // export interface INewDefEvent{
 //     value: Ref
 // }
+
+export type stringArray = string | Array<string>;
+export interface AttrParts{
+    root: string,
+    base: string,
+    branch: string,
+    leaf: string,
+} 
+
+type CSSQuery = string;
+
+type delimeter = '-' | ':' | '--';
+
+export interface ObservedAttributes<TBranches = any>{
+    enhancedElementInstanceOf?: Array<{new(): HTMLElement}>
+    enhancedElementMatches?: string,
+    rootOnBuiltIns?: stringArray,
+    rootOnBuiltInsInheritsFromRootOnCustom?: boolean,
+    rootOnCustom?: stringArray,
+    preBaseDelimiter: delimeter;
+    base?: string,
+    preBranchDelimeter: delimeter;
+    branches?: stringArray,
+    preLeafDelimiter: delimeter;
+    leaves: Partial<{[key in keyof TBranches & string]: stringArray}>,
+    hostMatches: CSSQuery
+    do?: {
+        mount: {
+            import: (parts: AttrParts) => Promise<{new(): HTMLElement}>, //Roundabout ready
+            enhancementPath?: string,
+            mapTo?: (parts: AttrParts) => string,
+            parse: (parts: AttrParts, val: string | null) => any,
+
+        }
+        
+
+    } 
+}

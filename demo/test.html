@@ -8,9 +8,14 @@
 </head>
 <body>
     <script type=module>
-        import '../be-hive.js';
-        const bh = document.createElement('be-hive');
-        document.body.appendChild(bh);
+        class Test extends HTMLElement{
+            constructor(){
+                super();
+                console.log('in constructor')
+            }
+        }
+        customElements.define('my-test', Test);
+        const test = new Test();
     </script>
 
 </body>
