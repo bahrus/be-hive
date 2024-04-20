@@ -17,10 +17,10 @@ export interface ObservedAttributes<TBranches = any>{
     rootOnCustom?: stringArray,
     preBaseDelimiter: delimiter;
     base?: string,
-    preBranchDelimeter: delimiter;
+    preBranchDelimiter: delimiter;
     branches?: stringArray,
     preLeafDelimiter: delimiter;
-    leaves: Partial<{[key in keyof TBranches & string]: stringArray}>,
+    leaves?: Partial<{[key in keyof TBranches & string]: stringArray}>,
     hostMatches?: CSSQuery,
     hostInstanceOf?: Array<{new(): HTMLElement}>
     do?: {
