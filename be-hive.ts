@@ -1,4 +1,5 @@
 import {ObservedAttributes} from './types';
+export {MountBeHive} from './types'
 
 export const defaultObsAttrs: ObservedAttributes = {
     rootOnCustom: ['enh-', 'data-enh'],
@@ -7,3 +8,7 @@ export const defaultObsAttrs: ObservedAttributes = {
     preBranchDelimiter: '-',
     preLeafDelimiter: '--',
 };
+
+export class BeHive extends HTMLElement{
+    
+}

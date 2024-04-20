@@ -35,3 +35,5 @@ export interface ObservedAttributes<TBranches = any>{
 
     } 
 }
+
+export type MountBeHive<TBranches = any> = Partial<ObservedAttributes<TBranches>>
