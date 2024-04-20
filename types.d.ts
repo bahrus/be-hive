@@ -1,58 +1,3 @@
-export interface BehaviorKeys {
-    ifWantsToBe: string,
-    upgrade: string,
-    localName: string,
-    block?: boolean,
-    unblock?: boolean,
-    disabled?: boolean,
-    aspects?: string[],
-}
-
-
-export interface BeHiveProps{
-    overrides: {[key: string]: BehaviorKeys};
-    isC: boolean;
-    registeredBehaviors: {[key: string]: BehaviorKeys};
-    latestBehaviors: BehaviorKeys[];
-    //refs: {[key: string]: Ref};
-    beSevered: boolean;
-    
-}
-
-export interface BeatifyOptions{
-    cleanMicrodata?: boolean,
-}
-
-export interface BeHiveActions{
-    intro(self: this): void;
-    //onOverrides(self: this): void;
-    onLatestBehaviors(self: this): void;
-    register(instance: BehaviorKeys): Element | undefined;
-}
-
-export interface LatestBehaviorEvent{
-    value: BehaviorKeys;
-}
-
-export interface IHasID{
-    id: string;
-}
-
-// export interface Ref<TElement = IHasID, Meta = any>{
-//     element: TElement,
-//     meta: Meta
-// }
-
-export interface IDisposable{
-    dispose(): void;
-}
-
-export type Disposable = {new(): IDisposable};
-
-// export interface INewDefEvent{
-//     value: Ref
-// }
-
 export type stringArray = string | Array<string>;
 export interface AttrParts{
     root: string,
@@ -63,21 +8,21 @@ export interface AttrParts{
 
 type CSSQuery = string;
 
-type delimeter = '-' | ':' | '--';
+type delimiter = '-' | ':' | '--';
 
 export interface ObservedAttributes<TBranches = any>{
     enhancedElementInstanceOf?: Array<{new(): HTMLElement}>
     enhancedElementMatches?: string,
     rootOnBuiltIns?: stringArray,
-    rootOnBuiltInsInheritsFromRootOnCustom?: boolean,
     rootOnCustom?: stringArray,
-    preBaseDelimiter: delimeter;
+    preBaseDelimiter: delimiter;
     base?: string,
-    preBranchDelimeter: delimeter;
+    preBranchDelimeter: delimiter;
     branches?: stringArray,
-    preLeafDelimiter: delimeter;
+    preLeafDelimiter: delimiter;
     leaves: Partial<{[key in keyof TBranches & string]: stringArray}>,
-    hostMatches: CSSQuery
+    hostMatches?: CSSQuery,
+    hostInstanceOf?: Array<{new(): HTMLElement}>
     do?: {
         mount: {
             import: (parts: AttrParts) => Promise<{new(): HTMLElement}>, //Roundabout ready
