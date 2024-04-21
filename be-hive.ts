@@ -9,11 +9,11 @@ import { AddMountEventListener, AttribMatch, MountInit } from 'mount-observer/ty
 export const defaultObsAttrs: MountBeHive = {
     hasRootIn: [
         {
-            start: 'enh-',
+            start: 'enh',
             context: 'Both'
         },
         {
-            start: 'data-enh-',
+            start: 'data-enh',
             context: 'Both'
         },
         {
@@ -118,12 +118,12 @@ export class BeHive extends HTMLElement{
             whereInstanceOf: enhancedElementInstanceOf,
             whereAttr: {
                 hasRootIn,
-                hasBase: base,
+                hasBase: [preBaseDelimiter!, base!],
                 
             },
         };
         if(branches !== undefined){
-            mi.whereAttr!.hasBranchIn = [preBaseDelimiter, branches];
+            mi.whereAttr!.hasBranchIn = [preBaseDelimiter!, branches];
         }
         if(leaves !== undefined){
             throw 'NI';

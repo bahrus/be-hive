@@ -3,11 +3,11 @@ import { MountObserver } from 'mount-observer/MountObserver.js';
 export const defaultObsAttrs = {
     hasRootIn: [
         {
-            start: 'enh-',
+            start: 'enh',
             context: 'Both'
         },
         {
-            start: 'data-enh-',
+            start: 'data-enh',
             context: 'Both'
         },
         {
@@ -95,7 +95,7 @@ export class BeHive extends HTMLElement {
             whereInstanceOf: enhancedElementInstanceOf,
             whereAttr: {
                 hasRootIn,
-                hasBase: base,
+                hasBase: [preBaseDelimiter, base],
             },
         };
         if (branches !== undefined) {
