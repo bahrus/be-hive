@@ -28,9 +28,18 @@ export const defaultObsAttrs: ObservedAttributes = {
     enhancedElementInstanceOf: [Element]
 };
 
+export class RegistryEventImpl<TBranches = any> extends Event implements RegistryEvent<TBranches>{
+
+    static EventName: RegistryEventName = 'load';
+
+    constructor(public mountBeHive: MountBeHive<TBranches>){
+        super(RegistryEventImpl.EventName);
+    }
+}
+
 class Registry extends EventTarget{
     register(mbh: MountBeHive){
-        this.dispatchEvent(new Event('load'));
+        this.dispatchEvent(new RegistryEventImpl(mbh));
     }
 }
 
@@ -43,6 +52,20 @@ export class BeHive extends HTMLElement{
     }
 
     static #registry = new Registry();
+    static get registry(){
+        return this.#registry;
+    }
+
+    static {
+        this.#registry.addEventListener(RegistryEventImpl.EventName, e => {
+            const eAsR = e as any as RegistryEvent;
+            this.#topDowns.push(structuredClone(eAsR.mountBeHive));
+        })
+    }
+
+    get registry(){
+        return BeHive.registry;
+    }
 
     #overrides: {[key: string]: MountBeHive} = {};
     get overrides(){
@@ -51,7 +74,11 @@ export class BeHive extends HTMLElement{
     connectedCallback(){
         this.hidden = true;
         this.#getInheritedOverrides();
-        this.#mount();
+        this.#mountAll();
+        this.registry.addEventListener(RegistryEventImpl.EventName, e => {
+            const eAsR = e as any as RegistryEvent;
+            this.#mountSingle(eAsR.mountBeHive);
+        })
     }
 
     #getInheritedOverrides(){
@@ -62,52 +89,53 @@ export class BeHive extends HTMLElement{
         }
     }
 
-    get #topDowns(){
-        return (<any>this.constructor).topDowns as Array<MountBeHive>
+    get #allTopDowns(){
+        return BeHive.topDowns as Array<MountBeHive>
     }
 
-    #mount(){
-        for(const td of this.#topDowns){
-            const mergeWithDefaults = {...defaultObsAttrs, td};
-            const {
-                base, block, branches, do: d, enhancedElementInstanceOf,
-                enhancedElementMatches, hostInstanceOf, hostMatches,
-                leaves, preBaseDelimiter, preBranchDelimiter,
-                preLeafDelimiter, hasRootIn, 
-            } = mergeWithDefaults;
-            if(d === undefined) throw 'NI';
-            const mi: MountInit = {
-                on: enhancedElementMatches,
-                whereInstanceOf: enhancedElementInstanceOf,
-                whereAttr: {
-                    hasRootIn,
-                    hasBase: base,
-                    
-                },
-            };
-            if(branches !== undefined){
-                mi.whereAttr!.hasBranchIn = [preBaseDelimiter, branches];
-            }
-            if(leaves !== undefined){
-                throw 'NI';
-            }
-            const mo = new MountObserver(mi);
-            (mo as any as AddMountEventListener).addEventListener('mount', e => {
-                
-            });
-            const rn = this.getRootNode() as Document | ShadowRoot;
-            mo.observe(rn);
+    #mountAll(){
+        for(const mbh of this.#allTopDowns){
+            this.#mountSingle(mbh);
 
         }
     }
-}
 
-export class RegistryEventImpl<TBranches = any> extends Event implements RegistryEvent<TBranches>{
-
-    static EventName: RegistryEventName = 'load';
-
-    constructor(public mountBeHive: MountBeHive<TBranches>){
-        super(RegistryEventImpl.EventName);
+    #mountSingle(mbh: MountBeHive){
+        const mergeWithDefaults = {...defaultObsAttrs, td: mbh};
+        //allow for programmatic adjustments in load event
+        this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
+        const {
+            base, block, branches, do: d, enhancedElementInstanceOf,
+            enhancedElementMatches, hostInstanceOf, hostMatches,
+            leaves, preBaseDelimiter, preBranchDelimiter,
+            preLeafDelimiter, hasRootIn, 
+        } = mergeWithDefaults;
+        if(d === undefined) throw 'NI';
+        const mi: MountInit = {
+            on: enhancedElementMatches,
+            whereInstanceOf: enhancedElementInstanceOf,
+            whereAttr: {
+                hasRootIn,
+                hasBase: base,
+                
+            },
+        };
+        if(branches !== undefined){
+            mi.whereAttr!.hasBranchIn = [preBaseDelimiter, branches];
+        }
+        if(leaves !== undefined){
+            throw 'NI';
+        }
+        const mo = new MountObserver(mi);
+        (mo as any as AddMountEventListener).addEventListener('mount', e => {
+            
+        });
+        const rn = this.getRootNode() as Document | ShadowRoot;
+        mo.observe(rn);
     }
 }
+
+
+
+
 
