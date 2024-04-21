@@ -1,4 +1,4 @@
-# be-hive
+# be-hive [WIP]
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/bahrus/be-hive)
 [![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-hive?style=for-the-badge)](https://bundlephobia.com/result?p=be-hive)
@@ -33,10 +33,10 @@ But the child Shadow DOM realm can develop a personality of its own by:
 ```html
 <be-hive overrides='{
     "be-sharing":{
-        "ifWantsToBe": "familial"
+        "base": "familial"
     },
     "be-gracious": {
-        "ifWantsToBe": "respectful"
+        "base": "respectful"
     },
     "be-disobedient-without-facing-the-consequences": {
         "block": "true"
