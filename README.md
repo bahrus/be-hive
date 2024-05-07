@@ -33,7 +33,7 @@ But the child Shadow DOM realm can develop a personality of its own by:
 ```html
 <be-hive overrides='{
     "be-sharing":{
-        "base": "familial"
+        "replaceBaseWith": "familial"
     },
     "be-gracious": {
         "base": "respectful"
