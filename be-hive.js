@@ -3,6 +3,10 @@ import { MountObserver } from 'mount-observer/MountObserver.js';
 export const defaultObsAttrs = {
     hasRootIn: [
         {
+            start: '',
+            context: 'BuiltIn'
+        },
+        {
             start: 'enh',
             context: 'Both'
         },
@@ -10,10 +14,6 @@ export const defaultObsAttrs = {
             start: 'data-enh',
             context: 'Both'
         },
-        {
-            start: '',
-            context: 'BuiltIn'
-        }
     ],
     base: '',
     preBaseDelimiter: '-',
@@ -108,14 +108,31 @@ export class BeHive extends HTMLElement {
         mo.addEventListener('mount', async (e) => {
             const { mountedElement } = e;
             const { beEnhanced } = mountedElement;
-            const { do: d } = mbh;
+            console.log({ mbh });
+            const { do: d, map } = mbh;
             const enhancementConstructor = await d.mount.import();
             const enhancementInstance = new enhancementConstructor();
             const { enhPropKey } = mergeWithDefaults;
-            const initialPropValues = beEnhanced[enhPropKey];
+            const initialPropValues = beEnhanced[enhPropKey] || {};
             if (initialPropValues instanceof enhancementConstructor)
                 return;
             const initialAttrInfo = mo.readAttrs(mountedElement);
+            if (map !== undefined) {
+                for (const attr of initialAttrInfo) {
+                    const leafIdx = 0;
+                    const { parts, newValue } = attr;
+                    if (newValue === null)
+                        continue;
+                    const { branchIdx } = parts;
+                    const key = `${branchIdx}.${leafIdx}`;
+                    const prop = map[key];
+                    if (prop === undefined)
+                        continue;
+                    if (initialPropValues[prop] !== undefined)
+                        continue;
+                    initialPropValues[prop] = newValue;
+                }
+            }
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
