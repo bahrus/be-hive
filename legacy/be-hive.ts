@@ -88,7 +88,6 @@ export class BeHive extends HTMLElement{
             
         this.registeredBehaviors[parentInstanceLocalName] = newRegisteredBehavior;
         this.#scanForSingleRegisteredBehavior(parentInstanceLocalName, newRegisteredBehavior);
-        //console.log({newRegisteredBehavior});
         this.dispatchEvent(new CustomEvent('latest-behavior-changed', {
             detail:{
                 value: newRegisteredBehavior,

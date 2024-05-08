@@ -135,7 +135,6 @@ export class BeHive extends HTMLElement{
         (mo as any as AddMountEventListener).addEventListener('mount', async e => {
             const {mountedElement} = (e as MountEvent);
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>mountedElement);
-            console.log({mbh});
             const {do: d, map} = mbh;
             const enhancementConstructor = await d!.mount.import();
             const enhancementInstance =  new enhancementConstructor();
