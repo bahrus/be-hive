@@ -28,21 +28,23 @@ But the child Shadow DOM realm can develop a personality of its own by:
 3.  Preventing inheriting unwanted behiviors from affecting the child Shadow DOM realm.
 4.  Start over.  Only decorator elements manually added inside the Shadow DOM (preferably inside the be-hive tag, for inheritance to work within)
 
-## Syntax for customizations of inherited behiviors:
+## Syntax for customizations of inherited behiviors [TODO]
 
 ```html
 <be-hive overrides='{
     "be-sharing":{
-        "replaceBaseWith": "familial"
+        "becomes": "be-familial"
     },
     "be-gracious": {
-        "base": "respectful"
+        "becomes": "be-respectful"
     },
     "be-disobedient-without-facing-the-consequences": {
         "block": "true"
     }
 }'></be-hive>
 ```
+
+
 
 ## Be like Sirius Black
 
