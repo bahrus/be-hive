@@ -110,11 +110,12 @@ export class BeHive extends HTMLElement {
             const { beEnhanced } = mountedElement;
             const { do: d, map } = mbh;
             const enhancementConstructor = await d.mount.import();
-            const enhancementInstance = new enhancementConstructor();
             const { enhPropKey } = mergeWithDefaults;
             const initialPropValues = beEnhanced[enhPropKey] || {};
             if (initialPropValues instanceof enhancementConstructor)
                 return;
+            const enhancementInstance = new enhancementConstructor();
+            beEnhanced[enhPropKey] = enhancementInstance;
             const initialAttrInfo = mo.readAttrs(mountedElement);
             if (map !== undefined) {
                 for (const attr of initialAttrInfo) {
