@@ -1,10 +1,9 @@
-import {MountBeHive, EnhancementMountCnfg} from 'trans-render/be/types';
+import {MountBeHive, EnhancementMountCnfg, AttrMapPoint} from 'trans-render/be/types';
 import {RegistryEvent, RegistryEventName} from './types';
 import {BeEnhanced} from 'be-enhanced/beEnhanced.js';
 import 'be-enhanced/beEnhanced.js';
 import { MountEvent, MountObserver } from 'mount-observer/MountObserver.js';
 import { AddMountEventListener, AttribMatch, MountInit } from 'mount-observer/types';
-
 
 export const defaultObsAttrs: MountBeHive = {
     hasRootIn: [
@@ -144,16 +143,42 @@ export class BeHive extends HTMLElement{
             (<any>beEnhanced)[enhPropKey!] = enhancementInstance;
             const initialAttrInfo = mo.readAttrs(mountedElement);
             if(map !== undefined){
+                debugger;
                 for(const attr of initialAttrInfo){
                     const leafIdx = 0;
                     const {parts, newValue} = attr;
                     if(newValue === null) continue;
                     const {branchIdx} = parts;
                     const key = `${branchIdx}.${leafIdx}`;
-                    const prop = (<any>map)[key];
+                    const prop = (<any>map)[key] as AttrMapPoint;
                     if(prop === undefined) continue;
-                    if(initialPropValues[prop] !== undefined) continue;
-                    initialPropValues[prop] = newValue;
+                    switch(typeof prop){
+                        case 'string':
+                            if(initialPropValues[prop] !== undefined) continue;
+                            initialPropValues[prop] = newValue;
+                            break;
+                        case 'object':
+                            const {instanceOf, mapsTo} = prop;
+                            let valToSet = newValue;
+                            switch(instanceOf){
+                                case 'Object':
+                                    try{
+                                        valToSet = JSON.parse(newValue);
+                                    }catch(e){
+                                        throw {err: 400, attr, newValue};
+                                    }
+                                    if(mapsTo === '.'){
+                                        Object.assign(initialPropValues, valToSet);
+                                    }
+                                    break;
+                                default:
+                                    throw 'NI';
+                            }
+                            break;
+                        default:
+                            throw 'NI';
+                    }
+                    
                 }
             }
             enhancementInstance.attach(mountedElement, {

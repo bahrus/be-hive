@@ -118,6 +118,7 @@ export class BeHive extends HTMLElement {
             beEnhanced[enhPropKey] = enhancementInstance;
             const initialAttrInfo = mo.readAttrs(mountedElement);
             if (map !== undefined) {
+                debugger;
                 for (const attr of initialAttrInfo) {
                     const leafIdx = 0;
                     const { parts, newValue } = attr;
@@ -128,9 +129,34 @@ export class BeHive extends HTMLElement {
                     const prop = map[key];
                     if (prop === undefined)
                         continue;
-                    if (initialPropValues[prop] !== undefined)
-                        continue;
-                    initialPropValues[prop] = newValue;
+                    switch (typeof prop) {
+                        case 'string':
+                            if (initialPropValues[prop] !== undefined)
+                                continue;
+                            initialPropValues[prop] = newValue;
+                            break;
+                        case 'object':
+                            const { instanceOf, mapsTo } = prop;
+                            let valToSet = newValue;
+                            switch (instanceOf) {
+                                case 'Object':
+                                    try {
+                                        valToSet = JSON.parse(newValue);
+                                    }
+                                    catch (e) {
+                                        throw { err: 400, attr, newValue };
+                                    }
+                                    if (mapsTo === '.') {
+                                        Object.assign(initialPropValues, valToSet);
+                                    }
+                                    break;
+                                default:
+                                    throw 'NI';
+                            }
+                            break;
+                        default:
+                            throw 'NI';
+                    }
                 }
             }
             enhancementInstance.attach(mountedElement, {
