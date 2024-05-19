@@ -143,7 +143,6 @@ export class BeHive extends HTMLElement{
             (<any>beEnhanced)[enhPropKey!] = enhancementInstance;
             const initialAttrInfo = mo.readAttrs(mountedElement);
             if(map !== undefined){
-                debugger;
                 for(const attr of initialAttrInfo){
                     const leafIdx = 0;
                     const {parts, newValue} = attr;
