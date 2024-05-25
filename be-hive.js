@@ -30,7 +30,7 @@ export class BeHive extends Synthesizer {
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
         if (mergeWithDefaults.block)
             return;
-        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, } = mergeWithDefaults;
+        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map } = mergeWithDefaults;
         const mi = {
             on: enhancedElementMatches,
             whereInstanceOf: enhancedElementInstanceOf,
@@ -105,13 +105,11 @@ export class BeHive extends Synthesizer {
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
-                mountCnfg: mbh
+                mountCnfg: mergeWithDefaults
             });
         });
     }
-    if(customElements, get) { }
 }
-('be-hive') === undefined;
-{
+if (customElements.get('be-hive') === undefined) {
     customElements.define('be-hive', BeHive);
 }

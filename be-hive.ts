@@ -1,9 +1,10 @@
 import {Synthesizer} from 'mount-observer/Synthesizer.js';
 import { AddMountEventListener, MountInit, MountObserverScriptElement, MountObserverScriptElementEndUserProps } from '../mount-observer/types';
 export {EnhancementMountCnfg} from 'trans-render/be/types';
-import {EnhancementMountCnfg} from 'trans-render/be/types';
+import {AttrMapPoint, EnhancementMountCnfg} from 'trans-render/be/types';
 import { MountEvent } from '../mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
+import { BeEnhanced } from 'be-enhanced/beEnhanced.js';
 
 export const defaultObsAttrs: EnhancementMountCnfg = {
     hasRootIn: [
@@ -42,7 +43,7 @@ export class BeHive extends Synthesizer {
             base, block, branches, enhancedElementInstanceOf,
             enhancedElementMatches, hostInstanceOf, hostMatches,
             leaves, preBaseDelimiter, preBranchDelimiter, importEnh,
-            preLeafDelimiter, hasRootIn, 
+            preLeafDelimiter, hasRootIn, map
             
         } = mergeWithDefaults;
         const mi: MountInit = {
@@ -117,8 +118,9 @@ export class BeHive extends Synthesizer {
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
-                mountCnfg: mbh as EnhancementMountCnfg
+                mountCnfg: mergeWithDefaults
             });
+        });
     }
 }
 
