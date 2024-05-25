@@ -1,5 +1,5 @@
 import {Synthesizer} from 'mount-observer/Synthesizer.js';
-import { AddMountEventListener, MountInit, MountObserverScriptElement, MountObserverScriptElementEndUserProps } from '../mount-observer/types';
+import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps } from '../mount-observer/types';
 export {EnhancementMountCnfg} from 'trans-render/be/types';
 import {AttrMapPoint, EnhancementMountCnfg} from 'trans-render/be/types';
 import { MountEvent } from '../mount-observer/MountObserver';
@@ -33,8 +33,8 @@ export const defaultObsAttrs: EnhancementMountCnfg = {
 };
 
 export class BeHive extends Synthesizer {
-    override activate(mose: MountObserverScriptElement<any>): void {
-        const {synConfig} = mose as MountObserverScriptElementEndUserProps<any>;
+    override activate(mose: MOSE<any>): void {
+        const {synConfig} = mose as MOSEAddedProps<any>;
         const mergeWithDefaults = {...defaultObsAttrs, ...synConfig} as EnhancementMountCnfg;
         //TODO allow for programmatic adjustments in load event
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
