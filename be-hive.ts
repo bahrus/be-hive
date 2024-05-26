@@ -43,7 +43,7 @@ export class BeHive extends Synthesizer {
             base, block, branches, enhancedElementInstanceOf,
             enhancedElementMatches, hostInstanceOf, hostMatches,
             leaves, preBaseDelimiter, preBranchDelimiter, importEnh,
-            preLeafDelimiter, hasRootIn, map
+            preLeafDelimiter, hasRootIn, map, osotas
             
         } = mergeWithDefaults;
         const mi: MountInit = {
@@ -54,6 +54,7 @@ export class BeHive extends Synthesizer {
                 hasBase: [preBaseDelimiter!, base!],
                 
             },
+            observedAttrsWhenMounted: osotas,
         };
         if(branches !== undefined){
             mi.whereAttr!.hasBranchIn = [preBaseDelimiter!, branches];

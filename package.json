@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "be-enhanced": "0.0.87",
-    "mount-observer": "0.0.24",
+    "mount-observer": "0.0.25",
     "trans-render": "0.0.769"
   },
   "devDependencies": {

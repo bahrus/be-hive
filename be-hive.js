@@ -30,7 +30,7 @@ export class BeHive extends Synthesizer {
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
         if (mergeWithDefaults.block)
             return;
-        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map } = mergeWithDefaults;
+        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map, osotas } = mergeWithDefaults;
         const mi = {
             on: enhancedElementMatches,
             whereInstanceOf: enhancedElementInstanceOf,
@@ -38,6 +38,7 @@ export class BeHive extends Synthesizer {
                 hasRootIn,
                 hasBase: [preBaseDelimiter, base],
             },
+            observedAttrsWhenMounted: osotas,
         };
         if (branches !== undefined) {
             mi.whereAttr.hasBranchIn = [preBaseDelimiter, branches];
