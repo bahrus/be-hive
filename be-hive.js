@@ -103,6 +103,9 @@ export class BeHive extends Synthesizer {
                                             initialPropValues[mapsTo] = valToSet;
                                         }
                                         break;
+                                    case 'String':
+                                        initialPropValues[mapsTo] = valToSet;
+                                        break;
                                     default:
                                         throw 'NI';
                                 }
