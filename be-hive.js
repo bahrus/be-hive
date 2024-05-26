@@ -64,6 +64,8 @@ export class BeHive extends Synthesizer {
             const initialAttrInfo = mo.readAttrs(mountedElement);
             if (map !== undefined) {
                 for (const attr of initialAttrInfo) {
+                    if (attr.isSOfTAttr)
+                        continue;
                     const leafIdx = 0;
                     const { parts, newValue } = attr;
                     if (newValue === null)
@@ -101,6 +103,14 @@ export class BeHive extends Synthesizer {
                         default:
                             throw 'NI';
                     }
+                }
+            }
+            if (osotas !== undefined) {
+                for (const attr of initialAttrInfo) {
+                    if (!attr.isSOfTAttr)
+                        continue;
+                    const { mapsTo, newValue } = attr;
+                    initialPropValues[mapsTo] = newValue;
                 }
             }
             enhancementInstance.attach(mountedElement, {
