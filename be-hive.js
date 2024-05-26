@@ -95,6 +95,9 @@ export class BeHive extends Synthesizer {
                                     if (mapsTo === '.') {
                                         Object.assign(initialPropValues, valToSet);
                                     }
+                                    else {
+                                        initialPropValues[mapsTo] = valToSet;
+                                    }
                                     break;
                                 default:
                                     throw 'NI';
