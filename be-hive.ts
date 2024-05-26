@@ -94,24 +94,29 @@ export class BeHive extends Synthesizer {
                             initialPropValues[prop] = newValue;
                             break;
                         case 'object':
-                            const {instanceOf, mapsTo} = prop;
+                            const {instanceOf, mapsTo, valIfFalsy} = prop;
                             let valToSet = newValue;
-                            switch(instanceOf){
-                                case 'Object':
-                                    try{
-                                        valToSet = JSON.parse(newValue);
-                                    }catch(e){
-                                        throw {err: 400, attr, newValue};
-                                    }
-                                    if(mapsTo === '.'){
-                                        Object.assign(initialPropValues, valToSet);
-                                    }else{
-                                        initialPropValues[mapsTo] = valToSet;
-                                    }
-                                    break;
-                                default:
-                                    throw 'NI';
+                            if(valIfFalsy !== undefined && !newValue){
+                                initialPropValues[mapsTo] = valIfFalsy;
+                            }else{
+                                switch(instanceOf){
+                                    case 'Object':
+                                        try{
+                                            valToSet = JSON.parse(newValue);
+                                        }catch(e){
+                                            throw {err: 400, attr, newValue};
+                                        }
+                                        if(mapsTo === '.'){
+                                            Object.assign(initialPropValues, valToSet);
+                                        }else{
+                                            initialPropValues[mapsTo] = valToSet;
+                                        }
+                                        break;
+                                    default:
+                                        throw 'NI';
+                                }
                             }
+
                             break;
                         default:
                             throw 'NI';
