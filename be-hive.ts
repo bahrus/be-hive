@@ -95,7 +95,7 @@ export class BeHive extends Synthesizer {
                             break;
                         case 'object':
                             const {prsObj} = await import ('./prsObj.js');
-                            prsObj(prop, newValue, initialPropValues, attr);
+                            await prsObj(prop, newValue, initialPropValues, attr);
                             break;
                         default:
                             throw 'NI';
