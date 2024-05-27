@@ -31,7 +31,11 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
                     initialPropValues[strValMapsTo] = parsedObj.strVal;
                 }
                 if(parsedObj.objVal && objValMapsTo !== undefined){
-                    initialPropValues[objValMapsTo] = parsedObj.objVal;
+                    if(objValMapsTo === '.'){
+                        Object.assign(initialPropValues, parsedObj.objVal);
+                    }else{
+                        initialPropValues[objValMapsTo] = parsedObj.objVal;
+                    }
                 }else if(parsedObj.arrVal && arrValMapsTo !== undefined){
                     initialPropValues[arrValMapsTo] = parsedObj.arrVal;
                 }
