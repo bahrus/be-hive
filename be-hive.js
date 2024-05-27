@@ -82,34 +82,8 @@ export class BeHive extends Synthesizer {
                             initialPropValues[prop] = newValue;
                             break;
                         case 'object':
-                            const { instanceOf, mapsTo, valIfFalsy } = prop;
-                            let valToSet = newValue;
-                            if (valIfFalsy !== undefined && !newValue) {
-                                initialPropValues[mapsTo] = valIfFalsy;
-                            }
-                            else {
-                                switch (instanceOf) {
-                                    case 'Object':
-                                        try {
-                                            valToSet = JSON.parse(newValue);
-                                        }
-                                        catch (e) {
-                                            throw { err: 400, attr, newValue };
-                                        }
-                                        if (mapsTo === '.') {
-                                            Object.assign(initialPropValues, valToSet);
-                                        }
-                                        else {
-                                            initialPropValues[mapsTo] = valToSet;
-                                        }
-                                        break;
-                                    case 'String':
-                                        initialPropValues[mapsTo] = valToSet;
-                                        break;
-                                    default:
-                                        throw 'NI';
-                                }
-                            }
+                            const { prsObj } = await import('./prsObj.js');
+                            prsObj(prop, newValue, initialPropValues, attr);
                             break;
                         default:
                             throw 'NI';
