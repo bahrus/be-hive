@@ -36,7 +36,7 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
                         break;
                     case 'Object$entences':
                         const {Object$entences} = await import('trans-render/Object$entences.js');
-                        parsedObj = new Object$entences(newValue);
+                        parsedObj = new Object$entences(newValue, prop);
                         break;
                 }
                 
