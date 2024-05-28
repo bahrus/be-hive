@@ -1,7 +1,7 @@
 export async function prsObj(prop, newValue, initialPropValues, attr) {
     const { instanceOf, mapsTo, valIfFalsy } = prop;
     let valToSet = newValue;
-    if (valIfFalsy !== undefined && !newValue) {
+    if (valIfFalsy !== undefined && !newValue && mapsTo) {
         initialPropValues[mapsTo] = valIfFalsy;
     }
     else {
@@ -13,6 +13,8 @@ export async function prsObj(prop, newValue, initialPropValues, attr) {
                 catch (e) {
                     throw { err: 400, attr, newValue };
                 }
+                if (mapsTo === undefined)
+                    throw 400;
                 if (mapsTo === '.') {
                     Object.assign(initialPropValues, valToSet);
                 }
@@ -24,9 +26,19 @@ export async function prsObj(prop, newValue, initialPropValues, attr) {
                 initialPropValues[mapsTo] = valToSet;
                 break;
             case 'Object$tring':
-                const { Object$tring } = await import('trans-render/Object$tring.js');
-                const parsedObj = new Object$tring(newValue);
+            case 'Object$entences':
                 const { strValMapsTo, objValMapsTo, arrValMapsTo } = prop;
+                let parsedObj;
+                switch (instanceOf) {
+                    case 'Object$tring':
+                        const { Object$tring } = await import('trans-render/Object$tring.js');
+                        parsedObj = new Object$tring(newValue);
+                        break;
+                    case 'Object$entences':
+                        const { Object$entences } = await import('trans-render/Object$entences.js');
+                        parsedObj = new Object$entences(newValue);
+                        break;
+                }
                 if (parsedObj.strVal && strValMapsTo !== undefined) {
                     initialPropValues[strValMapsTo] = parsedObj.strVal;
                 }
