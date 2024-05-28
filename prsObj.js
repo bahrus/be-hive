@@ -53,6 +53,7 @@ export async function prsObj(prop, newValue, initialPropValues, attr) {
                 else if (parsedObj.arrVal && arrValMapsTo !== undefined) {
                     initialPropValues[arrValMapsTo] = parsedObj.arrVal;
                 }
+                break;
             default:
                 throw 'NI';
         }
