@@ -1,5 +1,6 @@
 import {AttrMapConfig} from 'trans-render/be/types';
 import { AttrChangeInfo } from '../mount-observer/types';
+import { IObject$tring } from '../trans-render/types';
 
 export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropValues: any, attr: AttrChangeInfo){
     const {instanceOf, mapsTo, valIfFalsy} = prop;
@@ -24,9 +25,16 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
                 initialPropValues[mapsTo] = valToSet;
                 break;
             case 'Object$tring':
-                const {Object$tring} = await import('trans-render/Object$tring.js');
-                const parsedObj = new Object$tring(newValue);
-                const {strValMapsTo, objValMapsTo, arrValMapsTo} = prop;
+                const {Object$Stringer, strValMapsTo, objValMapsTo, arrValMapsTo} = prop;
+                let parsedObj : IObject$tring | undefined;
+                if(Object$Stringer !== undefined){
+                    const Stringer = await Object$Stringer();
+                    parsedObj = new Stringer(newValue)
+                }else{
+                    const {Object$tring} = await import('trans-render/Object$tring.js');
+                    parsedObj = new Object$tring(newValue);
+                }
+
                 if(parsedObj.strVal && strValMapsTo !== undefined){
                     initialPropValues[strValMapsTo] = parsedObj.strVal;
                 }
