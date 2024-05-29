@@ -33,10 +33,12 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
                     case 'Object$tring':
                         const {Object$tring} = await import('trans-render/Object$tring.js');
                         parsedObj = new Object$tring(newValue);
+                        await parsedObj.parse();
                         break;
                     case 'Object$entences':
                         const {Object$entences} = await import('trans-render/Object$entences.js');
                         parsedObj = new Object$entences(newValue, prop);
+                        await parsedObj.parse();
                         break;
                 }
                 
