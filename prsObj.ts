@@ -1,5 +1,5 @@
 import {AttrMapConfig} from 'trans-render/be/types';
-import { AttrChangeInfo } from '../mount-observer/types';
+import { AttrChangeInfo } from 'mount-observer/types';
 import { IObject$tring } from '../trans-render/types';
 
 export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropValues: any, attr: AttrChangeInfo){
