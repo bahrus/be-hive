@@ -68,19 +68,32 @@ If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it b
 ```
 
 
-## API
+## The Emcee API
 
+To make the ceremony of establishing an enhancement as smoothly as possible, the developer defines an "EMC" object.
 
-be-hiviors are registered via function:
+For example:
 
-```Typescript
-register(ifWantsToBe: string, upgrade: string, extTagName: string);
+```TypeScript
+const base = 'be-based';
+export const emc: EMC = {
+    base,
+    map: {
+        '0.0': 'base'
+    },
+    enhPropKey: 'beBased',
+    importEnh: async () => {
+        const {BeBased} = await import('./behance.js');
+        return BeBased;
+    }
+};
 ```
 
-in be-hive/register.js
+This can then be use to enhance an element programmatically:
 
-
-be-hive then determines which be-hiviors to inherit.
+```TypeScript
+const beBasedEnhancement = await oDivElement.beEnhanced.whenResolved(emc);
+```
 
 ## Behivior aspects [Untested]
 
