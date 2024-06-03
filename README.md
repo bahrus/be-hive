@@ -68,16 +68,19 @@ If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it b
 ```
 
 
-## The Emcee API
+## The "Emcee" script files
 
-To make the ceremony of establishing an enhancement as smoothly as possible, the developer defines an "EMC" object.
+To make the ceremony of establishing DOM enhancements go as smoothly as possible, *be-hive* rests on a protocol file that developers are expected to provide -- the developer defines an "EMC" object.  
+
+EMC stands for "Enhancement Mount Configuration".
+
+These objects are small, and most of it can be turned into a JSON import:
 
 For example:
 
 ```TypeScript
-const base = 'be-based';
 export const emc: EMC = {
-    base,
+    base: 'be-based',
     map: {
         '0.0': 'base'
     },
@@ -89,11 +92,23 @@ export const emc: EMC = {
 };
 ```
 
-This can then be use to enhance an element programmatically:
+This provides a kind of "entrance ticket" that can then be used to enhance an element programmatically:
 
 ```TypeScript
 const beBasedEnhancement = await oDivElement.beEnhanced.whenResolved(emc);
 ```
+
+It also contains all the needed information for how to parse the the behavior/enhancement attributes, into an object that can be passed in to the behavior/enhancement during template instantiation.
+
+Potentially, an alternative EMC definition can be used inside different Shadow DOM roots in order to avoid clashes between two libraries that use the same names.
+
+So we can synchronously load these small files (or a bundle of such small files), which would block being able to do template instantiation on a first load. but at least the files are as small (and as parsable) as possible.
+
+The thinking is we can take a template filled with lots of inline behavior/enhancement attributes, where that template is going to be cloned repeatedly.  In order to avoid excessive string parsing, we can analyze the template:
+
+1.  Iterate through a provide list of applicable EMC's associated with the template provided by the developer.
+2.  Extract out all the attributes into (structurally clonable) objects leaving behind a a unique id attribute of the  element it came from (if the developer didn't provide one already)
+3.  If ShadowDOM is not used, and the template is cloned in a repeat loop, the id will need to be appended with the index of the loop before adding to the actual live DOM tree.
 
 ## Behivior aspects [Untested]
 
