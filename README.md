@@ -114,7 +114,7 @@ The thinking is we can take a template filled with lots of inline behavior/enhan
 2.  Extract out all the attributes into (structurally clonable) objects leaving behind a a unique id attribute of the  element it came from (if the developer didn't provide one already)
 3.  If ShadowDOM is not used, and the template is cloned in a repeat loop, the id will need to be appended with the index of the loop before adding to the actual live DOM tree.
 
-## Behivior aspects [Untested]
+## Behivior aspects [WIP]
 
 There may be some cases, especially for enhancements with many equally important parameters where a developer may prefer to break up the settings into separate attributes. [Here's an example](https://github.com/bahrus/be-intl) where I can definitely see the appeal.  So instead of:
 
