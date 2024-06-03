@@ -70,7 +70,7 @@ If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it b
 
 ## The "Emcee" script files
 
-To make the ceremony of establishing DOM enhancements go as smoothly as possible, *be-hive* rests on a protocol file that developers are expected to provide -- the developer defines an "EMC" object.  
+To make the ceremony of establishing DOM enhancements go as smoothly as possible, *be-hive* rests on a key object structure that that should accompany each enhancement -- the  "EMC" object.  
 
 EMC stands for "Enhancement Mount Configuration".
 
@@ -99,6 +99,10 @@ const beBasedEnhancement = await oDivElement.beEnhanced.whenResolved(emc);
 ```
 
 It also contains all the needed information for how to parse the the behavior/enhancement attributes, into an object that can be passed in to the behavior/enhancement during template instantiation.
+
+To see a more complex example along those lines, see [be-switched](https://github.com/bahrus/be-switched/blob/baseline/behivior.ts).
+
+
 
 Potentially, an alternative EMC definition can be used inside different Shadow DOM roots in order to avoid clashes between two libraries that use the same names.
 
