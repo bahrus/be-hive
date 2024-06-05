@@ -110,7 +110,7 @@ So we can synchronously load these small files (or a bundle of such small files)
 
 The thinking is we can take a template filled with lots of inline behavior/enhancement attributes, where that template is going to be cloned repeatedly.  In order to avoid excessive string parsing, we can analyze the template:
 
-If the EMC's "cache" setting is set to true, then it will look at the initial attribute settings, and see if it matches something that is already in the cache, and if so, do a (structural clone?) of the object without reparsing.  Maybe this should only be done if the root fragment isn't connected?
+If the EMC's "cache" setting is set to true, then it will look at the initial attribute settings, and see if it matches something that is already in the cache, and if so, do a (structural clone?) of the object without re-parsing.  Maybe this should only be done if the root fragment isn't connected?
 
 ## Behivior aspects [WIP]
 
