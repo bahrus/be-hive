@@ -70,7 +70,7 @@ If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it b
 
 ## The "Emcee" script files
 
-To make the ceremony of establishing DOM enhancements go as smoothly as possible, *be-hive* rests on a key object structure that that should accompany each enhancement -- the  "EMC" object.  
+To make the ceremony of establishing DOM enhancements go as smoothly as possible, *be-hive* rests on a key object structure that should accompany each enhancement -- the  "EMC" object.  
 
 EMC stands for "Enhancement Mount Configuration".
 
@@ -110,9 +110,7 @@ So we can synchronously load these small files (or a bundle of such small files)
 
 The thinking is we can take a template filled with lots of inline behavior/enhancement attributes, where that template is going to be cloned repeatedly.  In order to avoid excessive string parsing, we can analyze the template:
 
-1.  Iterate through a provide list of applicable EMC's associated with the template provided by the developer.
-2.  Extract out all the attributes into (structurally clonable) objects leaving behind a a unique id attribute of the  element it came from (if the developer didn't provide one already)
-3.  If ShadowDOM is not used, and the template is cloned in a repeat loop, the id will need to be appended with the index of the loop before adding to the actual live DOM tree.
+If the EMC's "cache" setting is set to true, then it will look at the initial attribute settings, and see if it matches something that is already in the cache, and if so, do a (structural clone?) of the object without reparsing.  Maybe this should only be done if the root fragment isn't connected?
 
 ## Behivior aspects [WIP]
 
