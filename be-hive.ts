@@ -34,7 +34,8 @@ export const defaultObsAttrs: Partial<EnhancementMountCnfg> = {
 
 export function seed(emc: EMC){
     const mose = document.createElement('script') as MOSE<EMC>;
-    mose.id = `be-hive.${emc.base}`;
+    const id = `be-hive.${emc.base}`
+    mose.id = emc.id = id;
     mose.synConfig = emc;
     return mose;
 }

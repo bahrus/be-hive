@@ -1,4 +1,5 @@
 import { Synthesizer } from 'mount-observer/Synthesizer.js';
+export { EnhancementMountCnfg } from 'trans-render/be/types';
 import 'be-enhanced/beEnhanced.js';
 export const defaultObsAttrs = {
     hasRootIn: [
@@ -24,7 +25,8 @@ export const defaultObsAttrs = {
 };
 export function seed(emc) {
     const mose = document.createElement('script');
-    mose.id = `be-hive.${emc.base}`;
+    const id = `be-hive.${emc.base}`;
+    mose.id = emc.id = id;
     mose.synConfig = emc;
     return mose;
 }
