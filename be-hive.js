@@ -1,4 +1,5 @@
 import { Synthesizer } from 'mount-observer/Synthesizer.js';
+export { MountObserver } from 'mount-observer/MountObserver.js';
 import 'be-enhanced/beEnhanced.js';
 export const defaultObsAttrs = {
     hasRootIn: [
