@@ -22,6 +22,12 @@ export const defaultObsAttrs = {
     enhancedElementMatches: '*',
     enhancedElementInstanceOf: [Element]
 };
+export function seed(emc) {
+    const mose = document.createElement('script');
+    mose.id = `be-hive.${emc.base}`;
+    mose.synConfig = emc;
+    return mose;
+}
 export class BeHive extends Synthesizer {
     activate(mose) {
         const { synConfig } = mose;

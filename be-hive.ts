@@ -1,12 +1,12 @@
 import {Synthesizer} from 'mount-observer/Synthesizer.js';
 import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps } from '../mount-observer/types';
 export {EnhancementMountCnfg, EMC} from 'trans-render/be/types';
-import {AttrMapPoint, EnhancementMountCnfg} from 'trans-render/be/types';
+import {AttrMapPoint, EMC, EnhancementMountCnfg} from 'trans-render/be/types';
 import { MountEvent } from '../mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
 import { BeEnhanced } from 'be-enhanced/beEnhanced.js';
 
-export const defaultObsAttrs: EnhancementMountCnfg = {
+export const defaultObsAttrs: Partial<EnhancementMountCnfg> = {
     hasRootIn: [
         {
             start: '',
@@ -31,6 +31,13 @@ export const defaultObsAttrs: EnhancementMountCnfg = {
     enhancedElementMatches: '*',
     enhancedElementInstanceOf: [Element]
 };
+
+export function seed(emc: EMC){
+    const mose = document.createElement('script') as MOSE<EMC>;
+    mose.id = `be-hive.${emc.base}`;
+    mose.synConfig = emc;
+    return mose;
+}
 
 export class BeHive extends Synthesizer {
     override activate(mose: MOSE<any>): void {
