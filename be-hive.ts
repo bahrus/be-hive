@@ -1,12 +1,12 @@
 import {Synthesizer} from 'mount-observer/Synthesizer.js';
 import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps } from '../mount-observer/types';
-export {EnhancementMountCnfg, EMC} from 'trans-render/be/types';
-import {AttrMapPoint, EMC, EnhancementMountCnfg} from 'trans-render/be/types';
+export {EMC} from 'trans-render/be/types';
+import {AttrMapPoint, EMC} from 'trans-render/be/types';
 import { MountEvent } from '../mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
 import { BeEnhanced } from 'be-enhanced/beEnhanced.js';
 
-export const defaultObsAttrs: Partial<EnhancementMountCnfg> = {
+export const defaultObsAttrs: Partial<EMC> = {
     hasRootIn: [
         {
             start: '',
@@ -43,7 +43,7 @@ export function seed(emc: EMC){
 export class BeHive extends Synthesizer {
     override activate(mose: MOSE<any>): void {
         const {synConfig} = mose as MOSEAddedProps<any>;
-        const mergeWithDefaults = {...defaultObsAttrs, ...synConfig} as EnhancementMountCnfg;
+        const mergeWithDefaults = {...defaultObsAttrs, ...synConfig} as EMC;
         //TODO allow for programmatic adjustments in load event
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
         if(mergeWithDefaults.block) return;

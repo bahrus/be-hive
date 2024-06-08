@@ -1,5 +1,4 @@
 import { Synthesizer } from 'mount-observer/Synthesizer.js';
-export { EnhancementMountCnfg } from 'trans-render/be/types';
 import 'be-enhanced/beEnhanced.js';
 export const defaultObsAttrs = {
     hasRootIn: [
