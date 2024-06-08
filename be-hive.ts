@@ -1,8 +1,8 @@
 import {Synthesizer} from 'mount-observer/Synthesizer.js';
-import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps } from '../mount-observer/types';
+import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps } from 'mount-observer/types';
 export {EMC} from 'trans-render/be/types';
 import {AttrMapPoint, EMC} from 'trans-render/be/types';
-import { MountEvent } from '../mount-observer/MountObserver';
+import { MountEvent } from 'mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
 import { BeEnhanced } from 'be-enhanced/beEnhanced.js';
 
