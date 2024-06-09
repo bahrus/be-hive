@@ -81,6 +81,7 @@ export class BeHive extends Synthesizer {
             //const {do: d, map} = mbh;
             //const enhancementConstructor = await d!.mount.import();
             const enhancementConstructor = await importEnh!();
+            (<any>enhancementConstructor).synConfig = synConfig;
             const {enhPropKey} = mergeWithDefaults;
             const initialPropValues = (<any>beEnhanced)[enhPropKey!] || {};
             if(initialPropValues instanceof enhancementConstructor) return;
