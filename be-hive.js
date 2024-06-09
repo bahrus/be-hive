@@ -60,10 +60,7 @@ export class BeHive extends Synthesizer {
         mo.addEventListener('mount', async (e) => {
             const { mountedElement } = e;
             const { beEnhanced } = mountedElement;
-            //const {do: d, map} = mbh;
-            //const enhancementConstructor = await d!.mount.import();
             const enhancementConstructor = await importEnh();
-            enhancementConstructor.synConfig = synConfig;
             const { enhPropKey } = mergeWithDefaults;
             const initialPropValues = beEnhanced[enhPropKey] || {};
             if (initialPropValues instanceof enhancementConstructor)

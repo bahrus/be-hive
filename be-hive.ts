@@ -78,10 +78,7 @@ export class BeHive extends Synthesizer {
         (mo as any as AddMountEventListener).addEventListener('mount', async e => {
             const {mountedElement} = (e as MountEvent);
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>mountedElement);
-            //const {do: d, map} = mbh;
-            //const enhancementConstructor = await d!.mount.import();
             const enhancementConstructor = await importEnh!();
-            (<any>enhancementConstructor).synConfig = synConfig;
             const {enhPropKey} = mergeWithDefaults;
             const initialPropValues = (<any>beEnhanced)[enhPropKey!] || {};
             if(initialPropValues instanceof enhancementConstructor) return;
