@@ -5,7 +5,7 @@ export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
 import {AttrMapPoint, EMC} from 'trans-render/be/types';
 import { MountEvent } from 'mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
-import { BeEnhanced } from 'be-enhanced/beEnhanced.js';
+import { BeEnhanced, Enhancers } from 'be-enhanced/beEnhanced.js';
 
 export const defaultObsAttrs: Partial<EMC> = {
     hasRootIn: [
@@ -34,6 +34,10 @@ export const defaultObsAttrs: Partial<EMC> = {
 };
 
 export function seed(emc: EMC){
+    try{
+        Enhancers.define(emc);
+    }catch(e){}
+    
     const mose = document.createElement('script') as MOSE<EMC>;
     const id = `be-hive.${emc.base}`;
     mose.id = emc.id = id;

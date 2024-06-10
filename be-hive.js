@@ -1,6 +1,7 @@
 import { Synthesizer } from 'mount-observer/Synthesizer.js';
 export { MountObserver } from 'mount-observer/MountObserver.js';
 import 'be-enhanced/beEnhanced.js';
+import { Enhancers } from 'be-enhanced/beEnhanced.js';
 export const defaultObsAttrs = {
     hasRootIn: [
         {
@@ -24,6 +25,10 @@ export const defaultObsAttrs = {
     enhancedElementInstanceOf: [Element]
 };
 export function seed(emc) {
+    try {
+        Enhancers.define(emc);
+    }
+    catch (e) { }
     const mose = document.createElement('script');
     const id = `be-hive.${emc.base}`;
     mose.id = emc.id = id;
