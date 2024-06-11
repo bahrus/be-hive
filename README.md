@@ -23,7 +23,7 @@ This signals that the Shadow DOM realm is opting-in, and allowing element behivi
 
 But the child Shadow DOM realm can develop a personality of its own by:
 
-1.  Adding additional behiviors by adding specific be-decorated elements inside the be-hive instance tag.
+1.  Adding additional behiviors by adding specific be-enhanced based enhancement instructions inside the be-hive instance tag.
 2.  Avoiding naming conflicts by overriding the attribute associated with the inherited behivior.
 3.  Preventing inheriting unwanted behiviors from affecting the child Shadow DOM realm.
 4.  Start over.  Only decorator elements manually added inside the Shadow DOM (preferably inside the be-hive tag, for inheritance to work within)
@@ -55,7 +55,7 @@ If the inherited behiviors are all just too odious to inherit, there's an option
 </be-hive>
 ```
 
-## Adding back a personality trait [Untested]
+## Adding back a personality trait [TODO]
 
 If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it back within their (and descendent) shadow DOM realms thusly:
 
@@ -132,17 +132,7 @@ we can write:
 
 This is especially useful in environments where the consumer of the behivior prefers to use attributes, rather than properties, for updating a property of the behivior.
 
-For this, we can add a fourth parameter to our register function:
 
-```Typescript
-register(ifWantsToBe: string, upgrade: string, extTagName: string, aspects: string[]);
-```
-
-So for the example above, this would look like:
-
-```Typescript
-register('intl', 'time', 'be-intl', ['weekday', 'year', 'month', 'day']);
-```
 
   
 
