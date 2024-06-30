@@ -25,6 +25,7 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
             case 'String':
                 initialPropValues[mapsTo!] = valToSet;
                 break;
+            case 'DSSArray':
             case 'Object$tring':
             case 'Object$entences':
                 const {strValMapsTo, objValMapsTo, arrValMapsTo} = prop;
@@ -33,14 +34,18 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
                     case 'Object$tring':
                         const {Object$tring} = await import('trans-render/Object$tring.js');
                         parsedObj = new Object$tring(newValue);
-                        await parsedObj.parse();
                         break;
                     case 'Object$entences':
                         const {Object$entences} = await import('trans-render/Object$entences.js');
                         parsedObj = new Object$entences(newValue, prop);
-                        await parsedObj.parse();
                         break;
+                    case 'DSSArray':
+                        const {DSSArray} = await import('trans-render/DSSArray.js');
+                        parsedObj = new DSSArray(newValue);
+                        break;
+
                 }
+                await parsedObj.parse();
                 
                 if(parsedObj.strVal && strValMapsTo !== undefined){
                     initialPropValues[strValMapsTo] = parsedObj.strVal;
