@@ -25,6 +25,9 @@ export async function prsObj(prop, newValue, initialPropValues, attr) {
             case 'String':
                 initialPropValues[mapsTo] = valToSet;
                 break;
+            case 'Boolean':
+                initialPropValues[mapsTo] = valToSet !== null;
+                break;
             case 'DSSArray':
             case 'Object$tring':
             case 'Object$entences':
