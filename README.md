@@ -28,7 +28,19 @@ But the child Shadow DOM realm can develop a personality of its own by:
 3.  Preventing inheriting unwanted behiviors from affecting the child Shadow DOM realm.
 4.  Start over.  Only decorator elements manually added inside the Shadow DOM (preferably inside the be-hive tag, for inheritance to work within)
 
-## Syntax for customizations of inherited behiviors [TODO]
+## Syntax for customizations of inherited behiviors [WIP]
+
+```html
+<be-hive passthrough></be-hive>
+```
+
+allows behiviors to flow though the ShadowDOM realm to child ShadowDOM realms, but skips over the one in question.
+
+```html
+<be-hive include=... exclude=...>
+```
+
+allows for blocking or specifying which behiviors to enable within the ShadowDOM realm, while allowing them to flow through to the child ShadowDOM realms, unaffected.
 
 ```html
 <be-hive overrides='{
