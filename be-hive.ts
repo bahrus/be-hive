@@ -77,7 +77,6 @@ export class BeHive extends Synthesizer {
         }
         mose.init = mi;
         super.activate(mose);
-
         const mo = mose.observer;
         (mo as any as AddMountEventListener).addEventListener('mount', async e => {
             const {mountedElement} = (e as MountEvent);
