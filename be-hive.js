@@ -60,6 +60,7 @@ export class BeHive extends Synthesizer {
             throw 'NI';
         }
         mose.init = mi;
+        super.activate(mose);
         const mo = mose.observer;
         mo.addEventListener('mount', async (e) => {
             const { mountedElement } = e;
