@@ -37,12 +37,12 @@ export function seed(emc) {
 }
 export class BeHive extends Synthesizer {
     activate(mose) {
+        if (!this.checkIfAllowed(mose))
+            return;
         const { synConfig } = mose;
         const mergeWithDefaults = { ...defaultObsAttrs, ...synConfig };
         //TODO allow for programmatic adjustments in load event
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
-        if (mergeWithDefaults.block)
-            return { mode: 'exclude' };
         const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map, osotas } = mergeWithDefaults;
         const mi = {
             on: enhancedElementMatches,
@@ -60,9 +60,6 @@ export class BeHive extends Synthesizer {
             throw 'NI';
         }
         mose.init = mi;
-        const activeStatus = super.activate(mose);
-        if (activeStatus.mode !== 'active')
-            return activeStatus;
         const mo = mose.observer;
         mo.addEventListener('mount', async (e) => {
             const { mountedElement } = e;
@@ -117,7 +114,6 @@ export class BeHive extends Synthesizer {
                 mountCnfg: mergeWithDefaults
             });
         });
-        return activeStatus;
     }
 }
 if (customElements.get('be-hive') === undefined) {

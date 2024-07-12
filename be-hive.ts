@@ -1,5 +1,5 @@
 import {Synthesizer} from 'mount-observer/Synthesizer.js';
-import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps, ActivateResponse } from 'mount-observer/types';
+import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps} from 'mount-observer/types';
 export {EMC} from 'trans-render/be/types';
 export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
 import {AttrMapPoint, EMC} from 'trans-render/be/types';
@@ -47,11 +47,11 @@ export function seed(emc: EMC){
 
 export class BeHive extends Synthesizer {
     override activate(mose: MOSE<any>) {
+        if(!this.checkIfAllowed(mose)) return;
         const {synConfig} = mose as MOSEAddedProps<any>;
         const mergeWithDefaults = {...defaultObsAttrs, ...synConfig} as EMC;
         //TODO allow for programmatic adjustments in load event
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
-        if(mergeWithDefaults.block) return { mode: 'exclude'} as ActivateResponse;
         const {
             base, block, branches, enhancedElementInstanceOf,
             enhancedElementMatches, hostInstanceOf, hostMatches,
@@ -76,8 +76,6 @@ export class BeHive extends Synthesizer {
             throw 'NI';
         }
         mose.init = mi;
-        const activeStatus = super.activate(mose);
-        if(activeStatus.mode !== 'active') return activeStatus;
         const mo = mose.observer;
         (mo as any as AddMountEventListener).addEventListener('mount', async e => {
             const {mountedElement} = (e as MountEvent);
@@ -127,7 +125,6 @@ export class BeHive extends Synthesizer {
                 mountCnfg: mergeWithDefaults
             });
         });
-        return activeStatus;
     }
 }
 
