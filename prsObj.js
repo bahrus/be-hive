@@ -3,7 +3,12 @@ export async function prsObj(prop, newValue, initialPropValues, attr) {
     let valToSet = newValue;
     if (valIfFalsy !== undefined && !newValue && mapsTo) {
         if (mapsTo === '.') {
-            Object.assign(initialPropValues, valIfFalsy);
+            if (typeof valIfFalsy === 'object') {
+                Object.assign(initialPropValues, valIfFalsy);
+            }
+            else {
+                throw 'NI';
+            }
         }
         else {
             initialPropValues[mapsTo] = valIfFalsy;
