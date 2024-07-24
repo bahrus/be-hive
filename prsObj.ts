@@ -6,7 +6,12 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
     const {instanceOf, mapsTo, valIfFalsy} = prop;
     let valToSet = newValue;
     if(valIfFalsy !== undefined && !newValue && mapsTo){
-        initialPropValues[mapsTo] = valIfFalsy;
+        if(mapsTo === '.'){
+            Object.assign(initialPropValues, valIfFalsy);
+        }else{
+            initialPropValues[mapsTo] = valIfFalsy;
+        }
+        
     }else{
         switch(instanceOf){
             case 'Object':
