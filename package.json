@@ -11,26 +11,31 @@
   "main": "be-hive.js",
   "module": "be-hive.js",
   "exports": {
-    ".": "./be-hive.js",
-    "./be-hive.js": "./be-hive.js",
-    "./register.js": "./register.js",
-    "./beatify.js": "./beatify.js",
-    "./getLocalName.js": "./getLocalName.js",
-    "./toTempl.js": "./toTempl.js"
+    ".": {
+      "default": "./be-hive.js",
+      "types": "./be-hive.ts"
+    },
+    "./be-hive.js": {
+      "default": "./be-hive.js",
+      "types": "./be-hive.ts"
+    },
+    "./prsObj.js": {
+      "default": "./prsObj.js",
+      "types": "./prsObj.ts"
+    }
   },
   "files": [
     "*.js",
-    "types.d.ts"
+    "*.ts"
   ],
-  "types": "types.d.ts",
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.131",
-    "mount-observer": "0.0.31",
-    "trans-render": "0.0.821"
+    "be-enhanced": "0.0.133",
+    "mount-observer": "0.0.34",
+    "trans-render": "0.0.825"
   },
   "devDependencies": {
     "may-it-serve": "0.0.8"
