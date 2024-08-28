@@ -20,7 +20,9 @@ export async function prsObj(prop: AttrMapConfig, newValue: string, initialPropV
     }else{
         switch(instanceOf){
             case 'Object':
+                if(!newValue) return;
                 try{
+                    
                     valToSet = JSON.parse(newValue);
                 }catch(e){
                     throw {err: 400, attr, newValue};

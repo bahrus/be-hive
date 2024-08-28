@@ -17,6 +17,8 @@ export async function prsObj(prop, newValue, initialPropValues, attr) {
     else {
         switch (instanceOf) {
             case 'Object':
+                if (!newValue)
+                    return;
                 try {
                     valToSet = JSON.parse(newValue);
                 }
