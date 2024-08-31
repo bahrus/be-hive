@@ -43,7 +43,7 @@ export class BeHive extends Synthesizer {
         const mergeWithDefaults = { ...defaultObsAttrs, ...synConfig };
         //TODO allow for programmatic adjustments in load event
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
-        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map, osotas } = mergeWithDefaults;
+        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map, osotas, mapLocalNameTo } = mergeWithDefaults;
         const mi = {
             on: enhancedElementMatches,
             whereInstanceOf: enhancedElementInstanceOf,
@@ -108,6 +108,9 @@ export class BeHive extends Synthesizer {
                     const { mapsTo, newValue } = attr;
                     initialPropValues[mapsTo] = newValue;
                 }
+            }
+            if (mapLocalNameTo !== undefined) {
+                initialPropValues[mapLocalNameTo] = mountedElement.localName;
             }
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
