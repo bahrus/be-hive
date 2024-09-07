@@ -22,6 +22,10 @@
     "./prsObj.js": {
       "default": "./prsObj.js",
       "types": "./prsObj.ts"
+    },
+    "./Registry.js": {
+      "default": "./Registry.js",
+      "types": "./Registry.js"
     }
   },
   "files": [
