@@ -24,7 +24,10 @@ export const defaultObsAttrs = {
     enhancedElementMatches: '*',
     enhancedElementInstanceOf: [Element]
 };
+export const registeredHandlers = new Map();
 export function seed(emc) {
+    if (!registeredHandlers.has(emc))
+        registeredHandlers.set(emc, new Map());
     try {
         Enhancers.define(emc);
     }
