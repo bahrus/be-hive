@@ -10,6 +10,7 @@
 	},
 	"files": [
 		"be-hive.ts",
+		"Registry.ts"
 	],
 	"exclude":[
 		"node_modules"
