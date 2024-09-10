@@ -126,7 +126,8 @@ export class BeHive extends Synthesizer {
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
-                mountCnfg: mergeWithDefaults
+                mountCnfg: mergeWithDefaults,
+                synConfig
             });
         });
     }
