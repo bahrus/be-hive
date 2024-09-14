@@ -14,7 +14,11 @@ export class Registry{
 
     static within(emc: EMC, q: CSSQuery,  handlerName: string, handler: EventListenerOrFn){
         const scopedCluster = scopedHandlers.get(emc)!;
-        
+        const scopedCustomHandlers = scopedCluster.get(emc.handlerKey!)!;
+        if(scopedCustomHandlers?.has(handlerName)){
+            console.error(`Conflicting handlers: ${handlerName}`);
+        }
+        scopedCustomHandlers.set(handlerName, [q, handler]);
     }
 
 }
