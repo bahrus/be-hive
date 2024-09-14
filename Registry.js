@@ -11,9 +11,9 @@ export class Registry {
     static within(emc, q, handlerName, handler) {
         const scopedCluster = scopedHandlers.get(emc);
         const scopedCustomHandlers = scopedCluster.get(emc.handlerKey);
-        if (scopedCustomHandlers?.has(handlerName)) {
-            console.error(`Conflicting handlers: ${handlerName}`);
+        if (!scopedCustomHandlers.has(handlerName)) {
+            scopedCustomHandlers.set(handlerName, []);
         }
-        scopedCustomHandlers.set(handlerName, [q, handler]);
+        scopedCustomHandlers.get(handlerName).push([q, handler]);
     }
 }
