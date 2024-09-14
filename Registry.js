@@ -1,4 +1,4 @@
-import { registeredHandlers } from './be-hive.js';
+import { registeredHandlers, scopedHandlers } from './be-hive.js';
 export class Registry {
     static register(emc, handlerName, handler) {
         const cluster = registeredHandlers.get(emc);
@@ -7,5 +7,8 @@ export class Registry {
             console.warn(`Overriding ${handlerName}`);
         }
         customHandlers.set(handlerName, handler);
+    }
+    static within(emc, q, handlerName, handler) {
+        const scopedCluster = scopedHandlers.get(emc);
     }
 }

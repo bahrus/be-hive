@@ -25,6 +25,7 @@ export const defaultObsAttrs = {
     enhancedElementInstanceOf: [Element]
 };
 export const registeredHandlers = new Map();
+export const scopedHandlers = new Map();
 export function seed(emc) {
     if (emc.handlerKey === undefined)
         emc.handlerKey = emc.enhPropKey;
@@ -35,6 +36,13 @@ export function seed(emc) {
     const cluster = registeredHandlers.get(emc);
     if (!cluster?.has(handlerKey)) {
         cluster.set(handlerKey, new Map());
+    }
+    if (!scopedHandlers.has(emc)) {
+        scopedHandlers.set(emc, new Map());
+    }
+    const scopedCluster = scopedHandlers.get(emc);
+    if (!scopedCluster?.has(handlerKey)) {
+        scopedCluster.set(handlerKey, new Map());
     }
     try {
         Enhancers.define(emc);

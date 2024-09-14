@@ -1,8 +1,9 @@
 import {EMC, EventListenerOrFn} from './ts-refs/trans-render/be/types';
-import {registeredHandlers} from './be-hive.js';
+import {registeredHandlers, scopedHandlers} from './be-hive.js';
+import { CSSQuery } from './ts-refs/trans-render/types';
 
 export class Registry{
-    static register(emc: EMC, handlerName: string, handler: EventListener | ((e: Event) => void)){
+    static register(emc: EMC, handlerName: string, handler: EventListenerOrFn){
         const cluster = registeredHandlers.get(emc)!;
         const customHandlers = cluster.get(emc.handlerKey!)!;
         if(customHandlers.has(handlerName)){
@@ -11,5 +12,9 @@ export class Registry{
         customHandlers.set(handlerName, handler);
     }
 
+    static within(emc: EMC, q: CSSQuery,  handlerName: string, handler: EventListenerOrFn){
+        const scopedCluster = scopedHandlers.get(emc)!;
+        
+    }
 
 }
