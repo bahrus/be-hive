@@ -23,8 +23,8 @@ export abstract class AggEvent extends Event {
     //     this.args = args;
     //     this.f = f;
     // }
-    constructor(args: Array<any>, target: Element){
-        super('aggEvt')
+    constructor(type: string, args: Array<any>, target: Element){
+        super(type);
         this.args = args;
         this.target = target;
     }

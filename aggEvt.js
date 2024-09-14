@@ -21,8 +21,8 @@ export class AggEvent extends Event {
     //     this.args = args;
     //     this.f = f;
     // }
-    constructor(args, target) {
-        super('aggEvt');
+    constructor(type, args, target) {
+        super(type);
         this.args = args;
         this.target = target;
     }
