@@ -29,6 +29,7 @@ export const scopedHandlers = new Map();
 export function seed(emc) {
     if (emc.handlerKey === undefined)
         emc.handlerKey = emc.enhPropKey;
+    emc.top = emc;
     const { handlerKey } = emc;
     if (!registeredHandlers.has(emc)) {
         registeredHandlers.set(emc, new Map());
