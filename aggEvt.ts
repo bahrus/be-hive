@@ -6,20 +6,8 @@ export abstract class AggEvent extends Event {
     r: any = rguid;
     args: Array<any>;
     f: {[key: string]: any};
-    /**
-     * @type {Element}
-     */
-    target 
-    // /**
-    //  * 
-    //  * @param {Array<any>} args 
-    //  * @param {{[key: string]: any}} f 
-    //  */
-    // constructor(args, f, target){
-    //     super(CalcEvent.eventName);
-    //     this.args = args;
-    //     this.f = f;
-    // }
+    target: Element;
+
     constructor(type: string, args: Array<any>, f: {[key: string]: any},  target: Element){
         super(type);
         this.args = args;

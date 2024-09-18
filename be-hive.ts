@@ -147,6 +147,8 @@ export class BeHive extends Synthesizer {
             if(mapLocalNameTo !== undefined){
                 initialPropValues[mapLocalNameTo] = mountedElement.localName;
             }
+            initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
+            initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
