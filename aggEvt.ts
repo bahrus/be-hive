@@ -1,4 +1,5 @@
 import { EventListenerOrFn } from "./ts-refs/trans-render/be/types";
+import {aggKeys} from './ts-refs/be-hive/types';
 
 export const rguid = 'XM5dz7tqZkeFCtytNXHPzw';
 export abstract class AggEvent extends Event {
@@ -27,7 +28,7 @@ export abstract class AggEvent extends Event {
     }
 }
 
-export const aggs: {[key: string]: (e: AggEvent) => void} = {
+export const aggs: {[key: aggKeys & string]: (e: AggEvent) => void} = {
     '+': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc + arg),
     '*': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc * arg),
     max: (e: AggEvent) => e.r = Math.max(...(e.args as Array<number>)),
