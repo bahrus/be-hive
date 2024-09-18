@@ -18,7 +18,7 @@ export class Registry{
         if(!scopedCustomHandlers.has(handlerName)){
             scopedCustomHandlers.set(handlerName, []);
         }
-        scopedCustomHandlers.get(handlerName).push([q, handler]);
+        scopedCustomHandlers!.get(handlerName)!.push([q, handler]);
     }
 
 }
