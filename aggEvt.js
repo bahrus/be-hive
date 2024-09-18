@@ -2,11 +2,7 @@ export const rguid = 'XM5dz7tqZkeFCtytNXHPzw';
 export class AggEvent extends Event {
     r = rguid;
     args;
-    // /** 
-    //  * Event view model
-    //  * @type {{[key: string]: any}} 
-    // */
-    // f;
+    f;
     /**
      * @type {Element}
      */
@@ -21,9 +17,10 @@ export class AggEvent extends Event {
     //     this.args = args;
     //     this.f = f;
     // }
-    constructor(type, args, target) {
+    constructor(type, args, f, target) {
         super(type);
         this.args = args;
+        this.f = f;
         this.target = target;
     }
 }
@@ -35,4 +32,7 @@ export const aggs = {
     nearlyEq: (e) => e.r = Math.max(...e.args) - Math.min(...e.args) < Number(e.target.dataset.maxDiff),
     //eq: (e: AggEvent) => e.r = Math.max(...(e.args as Array<number>)) === Math.min(...(e.args as Array<number>)),
     eq: (e) => e.r = e.args?.length === 0 ? true : e.args.find(x => e.args[0] !== x) === undefined,
+    '||': (e) => e.r = e.args.reduce((acc, arg) => acc || arg),
+    '&&': (e) => e.r = e.args.reduce((acc, arg) => acc && arg),
+    '{}': (e) => e.r = e.f,
 };

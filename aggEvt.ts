@@ -4,11 +4,7 @@ export const rguid = 'XM5dz7tqZkeFCtytNXHPzw';
 export abstract class AggEvent extends Event {
     r: any = rguid;
     args: Array<any>;
-    // /** 
-    //  * Event view model
-    //  * @type {{[key: string]: any}} 
-    // */
-    // f;
+    f: {[key: string]: any};
     /**
      * @type {Element}
      */
@@ -23,9 +19,10 @@ export abstract class AggEvent extends Event {
     //     this.args = args;
     //     this.f = f;
     // }
-    constructor(type: string, args: Array<any>, target: Element){
+    constructor(type: string, args: Array<any>, f: {[key: string]: any},  target: Element){
         super(type);
         this.args = args;
+        this.f = f;
         this.target = target;
     }
 }
@@ -38,5 +35,8 @@ export const aggs: {[key: string]: (e: AggEvent) => void} = {
     nearlyEq: (e: AggEvent) => e.r = Math.max(...(e.args as Array<number>)) - Math.min(...(e.args as Array<number>)) < Number((e.target as HTMLElement).dataset.maxDiff),
     //eq: (e: AggEvent) => e.r = Math.max(...(e.args as Array<number>)) === Math.min(...(e.args as Array<number>)),
     eq: (e: AggEvent) => e.r = e.args?.length === 0 ? true : e.args.find(x => e.args[0] !== x) === undefined,
+    '||': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc || arg),
+    '&&': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc && arg),
+    '{}': (e: AggEvent) => e.r = e.f,
 };
 
