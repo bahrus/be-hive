@@ -6,9 +6,9 @@ export abstract class AggEvent extends Event {
     r: any = rguid;
     args: Array<any>;
     f: {[key: string]: any};
-    target: Element;
+    target: EventTarget;
 
-    constructor(type: string, args: Array<any>, f: {[key: string]: any},  target: Element){
+    constructor(type: string, args: Array<any>, f: {[key: string]: any},  target: EventTarget){
         super(type);
         this.args = args;
         this.f = f;
