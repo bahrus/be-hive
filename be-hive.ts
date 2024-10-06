@@ -103,6 +103,7 @@ export class BeHive extends Synthesizer {
         super.activate(mose);
         const mo = mose.observer;
         (mo as any as AddMountEventListener).addEventListener('mount', async e => {
+            const observedAttrs = await mo.observedAttrs();
             const {mountedElement} = (e as MountEvent);
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>mountedElement);
             const enhancementConstructor = await importEnh!();
@@ -148,12 +149,13 @@ export class BeHive extends Synthesizer {
                 initialPropValues[mapLocalNameTo] = mountedElement.localName;
             }
             initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
-            const tbd = initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
+            initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
                 mountCnfg: mergeWithDefaults,
-                synConfig
+                synConfig,
+                observedAttrs
             });
         });
     }
