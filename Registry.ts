@@ -1,4 +1,4 @@
-import {EMC, EventListenerOrFn} from './ts-refs/trans-render/be/types';
+import {EMC, EventListenerOrFn, OnOptions} from './ts-refs/trans-render/be/types';
 import {registeredHandlers, scopedHandlers} from './be-hive.js';
 import { CSSQuery } from './ts-refs/trans-render/types';
 
@@ -19,6 +19,10 @@ export class Registry{
             scopedCustomHandlers.set(handlerName, []);
         }
         scopedCustomHandlers!.get(handlerName)!.push([q, handler]);
+    }
+
+    static on(emc: EMC, type: string, id: string, options?: OnOptions){
+        
     }
 
 }

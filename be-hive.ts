@@ -2,7 +2,11 @@ import {Synthesizer} from 'mount-observer/Synthesizer.js';
 import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps} from './ts-refs/mount-observer/types';
 export {EMC} from './ts-refs/trans-render/be/types';
 export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
-import {AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn, HandlerKey, ScopedCustomHandlerCluster} from './ts-refs/trans-render/be/types';
+import {
+    AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn, 
+    EventTypeHandlers, 
+    HandlerKey, ScopedCustomHandlerCluster, 
+} from './ts-refs/trans-render/be/types';
 import { MountEvent } from 'mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
 import { BeEnhanced, Enhancers } from 'be-enhanced/beEnhanced.js';
@@ -38,6 +42,8 @@ export const defaultObsAttrs: Partial<EMC> = {
 export const registeredHandlers = new Map<EMC, CustomHandlerCluster>();
 
 export const scopedHandlers = new Map<EMC, ScopedCustomHandlerCluster>();
+
+export const idHandlers = new Map<EMC, EventTypeHandlers>();
 
 export function seed(emc: EMC){
     if(emc.handlerKey === undefined) emc.handlerKey = emc.enhPropKey;
