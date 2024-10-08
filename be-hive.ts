@@ -63,6 +63,9 @@ export function seed(emc: EMC){
     if(!scopedCluster?.has(handlerKey)){
         scopedCluster!.set(handlerKey, new Map())
     }
+    if(!idHandlers.has(emc)){
+        idHandlers.set(emc, new Map());
+    }
     try{
         Enhancers.define(emc);
     }catch(e){}
