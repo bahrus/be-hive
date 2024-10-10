@@ -4,7 +4,7 @@ export {EMC} from './ts-refs/trans-render/be/types';
 export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
 import {
     AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn,  
-    HandlerKey, ScopedCustomHandlerCluster, 
+    HandlerKey, 
 } from './ts-refs/trans-render/be/types';
 import { MountEvent } from 'mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
@@ -40,9 +40,8 @@ export const defaultObsAttrs: Partial<EMC> = {
 
 export const registeredHandlers = new Map<EMC, CustomHandlerCluster>();
 
-export const scopedHandlers = new Map<EMC, ScopedCustomHandlerCluster>();
+//export const scopedHandlers = new Map<EMC, ScopedCustomHandlerCluster>();
 
-//export const E2D2I2T2L = new Map<EMC, DOM_IDToEventTypeToListener>();
 
 export function seed(emc: EMC){
     if(emc.handlerKey === undefined) emc.handlerKey = emc.enhPropKey;
@@ -55,13 +54,7 @@ export function seed(emc: EMC){
     if(!cluster?.has(handlerKey)){
         cluster!.set(handlerKey, new Map());
     }
-    if(!scopedHandlers.has(emc)){
-        scopedHandlers.set(emc, new Map());
-    }
-    const scopedCluster = scopedHandlers.get(emc);
-    if(!scopedCluster?.has(handlerKey)){
-        scopedCluster!.set(handlerKey, new Map())
-    }
+
 
     try{
         Enhancers.define(emc);
@@ -155,7 +148,7 @@ export class BeHive extends Synthesizer {
                 initialPropValues[mapLocalNameTo] = mountedElement.localName;
             }
             initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
-            initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
+            //initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
             enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
