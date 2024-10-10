@@ -4,7 +4,7 @@ export {EMC} from './ts-refs/trans-render/be/types';
 export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
 import {
     AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn, 
-    EventTypeHandlers, 
+    DOM_IDToEventTypeToListener, 
     HandlerKey, ScopedCustomHandlerCluster, 
 } from './ts-refs/trans-render/be/types';
 import { MountEvent } from 'mount-observer/MountObserver';
@@ -43,7 +43,7 @@ export const registeredHandlers = new Map<EMC, CustomHandlerCluster>();
 
 export const scopedHandlers = new Map<EMC, ScopedCustomHandlerCluster>();
 
-export const idHandlers = new Map<EMC, EventTypeHandlers>();
+export const E2D2I2T2L = new Map<EMC, DOM_IDToEventTypeToListener>();
 
 export function seed(emc: EMC){
     if(emc.handlerKey === undefined) emc.handlerKey = emc.enhPropKey;

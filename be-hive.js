@@ -26,6 +26,7 @@ export const defaultObsAttrs = {
 };
 export const registeredHandlers = new Map();
 export const scopedHandlers = new Map();
+export const E2D2I2T2L = new Map();
 export function seed(emc) {
     if (emc.handlerKey === undefined)
         emc.handlerKey = emc.enhPropKey;
@@ -44,6 +45,9 @@ export function seed(emc) {
     const scopedCluster = scopedHandlers.get(emc);
     if (!scopedCluster?.has(handlerKey)) {
         scopedCluster.set(handlerKey, new Map());
+    }
+    if (!idHandlers.has(emc)) {
+        idHandlers.set(emc, new Map());
     }
     try {
         Enhancers.define(emc);

@@ -1,5 +1,5 @@
 import {EMC, EventListenerOrFn, OnOptions} from './ts-refs/trans-render/be/types';
-import {registeredHandlers, scopedHandlers, idHandlers} from './be-hive.js';
+import {registeredHandlers, scopedHandlers, E2D2I2T2L} from './be-hive.js';
 import { CSSQuery } from './ts-refs/trans-render/types';
 
 export class Registry{
@@ -21,13 +21,16 @@ export class Registry{
         scopedCustomHandlers!.get(handlerName)!.push([q, handler]);
     }
 
-    static on(emc: EMC, type: string, id: string, handler: EventListenerOrFn, options?: OnOptions){
-        const eventTypeHandlers = idHandlers.get(emc)!;
-        if(!eventTypeHandlers.has(id)){
-            eventTypeHandlers.set(id, new Map());
+    static on(emc: EMC, type: string, id: string, listener: EventListenerOrFn, options?: OnOptions){
+        const D2I2T2L = E2D2I2T2L.get(emc)!;
+        if(!D2I2T2L.has(id)){
+            D2I2T2L.set(id, new Map());
         }
-        const tbd = eventTypeHandlers.get(id)!;
-        tbd.set(type, handler);
+        const I2T2L = D2I2T2L.get(id)!;
+        I2T2L.set(type, {
+            listener,
+            options
+        });
     }
 
 }

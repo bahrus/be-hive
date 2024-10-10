@@ -11,7 +11,8 @@
 	"files": [
 		"aggEvt.ts",
 		"be-hive.ts",
-		"Registry.ts"
+		"Registry.ts",
+		"w.ts"
 	],
 	"exclude":[
 		"node_modules"

@@ -29,7 +29,11 @@
     },
     "./Registry.js": {
       "default": "./Registry.js",
-      "types": "./Registry.js"
+      "types": "./Registry.Ts"
+    },
+    "./w.js": {
+      "default": "./w.js",
+      "types": "./w.ts"
     }
   },
   "files": [
