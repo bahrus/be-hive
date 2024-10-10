@@ -11,5 +11,6 @@ export class W {
     #a = {};
     a(eventsToAdd) {
         this.#a = { ...this.#a, ...eventsToAdd };
+        return this;
     }
 }
