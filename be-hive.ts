@@ -3,8 +3,7 @@ import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps} from './ts-refs
 export {EMC} from './ts-refs/trans-render/be/types';
 export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
 import {
-    AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn, 
-    DOM_IDToEventTypeToListener, 
+    AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn,  
     HandlerKey, ScopedCustomHandlerCluster, 
 } from './ts-refs/trans-render/be/types';
 import { MountEvent } from 'mount-observer/MountObserver';
@@ -43,7 +42,7 @@ export const registeredHandlers = new Map<EMC, CustomHandlerCluster>();
 
 export const scopedHandlers = new Map<EMC, ScopedCustomHandlerCluster>();
 
-export const E2D2I2T2L = new Map<EMC, DOM_IDToEventTypeToListener>();
+//export const E2D2I2T2L = new Map<EMC, DOM_IDToEventTypeToListener>();
 
 export function seed(emc: EMC){
     if(emc.handlerKey === undefined) emc.handlerKey = emc.enhPropKey;
@@ -63,9 +62,7 @@ export function seed(emc: EMC){
     if(!scopedCluster?.has(handlerKey)){
         scopedCluster!.set(handlerKey, new Map())
     }
-    if(!idHandlers.has(emc)){
-        idHandlers.set(emc, new Map());
-    }
+
     try{
         Enhancers.define(emc);
     }catch(e){}
