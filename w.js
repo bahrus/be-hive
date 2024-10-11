@@ -8,9 +8,12 @@ export class W {
     constructor(q) {
         this.q = q;
     }
-    #a = {};
+    #listeners = {};
+    get listeners() {
+        return this.#listeners;
+    }
     a(eventsToAdd) {
-        this.#a = { ...this.#a, ...eventsToAdd };
+        this.#listeners = { ...this.#listeners, ...eventsToAdd };
         return this;
     }
 }

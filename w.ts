@@ -1,4 +1,4 @@
-import { EventListenerOrFn, OnOptions, IW } from './ts-refs/trans-render/be/types';
+import { EventListenerOrFn, OnOptions, IW, MappedListeners } from './ts-refs/trans-render/be/types';
 import { CSSQuery } from './ts-refs/trans-render/types';
 export function w(q: CSSQuery, ws: Array<IW>){
     const returnObj = new W(q);
@@ -8,9 +8,12 @@ export function w(q: CSSQuery, ws: Array<IW>){
 
 export class W implements IW{
     constructor(public q: CSSQuery){}
-    #a:  {[key: string]: EventListenerOrFn} = {}
+    #listeners:  MappedListeners = {};
+    get listeners(){
+        return this.#listeners;
+    }
     a(eventsToAdd: {[key: string]: EventListenerOrFn}){
-        this.#a = {...this.#a, ...eventsToAdd};
+        this.#listeners = {...this.#listeners, ...eventsToAdd};
         return this;
     }
 
