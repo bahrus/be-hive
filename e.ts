@@ -9,12 +9,7 @@ export function e(matchingElement: Element, ws: Array<IW>, ac?: AbortController)
             if(listener.toString().substring(0, 5) === 'class'){
                 listener = new (<EventListenerClass>listener)() as any as EventListenerOrFn;
             }
-            //TODO:  abort signal
-            if(ac !== undefined){
-                matchingElement.addEventListener(key, listener, {signal: ac.signal});
-            }else{
-                matchingElement.addEventListener(key, listener);
-            }
+            matchingElement.addEventListener(key, listener, {signal: ac?.signal});
             
         }
     }

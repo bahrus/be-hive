@@ -8,13 +8,7 @@ export function e(matchingElement, ws, ac) {
             if (listener.toString().substring(0, 5) === 'class') {
                 listener = new listener();
             }
-            //TODO:  abort signal
-            if (ac !== undefined) {
-                matchingElement.addEventListener(key, listener, { signal: ac.signal });
-            }
-            else {
-                matchingElement.addEventListener(key, listener);
-            }
+            matchingElement.addEventListener(key, listener, { signal: ac?.signal });
         }
     }
 }
