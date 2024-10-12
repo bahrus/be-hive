@@ -4,7 +4,8 @@ export {EMC} from './ts-refs/trans-render/be/types';
 export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
 import {
     AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn,  
-    HandlerKey, 
+    HandlerKey,
+    IW, 
 } from './ts-refs/trans-render/be/types';
 import { MountEvent } from 'mount-observer/MountObserver';
 import 'be-enhanced/beEnhanced.js';
@@ -148,9 +149,9 @@ export class BeHive extends Synthesizer {
                 initialPropValues[mapLocalNameTo] = mountedElement.localName;
             }
             initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
-
+            let filteredWs: Array<IW> | undefined;
             if(ws !== undefined){
-                (await import('./e.js')).e(mountedElement, ws, initialPropValues);
+                filteredWs = (await import('./e.js')).e(mountedElement, ws, initialPropValues);
             }
             //initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
             enhancementInstance.attach(mountedElement, {
@@ -158,7 +159,8 @@ export class BeHive extends Synthesizer {
                 initialPropValues,
                 mountCnfg: mergeWithDefaults,
                 synConfig,
-                observedAttrs
+                observedAttrs,
+                ws: filteredWs
             });
         });
     }

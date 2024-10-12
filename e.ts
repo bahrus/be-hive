@@ -2,8 +2,10 @@ import { EventListenerClass, EventListenerOrFn, IW } from "./ts-refs/trans-rende
 
 
 export function e(matchingElement: Element, ws: Array<IW>, initialPropVals: any, ac?: AbortController){
+    const matchingWs = [];
     for(const w of ws){
         if(!matchingElement.matches(w.q)) continue;
+        matchingWs.push(w);
         const {listeners, props} = w;
         for(const key in listeners){
             let listener = listeners[key] as any;
@@ -14,4 +16,5 @@ export function e(matchingElement: Element, ws: Array<IW>, initialPropVals: any,
         }
         Object.assign(initialPropVals, props);
     }
+    return matchingWs;
 }

@@ -127,8 +127,9 @@ export class BeHive extends Synthesizer {
                 initialPropValues[mapLocalNameTo] = mountedElement.localName;
             }
             initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
+            let filteredWs;
             if (ws !== undefined) {
-                (await import('./e.js')).e(mountedElement, ws, initialPropValues);
+                filteredWs = (await import('./e.js')).e(mountedElement, ws, initialPropValues);
             }
             //initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
             enhancementInstance.attach(mountedElement, {
@@ -136,7 +137,8 @@ export class BeHive extends Synthesizer {
                 initialPropValues,
                 mountCnfg: mergeWithDefaults,
                 synConfig,
-                observedAttrs
+                observedAttrs,
+                ws: filteredWs
             });
         });
     }

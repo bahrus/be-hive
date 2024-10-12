@@ -16,12 +16,36 @@ export class W<T = EventTarget> implements IW<T>{
     get props(){
         return this.#props;
     }
+    #refs: {[key: string]: any} = {};
+    get refs(){
+        return this.#refs;
+    }
+    /**
+     * add events
+     * @param eventsToAdd 
+     * @returns 
+     */
     a(eventsToAdd: {[key: string]: EventListenerOrFn}){
         this.#listeners = {...this.#listeners, ...eventsToAdd};
         return this;
     }
+    /**
+     * set props
+     * @param props 
+     * @returns 
+     */
     s(props: Partial<T>){
         this.#props = {...this.#props, ...props};
+        return this;
+    }
+
+    /**
+     * register refs
+     * @param refs 
+     * @returns 
+     */
+    r(refs: {[key: string]: any}){
+        this.#refs = {...this.#refs, ...refs};
         return this;
     }
 
