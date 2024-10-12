@@ -41,16 +41,16 @@
     "*.ts"
   ],
   "scripts": {
-    "serve": "node node_modules/may-it-serve/serve.js",
+    "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.146",
-    "mount-observer": "0.0.38",
-    "trans-render": "0.0.847"
+    "be-enhanced": "0.0.147",
+    "mount-observer": "0.0.39",
+    "trans-render": "0.0.848"
   },
   "devDependencies": {
-    "may-it-serve": "0.0.8"
+    "ssi-server": "0.0.1"
   },
   "repository": {
     "type": "git",
