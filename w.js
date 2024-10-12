@@ -12,8 +12,16 @@ export class W {
     get listeners() {
         return this.#listeners;
     }
+    #props = {};
+    get props() {
+        return this.#props;
+    }
     a(eventsToAdd) {
         this.#listeners = { ...this.#listeners, ...eventsToAdd };
+        return this;
+    }
+    s(props) {
+        this.#props = { ...this.#props, ...props };
         return this;
     }
 }

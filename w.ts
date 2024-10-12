@@ -6,14 +6,22 @@ export function w(q: CSSQuery, ws: Array<IW>){
     return returnObj;
 }
 
-export class W implements IW{
+export class W<T = EventTarget> implements IW<T>{
     constructor(public q: CSSQuery){}
     #listeners:  MappedListeners = {};
     get listeners(){
         return this.#listeners;
     }
+    #props: Partial<T> = {};
+    get props(){
+        return this.#props;
+    }
     a(eventsToAdd: {[key: string]: EventListenerOrFn}){
         this.#listeners = {...this.#listeners, ...eventsToAdd};
+        return this;
+    }
+    s(props: Partial<T>){
+        this.#props = {...this.#props, ...props};
         return this;
     }
 

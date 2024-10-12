@@ -7,7 +7,7 @@
     "custom-element",
     "custom-elements"
   ],
-  "description": "Specify that ShadowDOM should inherit be-haviors from parent Shadow DOM",
+  "description": "Specify that ShadowDOM should inherit be-hiviors from the parent Shadow DOM",
   "main": "be-hive.js",
   "module": "be-hive.js",
   "exports": {
@@ -29,7 +29,7 @@
     },
     "./Registry.js": {
       "default": "./Registry.js",
-      "types": "./Registry.Ts"
+      "types": "./Registry.ts"
     },
     "./w.js": {
       "default": "./w.js",
