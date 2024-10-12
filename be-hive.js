@@ -128,7 +128,7 @@ export class BeHive extends Synthesizer {
             }
             initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
             if (ws !== undefined) {
-                (await import('./e.js')).e(mountedElement, ws);
+                (await import('./e.js')).e(mountedElement, ws, initialPropValues);
             }
             //initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
             enhancementInstance.attach(mountedElement, {
