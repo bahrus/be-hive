@@ -1,12 +1,14 @@
-export function w(q, ws) {
-    const returnObj = new W(q);
+export function w(q, ws, callback) {
+    const returnObj = new W(q, callback);
     ws.push(returnObj);
     return returnObj;
 }
 export class W {
     q;
-    constructor(q) {
+    w;
+    constructor(q, w) {
         this.q = q;
+        this.w = w;
     }
     #listeners = {};
     get listeners() {

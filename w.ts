@@ -1,13 +1,13 @@
 import { EventListenerOrFn, OnOptions, IW, MappedListeners } from './ts-refs/trans-render/be/types';
 import { CSSQuery } from './ts-refs/trans-render/types';
-export function w(q: CSSQuery, ws: Array<IW>){
-    const returnObj = new W(q);
+export function w(q: CSSQuery, ws: Array<IW>, callback: (q: CSSQuery) => W){
+    const returnObj = new W(q, callback);
     ws.push(returnObj);
     return returnObj;
 }
 
 export class W<T = EventTarget> implements IW<T>{
-    constructor(public q: CSSQuery){}
+    constructor(public q: CSSQuery, public w: (q: CSSQuery) => W){}
     #listeners:  MappedListeners = {};
     get listeners(){
         return this.#listeners;

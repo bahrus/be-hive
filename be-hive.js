@@ -76,6 +76,8 @@ export class BeHive extends Synthesizer {
         super.activate(mose);
         const mo = mose.observer;
         mo.addEventListener('mount', async (e) => {
+            //TODO:  doing this logic asynchronously after pulling in the existing prop
+            //could result in loss of information
             const observedAttrs = await mo.observedAttrs();
             const { mountedElement } = e;
             const { beEnhanced } = mountedElement;
