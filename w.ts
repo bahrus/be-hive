@@ -8,17 +8,12 @@ export function w(q: CSSQuery, ws: Array<IW>, callback: (q: CSSQuery) => W){
 
 export class W<T = EventTarget> implements IW<T>{
     constructor(public q: CSSQuery, public w: (q: CSSQuery) => W){}
+
+
+
     #listeners:  MappedListeners = {};
     get listeners(){
         return this.#listeners;
-    }
-    #props: Partial<T> = {};
-    get props(){
-        return this.#props;
-    }
-    #refs: {[key: string]: any} = {};
-    get refs(){
-        return this.#refs;
     }
     /**
      * add events
@@ -29,6 +24,17 @@ export class W<T = EventTarget> implements IW<T>{
         this.#listeners = {...this.#listeners, ...eventsToAdd};
         return this;
     }
+    #primaryVal: any
+    get primaryVal(){
+        return this.#primaryVal
+    }
+    p(val: any){
+        this.#primaryVal = val;
+    }
+    #props: Partial<T> = {};
+    get props(){
+        return this.#props;
+    }
     /**
      * set props
      * @param props 
@@ -38,7 +44,10 @@ export class W<T = EventTarget> implements IW<T>{
         this.#props = {...this.#props, ...props};
         return this;
     }
-
+    #refs: {[key: string]: any} = {};
+    get refs(){
+        return this.#refs;
+    }
     /**
      * register refs
      * @param refs 

@@ -14,14 +14,6 @@ export class W {
     get listeners() {
         return this.#listeners;
     }
-    #props = {};
-    get props() {
-        return this.#props;
-    }
-    #refs = {};
-    get refs() {
-        return this.#refs;
-    }
     /**
      * add events
      * @param eventsToAdd
@@ -31,6 +23,17 @@ export class W {
         this.#listeners = { ...this.#listeners, ...eventsToAdd };
         return this;
     }
+    #primaryVal;
+    get primaryVal() {
+        return this.#primaryVal;
+    }
+    p(val) {
+        this.#primaryVal = val;
+    }
+    #props = {};
+    get props() {
+        return this.#props;
+    }
     /**
      * set props
      * @param props
@@ -39,6 +42,10 @@ export class W {
     s(props) {
         this.#props = { ...this.#props, ...props };
         return this;
+    }
+    #refs = {};
+    get refs() {
+        return this.#refs;
     }
     /**
      * register refs
