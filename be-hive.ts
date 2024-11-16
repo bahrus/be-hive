@@ -156,7 +156,7 @@ export class BeHive extends Synthesizer {
                 (await import('./e.js')).e(mergeWithDefaults, mountedElement, ws, initialPropValues);
             }
             //initialPropValues.scopedCustomHandlers = scopedHandlers.get(synConfig.top)?.get(enhPropKey);
-            enhancementInstance.attach(mountedElement, {
+            await enhancementInstance.attach(mountedElement, {
                 initialAttrInfo,
                 initialPropValues,
                 mountCnfg: mergeWithDefaults,
