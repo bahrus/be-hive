@@ -109,7 +109,17 @@ export class BeHive extends Synthesizer {
             const {mountedElement} = (e as MountEvent);
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>mountedElement);
             const enhancementConstructor = await importEnh!();
-            const {enhPropKey} = mergeWithDefaults;
+            const {enhPropKey, base} = mergeWithDefaults;
+            if(base !== undefined){
+                //TODO:  check for data- and enh- and data-enh-
+                const deferBase = `defer-${base}`;
+                if(mountedElement.hasAttribute(deferBase)){
+                    const {wfac} = await import('trans-render/lib/wfac.js');
+                    await wfac(mountedElement, deferBase, (mr, el, attrs) => {
+                        return !el.hasAttribute(deferBase);
+                    });
+                }
+            }
             const initialPropValues = (<any>beEnhanced)[enhPropKey!] || {};
             if(initialPropValues instanceof enhancementConstructor) return;
             const enhancementInstance =  new enhancementConstructor();
