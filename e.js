@@ -1,3 +1,11 @@
+/**
+ * syndicate custom event handlers
+ * @param emc
+ * @param matchingElement
+ * @param ws
+ * @param initialPropVals
+ * @param ac
+ */
 export function e(emc, matchingElement, ws, initialPropVals, ac) {
     const matchingWs = [];
     const { mapWSTo, primaryProp } = emc;

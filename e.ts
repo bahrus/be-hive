@@ -1,6 +1,13 @@
 import { EMC, EventListenerClass, EventListenerOrFn, IW } from "./ts-refs/trans-render/be/types";
 
-
+/**
+ * syndicate custom event handlers
+ * @param emc 
+ * @param matchingElement 
+ * @param ws 
+ * @param initialPropVals 
+ * @param ac 
+ */
 export function e(emc: EMC, matchingElement: Element, ws: Array<IW>, initialPropVals: any, ac?: AbortController){
     const matchingWs = [];
     const {mapWSTo, primaryProp} = emc;
