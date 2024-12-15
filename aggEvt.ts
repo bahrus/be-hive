@@ -25,7 +25,11 @@ export const aggs: {[key: aggKeys & string]: (e: AggEvent) => void} = {
     //eq: (e: AggEvent) => e.r = Math.max(...(e.args as Array<number>)) === Math.min(...(e.args as Array<number>)),
     eq: (e: AggEvent) => e.r = e.args?.length === 0 ? true : e.args.find(x => e.args[0] !== x) === undefined,
     '||': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc || arg),
+    '||!': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc || !arg),
     '&&': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc && arg),
+    '&&!': (e: AggEvent) => e.r = e.args.reduce((acc, arg) => acc && !arg),
     '{}': (e: AggEvent) => e.r = e.f,
+    
+    
 };
 
