@@ -1,7 +1,7 @@
 import { Synthesizer } from 'mount-observer/Synthesizer.js';
-export { MountObserver } from 'mount-observer/MountObserver.js';
 import 'be-enhanced/beEnhanced.js';
 import { Enhancers } from 'be-enhanced/beEnhanced.js';
+import { assignGingerly } from 'trans-render/lib/assignGingerly.js';
 export const defaultObsAttrs = {
     hasRootIn: [
         {
@@ -65,6 +65,7 @@ export class BeHive extends Synthesizer {
                 hasBase: [preBaseDelimiter, base],
             },
             observedAttrsWhenMounted: osotas,
+            assigner: assignGingerly,
         };
         if (branches !== undefined) {
             mi.whereAttr.hasBranchIn = [preBaseDelimiter, branches];
