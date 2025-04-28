@@ -57,7 +57,7 @@ export class BeHive extends Synthesizer {
         const mergeWithDefaults = { ...defaultObsAttrs, ...synConfig };
         //TODO allow for programmatic adjustments in load event
         //this.dispatchEvent(new RegistryEventImpl(mergeWithDefaults));
-        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map, osotas, mapLocalNameTo, ws, mapEnhKeyTo } = mergeWithDefaults;
+        const { base, block, branches, enhancedElementInstanceOf, enhancedElementMatches, hostInstanceOf, hostMatches, leaves, preBaseDelimiter, preBranchDelimiter, importEnh, preLeafDelimiter, hasRootIn, map, osotas, mapLocalNameTo, ws, mapEnhKeyTo, mapEmcTo } = mergeWithDefaults;
         const mi = {
             on: enhancedElementMatches,
             whereInstanceOf: enhancedElementInstanceOf,
@@ -142,6 +142,9 @@ export class BeHive extends Synthesizer {
             }
             if (mapEnhKeyTo !== undefined) {
                 initialPropValues[mapEnhKeyTo] = enhPropKey;
+            }
+            if (mapEmcTo !== undefined) {
+                initialPropValues[mapEmcTo] = mergeWithDefaults;
             }
             initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
             let filteredWs;

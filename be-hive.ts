@@ -81,7 +81,7 @@ export class BeHive extends Synthesizer {
             enhancedElementMatches, hostInstanceOf, hostMatches,
             leaves, preBaseDelimiter, preBranchDelimiter, importEnh,
             preLeafDelimiter, hasRootIn, map, osotas,
-            mapLocalNameTo, ws, mapEnhKeyTo
+            mapLocalNameTo, ws, mapEnhKeyTo, mapEmcTo
             
         } = mergeWithDefaults;
         const mi: MountInit = {
@@ -164,6 +164,9 @@ export class BeHive extends Synthesizer {
             }
             if(mapEnhKeyTo !== undefined){
                 initialPropValues[mapEnhKeyTo] = enhPropKey;
+            }
+            if(mapEmcTo !== undefined){
+                initialPropValues[mapEmcTo] = mergeWithDefaults;
             }
             initialPropValues.customHandlers = registeredHandlers.get(synConfig.top)?.get(enhPropKey);
             let filteredWs: Array<IW> | undefined;
