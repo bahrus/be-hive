@@ -45,9 +45,9 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.177",
-    "mount-observer": "0.0.56",
-    "trans-render": "0.0.900"
+    "be-enhanced": "0.0.179",
+    "mount-observer": "0.0.68",
+    "trans-render": "0.0.905"
   },
   "devDependencies": {
     "ssi-server": "0.0.1"
