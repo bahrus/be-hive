@@ -111,6 +111,7 @@ export class BeHive extends Synthesizer {
             const {mountedElement} = (e as MountEvent);
             const {beEnhanced} : {beEnhanced: BeEnhanced} = (<any>mountedElement);
             const enhancementConstructor = await importEnh!();
+            if(enhancementConstructor === undefined) throw 404;
             const {enhPropKey, base} = mergeWithDefaults;
             if(base !== undefined){
                 //TODO:  check for data- and enh- and data-enh-
