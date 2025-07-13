@@ -34,6 +34,10 @@
     "./w.js": {
       "default": "./w.js",
       "types": "./w.ts"
+    },
+    "./whenResolved.js": {
+      "default": "./whenResolved.js",
+      "types": "./whenResolved.ts"
     }
   },
   "files": [

@@ -12,7 +12,8 @@
 		"aggEvt.ts",
 		"be-hive.ts",
 		"Registry.ts",
-		"w.ts"
+		"w.ts",
+		"whenResolved.ts"
 	],
 	"exclude":[
 		"node_modules"
