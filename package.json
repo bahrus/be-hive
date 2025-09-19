@@ -45,16 +45,12 @@
     "*.ts"
   ],
   "scripts": {
-    "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.185",
-    "mount-observer": "0.0.91",
-    "trans-render": "0.0.939"
-  },
-  "devDependencies": {
-    "ssi-server": "0.0.1"
+    "be-enhanced": "0.0.187",
+    "mount-observer": "0.0.102",
+    "trans-render": "0.0.957"
   },
   "repository": {
     "type": "git",
