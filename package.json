@@ -48,9 +48,9 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-enhanced": "0.0.187",
+    "be-enhanced": "0.0.188",
     "mount-observer": "0.0.102",
-    "trans-render": "0.0.957"
+    "trans-render": "0.0.958"
   },
   "repository": {
     "type": "git",
