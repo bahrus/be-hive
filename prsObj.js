@@ -37,6 +37,9 @@ export async function prsObj(prop, newValue, initialPropValues, attr) {
             case 'String':
                 initialPropValues[mapsTo] = valToSet;
                 break;
+            case 'StringOrStrings':
+                initialPropValues[mapsTo] = (typeof valToSet === 'string' && valToSet.startsWith('[') && valToSet.endsWith(']')) ? JSON.parse(valToSet) : valToSet;
+                break;
             case 'Boolean':
                 initialPropValues[mapsTo] = valToSet !== null;
                 break;

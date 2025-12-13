@@ -7,7 +7,7 @@ import {
     HandlerKey,
     IW, 
 } from './ts-refs/trans-render/be/types';
-import { MountEvent } from 'mount-observer/MountObserver';
+import { MountEvent } from 'mount-observer/Events.js';
 import 'be-enhanced/beEnhanced.js';
 import { BeEnhanced, Enhancers } from 'be-enhanced/beEnhanced.js';
 import {assignGingerly} from 'trans-render/lib/assignGingerly.js';
