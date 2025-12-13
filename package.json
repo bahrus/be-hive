@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "be-enhanced": "0.0.189",
-    "mount-observer": "0.0.105",
+    "mount-observer": "0.0.111",
     "trans-render": "0.0.960"
   },
   "repository": {
