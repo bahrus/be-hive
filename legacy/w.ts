@@ -1,5 +1,5 @@
-import { EventListenerOrFn, OnOptions, IW, MappedListeners } from './ts-refs/trans-render/be/types';
-import { CSSQuery } from './ts-refs/trans-render/types';
+import { EventListenerOrFn, OnOptions, IW, MappedListeners } from '../ts-refs/trans-render/be/types';
+import { CSSQuery } from '../ts-refs/trans-render/types';
 export function w(q: CSSQuery, ws: Array<IW>, callback: (q: CSSQuery) => W){
     const returnObj = new W(q, callback);
     ws.push(returnObj);

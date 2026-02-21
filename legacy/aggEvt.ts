@@ -1,5 +1,5 @@
-import { EventListenerOrFn } from "./ts-refs/trans-render/be/types";
-import {aggKeys} from './ts-refs/be-hive/types';
+import { EventListenerOrFn } from "../ts-refs/trans-render/be/types";
+import {aggKeys} from '../ts-refs/be-hive/types';
 
 export const rguid = 'XM5dz7tqZkeFCtytNXHPzw';
 export abstract class AggEvent extends Event {

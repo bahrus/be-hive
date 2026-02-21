@@ -1,12 +1,12 @@
 import {Synthesizer} from 'mount-observer/Synthesizer.js';
-import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps} from './ts-refs/mount-observer/types';
-export {EMC} from './ts-refs/trans-render/be/types';
+import { AddMountEventListener, MountInit, MOSE, MOSEAddedProps} from '../ts-refs/mount-observer/types';
+export {EMC} from '../ts-refs/trans-render/be/types';
 export {MountObserver, MOSE} from 'mount-observer/MountObserver.js';
 import {
     AttrMapPoint, CustomHandlerCluster, EMC, EventListenerOrFn,  
     HandlerKey,
     IW, 
-} from './ts-refs/trans-render/be/types';
+} from '../ts-refs/trans-render/be/types';
 import { MountEvent } from 'mount-observer/Events.js';
 import 'be-enhanced/beEnhanced.js';
 import { BeEnhanced, Enhancers } from 'be-enhanced/beEnhanced.js';

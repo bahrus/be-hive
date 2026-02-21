@@ -1,6 +1,6 @@
-import {EMC, EventListenerOrFn, OnOptions} from './ts-refs/trans-render/be/types';
+import {EMC, EventListenerOrFn, OnOptions} from '../ts-refs/trans-render/be/types';
 import {registeredHandlers} from './be-hive.js';
-import { CSSQuery } from './ts-refs/trans-render/types';
+import { CSSQuery } from '../ts-refs/trans-render/types';
 
 export class Registry{
     static register(emc: EMC, handlerName: string, handler: EventListenerOrFn){

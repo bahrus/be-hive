@@ -1,4 +1,4 @@
-import { EMC, EventListenerClass, EventListenerOrFn, IW } from "./ts-refs/trans-render/be/types";
+import { EMC, EventListenerClass, EventListenerOrFn, IW } from "../ts-refs/trans-render/be/types";
 
 /**
  * syndicate custom event handlers
