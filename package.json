@@ -1,0 +1,39 @@
+{
+  "name": "be-hive",
+  "version": "0.1.0",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements"
+  ],
+  "description": "Specify that ShadowDOM should inherit be-hiviors from the Custom Element Registry Scope",
+  "main": "be-hive.js",
+  "module": "be-hive.js",
+  "exports": {
+    ".": {
+      "default": "./be-hive.js",
+      "types": "./be-hive.ts"
+    }
+  },
+  "files": [
+    "*.js",
+    "*.ts"
+  ],
+  "scripts": {
+    "update": "ncu -u && npm install"
+  },
+  "dependencies": {
+    "mount-observer-script-element": "0.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahrus/be-hive.git"
+  },
+  "author": "anderson.bruce.b@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahrus/be-hive/issues"
+  },
+  "homepage": "https://github.com/bahrus/be-hive#readme"
+}
