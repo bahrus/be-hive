@@ -24,8 +24,8 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "mount-observer": "0.1.10",
-    "mount-observer-script-element": "0.0.4"
+    "mount-observer": "0.1.16",
+    "mount-observer-script-element": "0.0.5"
   },
   "repository": {
     "type": "git",
