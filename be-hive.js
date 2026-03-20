@@ -1,5 +1,4 @@
-import { MOSE } from 'mount-observer-script-element/MOSE.js';
-import 'mount-observer/handlers/EnhanceMountedElement.js';
-export class BeHive extends MOSE(HTMLElement) {
+import { Synthesizer } from 'mount-observer/Synthesizer.js';
+export class BeHive extends Synthesizer {
 }
 customElements.define('be-hive', BeHive);
