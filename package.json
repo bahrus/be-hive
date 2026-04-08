@@ -24,7 +24,7 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "mount-observer": "0.1.25"
+    "mount-observer": "0.1.26"
   },
   "repository": {
     "type": "git",
