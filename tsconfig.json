@@ -9,7 +9,8 @@
 		"skipLibCheck": true
 	},
 	"files": [
-		"be-hive.ts"
+		"be-hive.ts",
+		"findAdjacentElement.ts"
 	],
 	"exclude":[
 		"node_modules"
