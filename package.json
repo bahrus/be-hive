@@ -23,6 +23,10 @@
       "default": "./findAdjacentElement.js",
       "types": "./findAdjacentElement.ts"
     },
+    "./parsers/parse-grouped-capture-statements.js": {
+      "default": "./parsers/parse-grouped-capture-statements.js",
+      "types": "./parsers/parse-grouped-capture-statements.ts"
+    },
     "./parsers/parse-pattern-statements.js": {
       "default": "./parsers/parse-pattern-statements.js",
       "types": "./parsers/parse-pattern-statements.ts"
