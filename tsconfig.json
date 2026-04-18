@@ -10,7 +10,8 @@
 	},
 	"files": [
 		"be-hive.ts",
-		"findAdjacentElement.ts"
+		"findAdjacentElement.ts",
+		"parsers/parse-pattern-statements.ts"
 	],
 	"exclude":[
 		"node_modules"

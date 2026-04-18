@@ -21,18 +21,25 @@
     },
     "./findAdjacentElement.js": {
       "default": "./findAdjacentElement.js",
-      "types": "./findAdjacentElement.js"
+      "types": "./findAdjacentElement.ts"
+    },
+    "./parsers/parse-pattern-statements.js": {
+      "default": "./parsers/parse-pattern-statements.js",
+      "types": "./parsers/parse-pattern-statements.ts"
     }
   },
   "files": [
     "*.js",
-    "*.ts"
+    "*.ts",
+    "parsers/*.js",
+    "parsers/*.ts"
   ],
   "scripts": {
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "mount-observer": "0.1.28"
+    "mount-observer": "0.1.30",
+    "nested-regex-groups": "0.0.5"
   },
   "repository": {
     "type": "git",
