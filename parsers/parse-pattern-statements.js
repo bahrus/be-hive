@@ -5,6 +5,7 @@ import { parsePatternStatements as pps } from 'nested-regex-groups/parse-pattern
  * @param {*} context
  */
 export default function parsePatternStatements(value, context) {
-    const result = pps(value, context.attrConfig.parserConfig);
+    const parserOptions = context.attrConfig.parserOptions;
+    const result = pps(value, context.attrConfig.parserConfig, parserOptions);
     return result;
 }
