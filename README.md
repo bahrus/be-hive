@@ -1,165 +1,184 @@
-# be-hive [WIP]
+# be-hive
 
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/bahrus/be-hive)
 [![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-hive?style=for-the-badge)](https://bundlephobia.com/result?p=be-hive)
 <img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-hive?compression=gzip">
 [![NPM version](https://badge.fury.io/js/be-hive.png)](http://badge.fury.io/js/be-hive)
 
-## Inheriting behiviors
+## Overview
 
 [be-hive](https://www.youtube.com/watch?v=SQoOwosJWns) lets it [snow in August](https://www.youtube.com/watch?v=m3dmnOtqrV0).
 
-be-hive allows us to manage and coordinate the [family, or HTML frimework](https://github.com/bahrus/may-it-be) of [be-enhanced](https://github.com/bahrus/be-enhanced) custom enhancements.  
+be-hive is the coordination layer for the [family of HTML enhancements](https://github.com/bahrus/may-it-be) that follow the "be-enhanced" pattern. It extends the [mount-observer](https://github.com/nicknisi/mount-observer) `Synthesizer` class, providing a declarative custom element (`<be-hive>`) for registering and managing element enhancements within Shadow DOM scopes.
 
-Without be-hive, the developer is burdened with plopping an instance of each enhancement inside each shadow DOM realm.
+In the modern architecture, `be-hive` serves as:
 
-With the help of the be-hive component, the developer only has to plop a single instance of be-hive inside the Shadow DOM realm, like so:
+1. A **custom element** (`<be-hive>`) that acts as a registry point inside a Shadow DOM realm
+2. A **host for EMC (Enhancement Mount Configuration) scripts** that declare which enhancements are active
+3. A **parser host** for registering attribute parsers used by enhancements
+4. A **utility provider** (e.g. `findAdjacentElement`) for enhancement implementations
 
-```html
-<be-hive></be-hive>
-```
+## How It Works
 
-This signals that the Shadow DOM realm is opting-in, and allowing element behiviors, and will inherit all the behiviors from the parent Shadow DOM realm, by default.
-
-But the child Shadow DOM realm can develop a personality of its own by:
-
-1.  Adding additional behiviors by adding specific be-enhanced based enhancement instructions inside the be-hive instance tag.
-2.  Avoiding naming conflicts by overriding the attribute associated with the inherited behivior.
-3.  Preventing inheriting unwanted behiviors from affecting the child Shadow DOM realm.
-4.  Start over.  Only decorator elements manually added inside the Shadow DOM (preferably inside the be-hive tag, for inheritance to work within)
-
-## Syntax for customizations of inherited behiviors [WIP]
-
-```html
-<be-hive passthrough></be-hive>
-```
-
-allows behiviors to flow though the ShadowDOM realm to child ShadowDOM realms, but skips over the one in question.
-
-```html
-<be-hive include=... exclude=...>
-```
-
-allows for blocking or specifying which behiviors to enable within the ShadowDOM realm, while allowing them to flow through to the child ShadowDOM realms, unaffected.
-
-```html
-<be-hive overrides='{
-    "be-sharing":{
-        "becomes": "be-familial"
-    },
-    "be-gracious": {
-        "becomes": "be-respectful"
-    },
-    "be-disobedient-without-facing-the-consequences": {
-        "block": "true"
-    }
-}'></be-hive>
-```
-
-
-
-## Be like Sirius Black
-
-If the inherited behiviors are all just too odious to inherit, there's an option to start again:
-
-```html
-<be-hive be-severed>
-</be-hive>
-```
-
-## Adding back a personality trait [TODO]
-
-If one Shadow DOM blocks an inherited behivior, child Shadow DOMs can bring it back within their (and descendent) shadow DOM realms thusly:
-
-```html
-<be-hive overrides='{
-    "be-disobedient-without-facing-the-consequences": {
-        "unblock": "true"
-    }
-}'></be-hive>
-```
-
-
-## The "Emcee" script files
-
-To make the ceremony of establishing DOM enhancements go as smoothly as possible, *be-hive* rests on a key object structure that should accompany each enhancement -- the  "EMC" object.  
-
-EMC stands for "Enhancement Mount Configuration".
-
-These objects are small, and most of it can be turned into a JSON import:
-
-For example:
+The `BeHive` class extends `Synthesizer` from `mount-observer`:
 
 ```TypeScript
-export const emc: EMC = {
-    base: 'be-based',
-    map: {
-        '0.0': 'base'
+import {Synthesizer} from 'mount-observer/Synthesizer.js';
+
+export class BeHive extends Synthesizer{}
+
+customElements.define('be-hive', BeHive);
+```
+
+When placed inside a Shadow DOM realm, `<be-hive>` processes its child `<script>` elements to configure which enhancements are active in that scope.
+
+## Registering Enhancements
+
+Enhancements are registered declaratively using `<script type=emc>` tags inside `<be-hive>`:
+
+```html
+<be-hive>
+    <script type=emc src="be-clonable/emc.json"></script>
+    <script type=emc src="be-committed/emc.json"></script>
+</be-hive>
+<script type=module>
+    import 'be-hive/be-hive.js';
+</script>
+```
+
+Each `<script type=emc>` points to a JSON configuration file (generated from an `emc.mjs` build script) that tells `be-hive` how to observe, parse, and spawn the enhancement.
+
+## The EMC (Enhancement Mount Configuration)
+
+Each enhancement project provides an EMC that defines:
+
+- **enhKey**: The unique identifier / attribute name for the enhancement
+- **spawn**: The module path to lazily import the enhancement class
+- **withAttrs**: How to map HTML attributes to enhancement properties
+
+Example `emc.mjs`:
+
+```javascript
+export const emc = {
+    enhConfig: {
+        enhKey: 'BeClonable',
+        spawn: 'be-clonable/be-clonable.js',
+        withAttrs: {
+            base: 'be-clonable',
+            triggerInsertPosition: '${base}-trigger-insert-position',
+        }
     },
-    enhPropKey: 'beBased',
-    importEnh: async () => {
-        const {BeBased} = await import('./behance.js');
-        return BeBased;
+    customData: {
+        weakRef: {
+            properties: ['enhancedElement']
+        },
+        actions: {
+            addCloneBtn: { ifAllOf: ['triggerInsertPosition', 'enhancedElement'] }
+        },
+        defaultPropVals: {
+            triggerInsertPosition: 'beforebegin'
+        }
     }
 };
+
+export function render(){
+    return JSON.stringify(emc, null, 4);
+}
+
+console.log(render());
 ```
 
-This provides a kind of "entrance ticket" that can then be used to enhance an element programmatically:
+Running `node emc.mjs > emc.json` generates the static JSON configuration that `<be-hive>` loads at runtime.
 
-```TypeScript
-const beBasedEnhancement = await oDivElement.beEnhanced.whenResolved(emc);
-```
+## Custom Parsers
 
-It also contains all the needed information for how to parse the the behavior/enhancement attributes, into an object that can be passed in to the behavior/enhancement during template instantiation.
+For enhancements with complex attribute syntax, be-hive provides built-in parser wrappers that integrate with the [nested-regex-groups](https://github.com/bahrus/nested-regex-groups) library:
 
-To see a more complex example along those lines, see [be-switched](https://github.com/bahrus/be-switched/blob/baseline/behivior.ts).
+- `be-hive/parsers/parse-pattern-statements.js` — for nested object structures using dot notation in capture groups
+- `be-hive/parsers/parse-grouped-capture-statements.js` — for flat objects parsed from multiple statements
 
-
-
-Potentially, an alternative EMC definition can be used inside different Shadow DOM roots in order to avoid clashes between two libraries that use the same names.
-
-So we can synchronously load these small files (or a bundle of such small files), which would block being able to do template instantiation on a first load. but at least the files are as small (and as parsable) as possible.
-
-The thinking is we can take a template filled with lots of inline behavior/enhancement attributes, where that template is going to be cloned repeatedly.  In order to avoid excessive string parsing, we can analyze the template:
-
-If the EMC's "cache" setting is set to true, then it will look at the initial attribute settings, and see if it matches something that is already in the cache, and if so, do a (structural clone?) of the object without re-parsing.  Maybe this should only be done if the root fragment isn't connected?
-
-## Behivior aspects [WIP]
-
-There may be some cases, especially for enhancements with many equally important parameters where a developer may prefer to break up the settings into separate attributes. [Here's an example](https://github.com/bahrus/be-intl) where I can definitely see the appeal.  So instead of:
+Register parsers in HTML before loading EMC scripts that depend on them:
 
 ```html
-<time lang="ar-EG" datetime=2011-11-18T14:54:39.929Z be-intl='{ "weekday": "long", "year": "numeric", "month": "long", "day": "numeric" }'></time>
+<be-hive>
+    <script type=emc-parser 
+            src="be-hive/parsers/parse-pattern-statements.js" 
+            parser-name=parse-pattern-statements></script>
+    <script type=emc 
+            src="do-invoke/emc.json" 
+            wait-for-parsers=parse-pattern-statements></script>
+</be-hive>
+<script type=module>
+    import 'be-hive/be-hive.js';
+</script>
 ```
 
-we can write:
+## Emoji Shorthand
+
+Many enhancements support both a full name and an emoji shorthand (e.g. `be-clonable` / `⿻`). A separate `.mjs` file generates a variant JSON that overrides the `enhKey` and `base` attribute:
 
 ```html
-<time lang="ar-EG" 
-    datetime=2011-11-18T14:54:39.929Z 
-    be-intl-weekday=long be-intl-year=numeric be-intl-month=long
-    be-intl-day=numeric>
-</time>
+<!-- Full name -->
+<div be-clonable>...</div>
+
+<!-- Emoji shorthand -->
+<div ⿻>...</div>
 ```
 
-This is especially useful in environments where the consumer of the behivior prefers to use attributes, rather than properties, for updating a property of the behivior.
+Both resolve to the same enhancement class; only the observed attribute name differs.
 
+## Utilities
+
+be-hive also provides utilities used by enhancement implementations:
+
+### findAdjacentElement
+
+Finds an element adjacent to a given element based on an `InsertPosition` and CSS selector:
+
+```javascript
+import {findAdjacentElement} from 'be-hive/findAdjacentElement.js';
+
+const trigger = findAdjacentElement('beforebegin', element, '.my-trigger');
+```
+
+## Exports
+
+| Path | Description |
+|------|-------------|
+| `be-hive/be-hive.js` | The `BeHive` custom element (extends Synthesizer) |
+| `be-hive/findAdjacentElement.js` | Adjacent element lookup utility |
+| `be-hive/parsers/parse-pattern-statements.js` | Parser for nested object structures |
+| `be-hive/parsers/parse-grouped-capture-statements.js` | Parser for flat object structures |
+
+## Dependencies
+
+- [mount-observer](https://github.com/nicknisi/mount-observer) — Provides the `Synthesizer` base class and the `MountObserver` infrastructure for watching DOM mutations and spawning enhancements
+- [nested-regex-groups](https://github.com/bahrus/nested-regex-groups) — Regex-based attribute parsing library used by the built-in parsers
+
+## Related Projects
+
+Key packages in the enhancement ecosystem:
+
+- [mount-observer](https://github.com/nicknisi/mount-observer) — Core observation engine
+- [roundabout-lib](https://github.com/bahrus/roundabout-lib) — Reactive property management for enhancements
+- [assign-gingerly](https://github.com/bahrus/assign-gingerly) — Safe property assignment and enhancement gateway
+- [inferencer](https://github.com/bahrus/inferencer) — Element property/event inference
+- [nested-regex-groups](https://github.com/bahrus/nested-regex-groups) — Attribute value parsing
+
+Example enhancements built on this architecture:
+
+- [be-clonable](https://github.com/bahrus/be-clonable) — Reference implementation
+- [do-invoke](https://github.com/bahrus/do-invoke) — Custom parser reference
+- [be-committed](https://github.com/bahrus/be-committed)
+- [be-bound](https://github.com/bahrus/be-bound) — Two-way data binding
 
 ## Viewing Locally
-
-Any web server that serves static files with server-side includes will do but...
 
 1. Install git
 2. Fork/clone this repo
 3. Install node.js
 4. Open command window to folder where you cloned this repo
-5. > git submodule add https://github.com/bahrus/types.git types
-6. > git submodule update --init --recursive
-7. > npm install
-8. > npm run serve
-9. Open http://localhost:8000/demo/ in a modern browser
-
-
-
-  
-
+5. `> git submodule update --init --recursive`
+6. `> npm install`
+7. `> npm run serve` (requires a static file server with SSI support)
+8. Open http://localhost:8000/demo/ in a modern browser (Chrome 146+ recommended for JSON import assertions)
