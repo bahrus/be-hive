@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "mount-observer": "0.1.43",
-    "nested-regex-groups": "0.0.7"
+    "nested-regex-groups": "0.0.8"
   },
   "repository": {
     "type": "git",
