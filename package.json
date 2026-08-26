@@ -42,7 +42,7 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "mount-observer": "0.1.52",
+    "mount-observer": "0.1.53",
     "nested-regex-groups": "0.0.8"
   },
   "repository": {
